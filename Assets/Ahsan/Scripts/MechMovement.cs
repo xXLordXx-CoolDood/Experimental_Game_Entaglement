@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class MechMovement : MonoBehaviour
 {
     MechStates state = MechStates.Based;
-    Vector2 m_rotation;
+    Quaternion baseRotation;
 
     [SerializeField] Animator animator;
 
@@ -15,6 +15,8 @@ public class MechMovement : MonoBehaviour
     [SerializeField] Transform LeftFoot;
     [SerializeField] Transform RightFoot;
     [SerializeField] float swayRate;
+    [SerializeField] float swayLength;
+    [SerializeField] float returnSpeed;
     float Balance = 0;
     float BalanceOffset = 0;
 
@@ -26,7 +28,6 @@ public class MechMovement : MonoBehaviour
     [SerializeField] InputAction TriggerRight;
     [SerializeField] InputAction TriggerLeft;
     [SerializeField] InputAction TurnInput;
-
 
     private void OnEnable()
     {
@@ -46,6 +47,8 @@ public class MechMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        baseRotation = transform.rotation;
+
         TriggerRight.performed += TriggerRight_performed;
         TriggerLeft.performed += TriggerLeft_performed;
     }
@@ -81,23 +84,47 @@ public class MechMovement : MonoBehaviour
         }
     }
 
+    public IEnumerator ReturnToPosition()
+    {
+        switch (state)
+        {
+            case MechStates.LeftUp:
+                state = MechStates.Orienting;
+                while (transform.rotation != baseRotation)
+                {
+                    transform.RotateAround(RightFoot.position, transform.forward, Time.deltaTime * ((transform.eulerAngles.z > 180) ? 1 : -1) * returnSpeed);
+                    yield return new WaitForEndOfFrame();
+                }
+                break;
+            case MechStates.RightUp:
+                state = MechStates.Orienting;
+                while (transform.rotation != baseRotation)
+                {
+                    transform.RotateAround(LeftFoot.position, transform.forward, Time.deltaTime * ((transform.eulerAngles.z > 180) ? 1 : -1) * returnSpeed);
+                    yield return new WaitForEndOfFrame();
+                }
+                break;
+        }
+        state = MechStates.Based;
+    }
+
     private void Sway()
     {
-        Transform rotationPoint = state switch
+        switch (state)
         {
-            MechStates.LeftUp => RightFoot.transform,
-            MechStates.RightUp => LeftFoot.transform,
-            MechStates.Based => transform,
-            _ => transform,
-        };
-
-        transform.RotateAround(rotationPoint.position, transform.forward, Balance * Time.deltaTime);
+            case MechStates.LeftUp:
+                transform.RotateAround(RightFoot.position, transform.forward, Balance * Time.deltaTime);
+                break;
+            case MechStates.RightUp:
+                transform.RotateAround(LeftFoot.position, transform.forward, Balance * Time.deltaTime);
+                break;
+        }
     }
 
     private void OffBalance()
     {
-        Balance = Mathf.Sin(Time.realtimeSinceStartup) * BalanceOffset * swayRate;
-        BalanceOffset += Time.deltaTime;
+        Balance = Mathf.Sin(Time.realtimeSinceStartup * swayRate) * BalanceOffset;
+        BalanceOffset += Time.deltaTime * swayLength;
     }
 
     private void ResetBalance()
@@ -108,9 +135,8 @@ public class MechMovement : MonoBehaviour
 
     private void Turn()
     {
-        var turnValue = TurnInput.ReadValue<float>();
-        m_rotation.y += turnValue * Time.deltaTime * turnSpeed;
-        transform.eulerAngles = m_rotation;
+        var turnValue = TurnInput.ReadValue<float>() * Time.deltaTime * turnSpeed;
+        transform.Rotate(transform.up, turnValue);
     }
 
     void LeftLeg()
@@ -123,7 +149,7 @@ public class MechMovement : MonoBehaviour
                 break;
             case MechStates.LeftUp:
                 animator.SetTrigger("LeftLeg");
-                state = MechStates.Based;
+                StartCoroutine("ReturnToPosition");
                 break;
             default:
                 break;
@@ -140,11 +166,10 @@ public class MechMovement : MonoBehaviour
                 break;
             case MechStates.RightUp:
                 animator.SetTrigger("RightLeg");
-                state = MechStates.Based;
+                StartCoroutine("ReturnToPosition");
                 break;
             default:
                 break;
         }
     }
-
 }

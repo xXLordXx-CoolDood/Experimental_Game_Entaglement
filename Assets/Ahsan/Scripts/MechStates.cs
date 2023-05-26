@@ -6,4 +6,5 @@ public enum MechStates
     Based,
     LeftUp,
     RightUp,
+    Orienting,
 }

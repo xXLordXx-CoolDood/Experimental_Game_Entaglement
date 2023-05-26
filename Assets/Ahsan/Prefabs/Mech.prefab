@@ -110,7 +110,9 @@ MonoBehaviour:
   animator: {fileID: 5978909143586189771}
   LeftFoot: {fileID: 310879582}
   RightFoot: {fileID: 2173303}
-  swayRate: 5
+  swayRate: 15
+  swayLength: 5
+  returnSpeed: 0
   turnSpeed: 15
   TriggerRight:
     m_Name: Trigger Right
