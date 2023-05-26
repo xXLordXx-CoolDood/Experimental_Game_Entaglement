@@ -5,21 +5,32 @@ using UnityEngine.InputSystem;
 
 public class MechMovement : MonoBehaviour
 {
-    Animator animator;
     MechStates state = MechStates.Based;
+    Animator animator;
+    Vector2 m_rotation;
+    float Balance;
+
+    [Header("Movement Values")]
+    [SerializeField] float turnSpeed;
+
+    [Header("Inputs")]
     [SerializeField] InputAction TriggerRight;
     [SerializeField] InputAction TriggerLeft;
+    [SerializeField] InputAction Turn;
+
 
     private void OnEnable()
     {
         TriggerLeft.Enable();
         TriggerRight.Enable();
+        Turn.Enable();
     }
 
     private void OnDisable()
     {
         TriggerLeft.Disable();
         TriggerRight.Disable();
+        Turn.Disable();
     }
 
 
@@ -31,6 +42,8 @@ public class MechMovement : MonoBehaviour
         TriggerRight.performed += TriggerRight_performed;
         TriggerLeft.performed += TriggerLeft_performed;
     }
+
+
 
     private void TriggerLeft_performed(InputAction.CallbackContext ctx)
     {
@@ -45,7 +58,12 @@ public class MechMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (state == MechStates.Based)
+        {
+            var turnValue = Turn.ReadValue<float>();
+            m_rotation.y += turnValue * Time.deltaTime * turnSpeed;
+            transform.eulerAngles = m_rotation;
+        }
     }
 
     void Left()

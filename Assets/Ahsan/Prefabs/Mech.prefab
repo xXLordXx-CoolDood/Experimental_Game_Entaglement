@@ -49,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400b54685c414cc4dae95b6a03a1bfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 15
   TriggerRight:
     m_Name: Trigger Right
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: accfd373-eae1-45b9-ad50-33318d84d372
     m_Processors: 
     m_Interactions: 
@@ -68,8 +69,8 @@ MonoBehaviour:
     m_Flags: 0
   TriggerLeft:
     m_Name: Trigger Left
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: cecb9856-7a63-4cd6-901c-55f6eee7c100
     m_Processors: 
     m_Interactions: 
@@ -82,6 +83,39 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Trigger Left
       m_Flags: 0
+    m_Flags: 0
+  Turn:
+    m_Name: Turn
+    m_Type: 0
+    m_ExpectedControlType: Axis
+    m_Id: 93cc12d4-1594-4304-88b8-cfa8a360905b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: d3f56f35-5431-43a8-8e4a-657fcf8dd0ce
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 0589055f-bc8a-4398-a62b-2720df501948
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 58698154-1b92-48de-b55a-e69f5066d079
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
     m_Flags: 0
 --- !u!95 &7296453700293654219
 Animator:

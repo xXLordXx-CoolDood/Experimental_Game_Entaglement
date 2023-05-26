@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4452582, g: 0.49489063, b: 0.5739065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -209,14 +209,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.8221639, y: -0.21397449, z: -0.103705466, w: 0.51721054}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 126.285, y: 41.464996, z: 50.877}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,14 +293,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.022932686, y: -0.93881506, z: 0.06375934, w: 0.33769095}
+  m_LocalPosition: {x: 2.0229607, y: 0.18439841, z: 4.139657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 69.384, z: 0}
 --- !u!1001 &1577128710882565638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,57 +356,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mech
       objectReference: {fileID: 0}
-    - target: {fileID: 7296453700293654219, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: m_CullingMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_Id
-      value: cecb9856-7a63-4cd6-901c-55f6eee7c100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_Id
-      value: accfd373-eae1-45b9-ad50-33318d84d372
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_Name
-      value: Trigger Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_Name
-      value: Trigger Right
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 9974b734-1830-42a3-b759-c9a26fbd099f
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Id
-      value: e6ca89da-be85-4598-9153-1d76cf666d3b
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/z
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/c
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Trigger Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
-      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Trigger Right
+      propertyPath: Turn.m_SingletonActionBindings.Array.data[0].m_Name
+      value: Keyboard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
