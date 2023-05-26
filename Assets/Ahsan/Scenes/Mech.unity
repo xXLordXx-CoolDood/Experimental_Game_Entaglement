@@ -356,5 +356,57 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mech
       objectReference: {fileID: 0}
+    - target: {fileID: 7296453700293654219, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_Id
+      value: cecb9856-7a63-4cd6-901c-55f6eee7c100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_Id
+      value: accfd373-eae1-45b9-ad50-33318d84d372
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_Name
+      value: Trigger Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_Name
+      value: Trigger Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 9974b734-1830-42a3-b759-c9a26fbd099f
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Id
+      value: e6ca89da-be85-4598-9153-1d76cf666d3b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/z
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/c
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerLeft.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Trigger Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517889497791059191, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}
+      propertyPath: TriggerRight.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Trigger Right
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e5654da8f886f34da3c646a4df53e26, type: 3}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577128709328690602}
   - component: {fileID: 8517889497791059191}
-  - component: {fileID: 3651484932800119704}
+  - component: {fileID: 7296453700293654219}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -49,7 +49,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400b54685c414cc4dae95b6a03a1bfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &3651484932800119704
+  TriggerRight:
+    m_Name: Trigger Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: accfd373-eae1-45b9-ad50-33318d84d372
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e6ca89da-be85-4598-9153-1d76cf666d3b
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Trigger Right
+      m_Flags: 0
+    m_Flags: 0
+  TriggerLeft:
+    m_Name: Trigger Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cecb9856-7a63-4cd6-901c-55f6eee7c100
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9974b734-1830-42a3-b759-c9a26fbd099f
+      m_Path: <Keyboard>/z
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Trigger Left
+      m_Flags: 0
+    m_Flags: 0
+--- !u!95 &7296453700293654219
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -60,9 +94,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 77049f83d0886a54da5c3e74a76d2a31, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
