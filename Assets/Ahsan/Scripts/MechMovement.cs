@@ -7,14 +7,16 @@ using UnityEngine.InputSystem;
 public class MechMovement : MonoBehaviour
 {
     MechStates state = MechStates.Based;
-    Animator animator;
     Vector2 m_rotation;
-    float Balance = 0;
-    float BalanceOffset = 0;
+
+    [SerializeField] Animator animator;
 
     [Header("Feet")]
     [SerializeField] Transform LeftFoot;
     [SerializeField] Transform RightFoot;
+    [SerializeField] float swayRate;
+    float Balance = 0;
+    float BalanceOffset = 0;
 
 
     [Header("Movement Values")]
@@ -44,8 +46,6 @@ public class MechMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-
         TriggerRight.performed += TriggerRight_performed;
         TriggerLeft.performed += TriggerLeft_performed;
     }
@@ -96,7 +96,7 @@ public class MechMovement : MonoBehaviour
 
     private void OffBalance()
     {
-        Balance = Mathf.Sin(Time.realtimeSinceStartup) * BalanceOffset;
+        Balance = Mathf.Sin(Time.realtimeSinceStartup) * BalanceOffset * swayRate;
         BalanceOffset += Time.deltaTime;
     }
 
