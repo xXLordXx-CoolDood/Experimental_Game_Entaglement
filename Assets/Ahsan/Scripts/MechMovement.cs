@@ -12,28 +12,33 @@ public class MechMovement : MonoBehaviour
     [SerializeField] Animator animator;
 
     [Header("Feet")]
-    [SerializeField] Transform LeftFoot;
-    [SerializeField] Transform RightFoot;
-    [SerializeField] float swayRate;
-    [SerializeField] float swayLength;
-    [SerializeField] float returnSpeed;
+    [Tooltip("Point of swaying when the other foot is raised")][SerializeField] Transform LeftFoot;
+    [Tooltip("Point of swaying when the other foot is raised")][SerializeField] Transform RightFoot;
+    [Tooltip("Makes it wiggle faster")][SerializeField] float swayRate;
+    [Tooltip("Makes it wiggle over longer distances")][SerializeField] float swayLength;
+    [Tooltip("How fast it comes back in place")][SerializeField] float returnSpeed;
+    [Tooltip("How quickly balance is offset to the other side (Needs to be more than swayLength)")][SerializeField] float balanceValue;
+    [Tooltip("Only lower leg when Balance is between the positive and negative of this value")][SerializeField] float BalanceMax;
+
     float Balance = 0;
     float BalanceOffset = 0;
 
 
     [Header("Movement Values")]
-    [SerializeField] float turnSpeed;
+    [Tooltip("How fast it rotates")][SerializeField] float turnSpeed;
 
     [Header("Inputs")]
-    [SerializeField] InputAction TriggerRight;
-    [SerializeField] InputAction TriggerLeft;
-    [SerializeField] InputAction TurnInput;
+    [Tooltip("Makes the right leg go up and down")][SerializeField] InputAction TriggerRight;
+    [Tooltip("Makes the left leg go up and down")][SerializeField] InputAction TriggerLeft;
+    [Tooltip("Input for turning")][SerializeField] InputAction TurnInput;
+    [Tooltip("Input for balancing when on one leg")][SerializeField] InputAction BalanceInput;
 
     private void OnEnable()
     {
         TriggerLeft.Enable();
         TriggerRight.Enable();
         TurnInput.Enable();
+        BalanceInput.Enable();
     }
 
     private void OnDisable()
@@ -41,6 +46,7 @@ public class MechMovement : MonoBehaviour
         TriggerLeft.Disable();
         TriggerRight.Disable();
         TurnInput.Disable();
+        BalanceInput.Disable();
     }
 
 
@@ -72,16 +78,23 @@ public class MechMovement : MonoBehaviour
         {
             case MechStates.Based:
                 ResetBalance();
-                Turn(); 
+                Turn();
                 break;
             case MechStates.LeftUp:
             case MechStates.RightUp:
                 OffBalance();
+                MakeBalance();
                 Sway();
                 break;
             default:
                 break;
         }
+    }
+
+    private void MakeBalance()
+    {
+        var turnValue = BalanceInput.ReadValue<float>() * Time.deltaTime;
+        BalanceOffset -= turnValue * balanceValue;
     }
 
     public IEnumerator ReturnToPosition()
@@ -148,8 +161,11 @@ public class MechMovement : MonoBehaviour
                 state = MechStates.LeftUp;
                 break;
             case MechStates.LeftUp:
-                animator.SetTrigger("LeftLeg");
-                StartCoroutine("ReturnToPosition");
+                if (-BalanceMax < Balance && Balance < BalanceMax)
+                {
+                    animator.SetTrigger("LeftLeg");
+                    StartCoroutine("ReturnToPosition");
+                }
                 break;
             default:
                 break;
@@ -165,8 +181,12 @@ public class MechMovement : MonoBehaviour
                 state = MechStates.RightUp;
                 break;
             case MechStates.RightUp:
-                animator.SetTrigger("RightLeg");
-                StartCoroutine("ReturnToPosition");
+                if (-BalanceMax < Balance && Balance < BalanceMax)
+                {
+                    animator.SetTrigger("RightLeg");
+                    StartCoroutine("ReturnToPosition");
+
+                }
                 break;
             default:
                 break;

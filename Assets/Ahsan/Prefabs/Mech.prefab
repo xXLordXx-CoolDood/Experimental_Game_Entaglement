@@ -110,9 +110,10 @@ MonoBehaviour:
   animator: {fileID: 5978909143586189771}
   LeftFoot: {fileID: 310879582}
   RightFoot: {fileID: 2173303}
-  swayRate: 15
-  swayLength: 5
-  returnSpeed: 0
+  swayRate: 5
+  swayLength: 10
+  returnSpeed: 5
+  balanceValue: 15
   turnSpeed: 15
   TriggerRight:
     m_Name: Trigger Right
@@ -181,6 +182,24 @@ MonoBehaviour:
       m_Action: Turn Input
       m_Flags: 8
     m_Flags: 0
+  BalanceInput:
+    m_Name: Balance Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c9394823-b29c-4915-88be-b8470cdd0e1c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 96fa3d80-dd9c-46d5-af92-35ca6412b635
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Balance Input
+      m_Flags: 0
+    m_Flags: 0
+  BalanceMax: 15
 --- !u!1 &1577128709332817329
 GameObject:
   m_ObjectHideFlags: 0
