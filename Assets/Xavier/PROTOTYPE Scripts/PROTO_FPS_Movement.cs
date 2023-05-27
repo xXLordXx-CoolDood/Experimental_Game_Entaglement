@@ -11,12 +11,17 @@ public class PROTO_FPS_Movement : MonoBehaviour
     [SerializeField] bool cursorLock = true;
     [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] float Speed = 6.0f;
+    [SerializeField] float SurfSpeed = 12.0f;
+    [SerializeField] bool SurfWithMovement = true;
     [SerializeField] [Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     [SerializeField] float gravity = -30f;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask webs;
 
     private PlayerInput playerInput;
+    private bool isSurfing;
+    private Vector3 surfDirection;
 
     public float jumpHeight = 6f;
     float velocityY;
@@ -83,11 +88,13 @@ public class PROTO_FPS_Movement : MonoBehaviour
 
             BoxCollider boxCol = lineRenderer.gameObject.AddComponent<BoxCollider>();
 
-            boxCol.size = new Vector3(lineRenderer.startWidth, lineRenderer.startWidth, (lineRenderer.GetPosition(0) + lineRenderer.GetPosition(1)).magnitude);
+            boxCol.size = new Vector3(lineRenderer.startWidth, lineRenderer.startWidth, (lineRenderer.GetPosition(0) + lineRenderer.GetPosition(1)).magnitude * 1.8f);
             boxCol.center = Vector3.zero;
+            boxCol.isTrigger = true;
 
             Vector3 dir = lineRenderer.GetPosition(1) - lineRenderer.GetPosition(0);
             lineRenderer.transform.rotation = Quaternion.LookRotation(dir);
+            lineRenderer.gameObject.layer = 7;
         }
     }
 
@@ -99,17 +106,63 @@ public class PROTO_FPS_Movement : MonoBehaviour
     public void Jump(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && isGrounded)
-            velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z); 
+            velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity); 
+            isSurfing = false;
+        }
     }
     #endregion
 
     void Update()
     {
+        if (isSurfing) { Surf(); return; }
+
         UpdateMove();
+    }
+
+    void Surf()
+    {
+        if(Physics.CheckSphere(groundCheck.position, 0.25f, webs) == false)
+        {
+            isSurfing = false;
+            isGrounded = false;
+            return;
+        }
+
+        transform.position += surfDirection * Time.deltaTime * SurfSpeed;
     }
 
     void UpdateMove()
     {
+        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
+
+        if (Physics.CheckSphere(groundCheck.position, 0.25f, webs)) 
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(groundCheck.position, 0.25f, groundCheck.forward, 0.5f);
+
+            foreach(RaycastHit hit in hits)
+            {
+                if(hit.collider.gameObject.TryGetComponent<LineRenderer>(out LineRenderer lineRenderer)) {
+                    surfDirection = (lineRenderer.GetPosition(1) - lineRenderer.GetPosition(0)).normalized;
+                    float dotProduct = 0;
+
+                    if (SurfWithMovement)
+                        dotProduct = Vector3.Dot(surfDirection, velocity.normalized);
+                    else
+                        dotProduct = Vector3.Dot(surfDirection, playerCamera.forward);
+
+                    if(dotProduct < 0) { surfDirection *= -1; }
+
+                    Debug.Log($"SURF DIRECTION = {surfDirection}    MOVE DIRECTION = {velocity.normalized}    DOT PRODUCT = {dotProduct}");
+                }
+            }
+
+            isSurfing = true; 
+            isGrounded = true; 
+            return; 
+        }
+
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
 
         moveInput.Normalize();
@@ -118,13 +171,22 @@ public class PROTO_FPS_Movement : MonoBehaviour
 
         velocityY += gravity * 2f * Time.deltaTime;
 
-        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
-
         controller.Move(velocity * Time.deltaTime);
 
         if (isGrounded! && controller.velocity.y < -1f)
         {
             velocityY = -8f;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!isSurfing && other.gameObject.layer == 7)
+        {
+            GetComponent<CharacterController>().enabled = false;
+            transform.position = new Vector3(0, 1.5f, 0);
+            GetComponent<CharacterController>().enabled = true;
+            Debug.Log("KILLEDED");
         }
     }
 }
