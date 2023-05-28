@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PROTO_Quantum_Object : MonoBehaviour
 {
+    public bool syncPositions;
     public Rigidbody rbPartner;
     public float switchThreshold;
 
@@ -30,12 +31,12 @@ public class PROTO_Quantum_Object : MonoBehaviour
         if(!beta) 
         {
             rbPartner.velocity = rb.velocity;
-            rbPartner.transform.position += (myPosDelta - partnerPosDelta);
+            if (syncPositions) { rbPartner.transform.position += (myPosDelta - partnerPosDelta); }
         }
         else 
         {
             rb.velocity = rbPartner.velocity;
-            transform.position += (partnerPosDelta - myPosDelta);
+            if (syncPositions) { transform.position += (partnerPosDelta - myPosDelta); }
         }
 
         selfPreviousVelocity = rb.velocity;
