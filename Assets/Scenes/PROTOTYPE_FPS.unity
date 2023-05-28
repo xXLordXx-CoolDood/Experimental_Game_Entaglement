@@ -2016,12 +2016,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c581c7e3122b225489376947af489769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncPositions: 0
   rbPartner: {fileID: 1339614414}
-  switchThreshold: 0
-  selfPreviousVelocity: {x: 0, y: 0, z: 0}
-  partnerPreviousVelocity: {x: 0, y: 0, z: 0}
-  selfPreviousPosition: {x: 0, y: 0, z: 0}
-  partnerPreviousPosition: {x: 0, y: 0, z: 0}
+  switchThreshold: 1
   beta: 0
 --- !u!54 &1923415124
 Rigidbody:

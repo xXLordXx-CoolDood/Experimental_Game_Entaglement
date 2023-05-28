@@ -9,7 +9,7 @@ public class PROTO_Quantum_Object : MonoBehaviour
     public float switchThreshold;
 
     private Rigidbody rb;
-    public Vector3 selfPreviousVelocity, partnerPreviousVelocity, selfPreviousPosition, partnerPreviousPosition;
+    private Vector3 selfPreviousVelocity, partnerPreviousVelocity, selfPreviousPosition, partnerPreviousPosition;
     [SerializeField] private bool beta;
 
     private void Start()
