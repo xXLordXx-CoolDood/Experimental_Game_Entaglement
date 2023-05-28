@@ -109,13 +109,14 @@ public class PROTO_FPS_Movement : MonoBehaviour
     {
         if (ctx.performed && isGrounded)
         {
-            isSurfing = false;
             groundCheck.GetComponent<SphereCollider>().enabled = false;
             StartCoroutine(SurfGrabDelay());
             transform.position = new Vector3(transform.position.x, transform.position.y + (surfDirection.y * 1.25f), transform.position.z); 
             velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
             if (isSurfing) { velocityY *= 1.25f; }
+
+            isSurfing = false;
         }
     }
     #endregion
