@@ -8,32 +8,39 @@ public class PROTO_Quantum_Object : MonoBehaviour
     public float switchThreshold;
 
     private Rigidbody rb;
-    public Vector3 selfPreviousVelocity, partnerPreviousVelocity;
+    public Vector3 selfPreviousVelocity, partnerPreviousVelocity, selfPreviousPosition, partnerPreviousPosition;
     [SerializeField] private bool beta;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        selfPreviousPosition = transform.position;
+        partnerPreviousPosition = rbPartner.transform.position;
     }
 
     private void FixedUpdate()
     {
-        if(Mathf.Abs(rb.velocity.magnitude) < Mathf.Abs(partnerPreviousVelocity.magnitude) * switchThreshold && !beta) 
-        { beta = true; }
+        Vector3 myPosDelta = transform.position - selfPreviousPosition;
+        Vector3 partnerPosDelta = rbPartner.transform.position - partnerPreviousPosition;
 
-        if(Mathf.Abs(rb.velocity.magnitude) * switchThreshold > Mathf.Abs(partnerPreviousVelocity.magnitude) && beta) 
-        { beta = false; }
+        if(Mathf.Abs(rb.velocity.magnitude) < Mathf.Abs(partnerPreviousVelocity.magnitude) * switchThreshold) 
+        { beta = !beta; }
 
         if(!beta) 
         {
             rbPartner.velocity = rb.velocity;
+            rbPartner.transform.position += (myPosDelta - partnerPosDelta);
         }
         else 
         {
             rb.velocity = rbPartner.velocity;
+            transform.position += (partnerPosDelta - myPosDelta);
         }
 
         selfPreviousVelocity = rb.velocity;
+        selfPreviousPosition = transform.position;
         partnerPreviousVelocity = rbPartner.velocity;
+        partnerPreviousPosition = rbPartner.transform.position;
     }
 }

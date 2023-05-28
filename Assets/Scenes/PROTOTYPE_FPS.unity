@@ -2017,9 +2017,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbPartner: {fileID: 1339614414}
-  switchThreshold: 100
+  switchThreshold: 0
   selfPreviousVelocity: {x: 0, y: 0, z: 0}
   partnerPreviousVelocity: {x: 0, y: 0, z: 0}
+  selfPreviousPosition: {x: 0, y: 0, z: 0}
+  partnerPreviousPosition: {x: 0, y: 0, z: 0}
   beta: 0
 --- !u!54 &1923415124
 Rigidbody:
@@ -2108,7 +2110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923415122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.25, y: 0.5, z: -8.77}
+  m_LocalPosition: {x: -63.25, y: 0.545, z: -8.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
