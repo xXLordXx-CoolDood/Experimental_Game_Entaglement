@@ -88,7 +88,9 @@ public class PROTO_FPS_Movement : MonoBehaviour
 
             BoxCollider boxCol = lineRenderer.gameObject.AddComponent<BoxCollider>();
 
-            boxCol.size = new Vector3(lineRenderer.startWidth, lineRenderer.startWidth, (lineRenderer.GetPosition(0) + lineRenderer.GetPosition(1)).magnitude * 1.8f);
+            float length = Vector3.Distance(lineRenderer.GetPosition(0), lineRenderer.GetPosition(1));
+
+            boxCol.size = new Vector3(lineRenderer.startWidth, lineRenderer.startWidth, length);
             boxCol.center = Vector3.zero;
             boxCol.isTrigger = true;
 
@@ -107,9 +109,13 @@ public class PROTO_FPS_Movement : MonoBehaviour
     {
         if (ctx.performed && isGrounded)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z); 
-            velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity); 
             isSurfing = false;
+            groundCheck.GetComponent<SphereCollider>().enabled = false;
+            StartCoroutine(SurfGrabDelay());
+            transform.position = new Vector3(transform.position.x, transform.position.y + (surfDirection.y * 1.25f), transform.position.z); 
+            velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+            if (isSurfing) { velocityY *= 1.25f; }
         }
     }
     #endregion
@@ -137,7 +143,7 @@ public class PROTO_FPS_Movement : MonoBehaviour
     {
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
 
-        if (Physics.CheckSphere(groundCheck.position, 0.25f, webs)) 
+        if (Physics.CheckSphere(groundCheck.position, 0.25f, webs) && groundCheck.GetComponent<SphereCollider>().enabled) 
         {
             RaycastHit[] hits = Physics.SphereCastAll(groundCheck.position, 0.25f, groundCheck.forward, 0.5f);
 
@@ -173,6 +179,12 @@ public class PROTO_FPS_Movement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        if(controller.velocity.y < 0 && controller.velocity.y > -0.1f && !isSurfing) 
+        { 
+            groundCheck.GetComponent<SphereCollider>().enabled = false; 
+            groundCheck.GetComponent<SphereCollider>().enabled = true; 
+        }
+
         if (isGrounded! && controller.velocity.y < -1f)
         {
             velocityY = -8f;
@@ -188,5 +200,12 @@ public class PROTO_FPS_Movement : MonoBehaviour
             GetComponent<CharacterController>().enabled = true;
             Debug.Log("KILLEDED");
         }
+    }
+
+    IEnumerator SurfGrabDelay()
+    {
+        yield return new WaitForSeconds(1);
+
+        groundCheck.GetComponent<SphereCollider>().enabled = true;
     }
 }
