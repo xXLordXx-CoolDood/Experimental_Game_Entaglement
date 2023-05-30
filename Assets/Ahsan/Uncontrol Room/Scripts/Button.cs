@@ -29,12 +29,12 @@ public class Button : MonoBehaviour
     {
         if (isActive && buttonInput.IsPressed())
         {
-            transform.Find("ButtonSwitch").position = new Vector3(0, 0.1f, 0);
+            transform.Find("ButtonSwitch").localPosition = new Vector3(0, 0.1f, 0);
             TargetFunction.Invoke();
         }
         else
         {
-            transform.Find("ButtonSwitch").position = new Vector3(0, 0.3f, 0);
+            transform.Find("ButtonSwitch").localPosition = new Vector3(0, 0.3f, 0);
         }
 
     }
