@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Tooltip("Speed at which the character is moving")][SerializeField] float moveSpeed = 15;
     [Tooltip("Camera move speed")][SerializeField] float camSpeed = 15;
