@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b21ec7b35c860b4d98e91c34a751aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strafeSpeed: 15
-  camSpeed: 15
+  moveSpeed: 15
+  camSpeed: 0.5
   Move:
     m_Name: Move
     m_Type: 0
