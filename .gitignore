@@ -70,3 +70,509 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+Assets/Samples.meta
+
+Assets/Samples/Input System.meta
+
+Assets/Samples/Input System/1.3.0.meta
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite.meta
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite/.sample.json
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite/CustomComposite.cs
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite/CustomComposite.cs.meta
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite/README.md
+
+Assets/Samples/Input System/1.3.0/Custom Binding Composite/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/.sample.json
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/.sample.json.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/CustomDeviceUsages.cs
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/CustomDeviceUsages.cs.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/README.md
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/TwoPlayerControls.inputactions
+
+Assets/Samples/Input System/1.3.0/Custom Device Usages/TwoPlayerControls.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device/.sample.json
+
+Assets/Samples/Input System/1.3.0/Custom Device/CustomDevice.cs
+
+Assets/Samples/Input System/1.3.0/Custom Device/CustomDevice.cs.meta
+
+Assets/Samples/Input System/1.3.0/Custom Device/README.md
+
+Assets/Samples/Input System/1.3.0/Custom Device/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/.sample.json
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/crosshair.png
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/crosshair.png.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/GamepadMouseCursorSample.unity
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/GamepadMouseCursorSample.unity.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/GamepadMouseCursorUIActions.inputactions
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/GamepadMouseCursorUIActions.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/README.md
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/VirtualMouseInput.png
+
+Assets/Samples/Input System/1.3.0/Gamepad Mouse Cursor/VirtualMouseInput.png.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/.sample.json
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsActions.cs
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsActions.cs.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsActions.inputactions
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsActions.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsExample.cs
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsExample.cs.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsSampleScene.unity
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/InGameHintsSampleScene.unity.meta
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/Unity.InputSystem.InGameHints.asmdef
+
+Assets/Samples/Input System/1.3.0/In-Game Hints/Unity.InputSystem.InGameHints.asmdef.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder/.sample.json
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorder.cs
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorder.cs.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorderInspector.cs
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorderInspector.cs.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorderSample.unity
+
+Assets/Samples/Input System/1.3.0/Input Recorder/InputRecorderSample.unity.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder/README.md
+
+Assets/Samples/Input System/1.3.0/Input Recorder/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Input Recorder/Unity.InputSystem.Recorder.asmdef
+
+Assets/Samples/Input System/1.3.0/Input Recorder/Unity.InputSystem.Recorder.asmdef.meta
+
+Assets/Samples/Input System/1.3.0/InputDeviceTester.meta
+
+Assets/Samples/Input System/1.3.0/InputDeviceTester/.sample.json
+
+Assets/Samples/Input System/1.3.0/InputDeviceTester/.sample.json.meta
+
+Assets/Samples/Input System/1.3.0/InputDeviceTester/InputDeviceTester.asset
+
+Assets/Samples/Input System/1.3.0/InputDeviceTester/InputDeviceTester.asset.meta
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls.meta
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/.sample.json
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/Button.prefab
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/Button.prefab.meta
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/OnScreenControlsSample.unity
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/OnScreenControlsSample.unity.meta
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/Stick.prefab
+
+Assets/Samples/Input System/1.3.0/On-Screen Controls/Stick.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/.sample.json
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/GamepadIconsExample.cs
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/GamepadIconsExample.cs.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Circle.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Circle.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Cross.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Cross.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Down.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Down.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Left.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Left.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Right.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Right.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Up.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad_Up.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Dpad.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_L1.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_L1.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_L2.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_L2.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Left_Stick.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Left_Stick.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Options.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Options.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_R1.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_R1.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_R2.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_R2.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Right_Stick.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Right_Stick.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Share.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Share.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Square.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Square.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Triangle.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/PS4_Triangle.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_A.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_A.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_B.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_B.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Down.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Down.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Left.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Left.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Right.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Right.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Up.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad_Up.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Dpad.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_LB.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_LB.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Left_Stick.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Left_Stick.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_LT.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_LT.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Menu.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Menu.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_RB.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_RB.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Right_Stick.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Right_Stick.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_RT.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_RT.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Windows.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Windows.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_X.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_X.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Y.png
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Icons/XboxOne_Y.png.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/README.md
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindActionUI.cs
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindActionUI.cs.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindActionUIEditor.cs
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindActionUIEditor.cs.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindingUISampleScene.unity
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindingUISampleScene.unity.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindSaveLoad.cs
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindSaveLoad.cs.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindUIPrefab.prefab
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindUIPrefab.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindUISampleActions.inputactions
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/RebindUISampleActions.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Unity.InputSystem.RebindingUI.asmdef
+
+Assets/Samples/Input System/1.3.0/Rebinding UI/Unity.InputSystem.RebindingUI.asmdef.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/.sample.json
+
+Assets/Samples/Input System/1.3.0/Simple Demo/.sample.json.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/Environment.prefab
+
+Assets/Samples/Input System/1.3.0/Simple Demo/Environment.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/README.md
+
+Assets/Samples/Input System/1.3.0/Simple Demo/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingActionAsset.cs
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingActionAsset.cs.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingActions.cs
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingActions.cs.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingPlayerInput.cs
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingPlayerInput.cs.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingState.cs
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleController_UsingState.cs.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleControls.cs
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleControls.cs.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleControls.inputactions
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleControls.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingActionAsset.unity
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingActionAsset.unity.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingActions.unity
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingActions.unity.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingPlayerInput.unity
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingPlayerInput.unity.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingState.unity
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleDemo_UsingState.unity.meta
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleProjectile.prefab
+
+Assets/Samples/Input System/1.3.0/Simple Demo/SimpleProjectile.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/.sample.json
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/Player.prefab
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/Player.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/README.md
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/README.md.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerControls.inputactions
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerControls.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerDemo.unity
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerDemo.unity.meta
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerPlayer.cs
+
+Assets/Samples/Input System/1.3.0/Simple Multiplayer/SimpleMultiplayerPlayer.cs.meta
+
+Assets/Samples/Input System/1.3.0/Touch Samples.meta
+
+Assets/Samples/Input System/1.3.0/Touch Samples/.sample.json
+
+Assets/Samples/Input System/1.3.0/Touch Samples/TouchSamples.asset
+
+Assets/Samples/Input System/1.3.0/Touch Samples/TouchSamples.asset.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/.sample.json
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/Projectile.prefab
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/Projectile.prefab.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/README.md
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/README.md.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.inputactions
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.png
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.png.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.unity
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInput.unity.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInputHandler.cs
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/UIvsGameInputHandler.cs.meta
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/Unity.InputSystem.UIvsGameInput.asmdef
+
+Assets/Samples/Input System/1.3.0/UI vs. Game Input/Unity.InputSystem.UIvsGameInput.asmdef.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/.sample.json
+
+Assets/Samples/Input System/1.3.0/Visualizers/GamepadVis.prefab
+
+Assets/Samples/Input System/1.3.0/Visualizers/GamepadVis.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/GamepadVisualizer.unity
+
+Assets/Samples/Input System/1.3.0/Visualizers/GamepadVisualizer.unity.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputActionVisualizer.cs
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputActionVisualizer.cs.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputControlVisualizer.cs
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputControlVisualizer.cs.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputVisualizer.cs
+
+Assets/Samples/Input System/1.3.0/Visualizers/InputVisualizer.cs.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/MouseVis.prefab
+
+Assets/Samples/Input System/1.3.0/Visualizers/MouseVis.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/MouseVisualizer.unity
+
+Assets/Samples/Input System/1.3.0/Visualizers/MouseVisualizer.unity.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/PenVis.prefab
+
+Assets/Samples/Input System/1.3.0/Visualizers/PenVis.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/PenVisualizer.unity
+
+Assets/Samples/Input System/1.3.0/Visualizers/PenVisualizer.unity.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControls.inputactions
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControls.inputactions.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControlsVis.prefab
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControlsVis.prefab.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControlsVisualizer.unity
+
+Assets/Samples/Input System/1.3.0/Visualizers/SimpleControlsVisualizer.unity.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/Unity.InputSystem.Visualizers.asmdef
+
+Assets/Samples/Input System/1.3.0/Visualizers/Unity.InputSystem.Visualizers.asmdef.meta
+
+Assets/Samples/Input System/1.3.0/Visualizers/VisualizationHelpers.cs
+
+Assets/Samples/Input System/1.3.0/Visualizers/VisualizationHelpers.cs.meta
