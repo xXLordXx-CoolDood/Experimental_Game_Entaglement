@@ -2,154 +2,132 @@
     "name": "FPS",
     "maps": [
         {
-            "name": "FPS",
-            "id": "f4de514c-d44c-498b-934c-414a122e94e5",
+            "name": "DogMech",
+            "id": "02dea3c5-b0f6-48cf-b789-86910693d632",
             "actions": [
                 {
-                    "name": "Walking",
+                    "name": "Front_Left",
+                    "type": "Button",
+                    "id": "29878668-f102-440c-9f23-70e587f5757f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=1.401298E-45,pressPoint=1.401298E-45)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Front_Right",
+                    "type": "Button",
+                    "id": "38035c51-6b6a-4f7b-8049-98408290a896",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back_Left",
+                    "type": "Button",
+                    "id": "b84b41d6-9344-4e9d-b3cb-b08879386192",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back_Right",
+                    "type": "Button",
+                    "id": "3a9f5ff1-c649-404c-8bf6-ff9706cda983",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Turn",
                     "type": "Value",
-                    "id": "1b2e7401-08ed-4002-9864-135c0136ab9a",
-                    "expectedControlType": "Vector2",
+                    "id": "c13eb223-088f-484c-8cb5-4ebba84e6310",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "MouseLook",
-                    "type": "Value",
-                    "id": "851e73f9-6b71-4af4-b852-b0fa67e33cf2",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "872b7f73-1757-482b-8e40-bcb9c6f91c47",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "0d8005cf-22be-4978-b100-1fdaa7b3dd2e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "8d26e52b-47b2-43c5-b8d9-b29c95bc6e4f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "8952996a-bb75-4ed2-ad3f-578b2c59aeac",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "9e9c6464-110c-4a3d-8aaf-e7e1db83a7dd",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Walking",
+                    "action": "Front_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c070afec-1aed-41d2-890d-d223656a8515",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Front_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4082de32-0b84-4537-a383-dc1d23cced50",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "800a0a0c-42eb-491b-9f8d-0b2aebd4c7e4",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ed5498c5-3a38-4996-80a3-1d7ac8ae3160",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "96020804-c8b7-47df-bcac-99427b5e70f9",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walking",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "904f71e6-f9da-49dd-b665-bd94582bf41a",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walking",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "333ac078-4c2f-4c33-bc93-2f6aab6cdfb6",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walking",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "a4587c2b-ebe7-4f8f-908b-961d8feaf8b4",
+                    "name": "negative",
+                    "id": "3abab1bc-fb79-4cf6-9f69-76e4c6934782",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Walking",
+                    "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "0bb65afc-30f7-4d14-afa9-6b1eeec765e6",
-                    "path": "<Mouse>/delta",
+                    "name": "positive",
+                    "id": "a08b6d4c-d1be-4ce9-9a01-9687c83bab2d",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseLook",
+                    "action": "Turn",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b2d12cea-26b7-4763-95f1-87c82618f63e",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4f79e9b9-06e7-4fc0-b57d-9c3e726a9e7e",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dac06d15-2782-44b8-a12f-6f795b001cc1",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }
