@@ -6,41 +6,50 @@ using UnityEngine.InputSystem;
 public class PROTO_Dog_Controller : MonoBehaviour
 {
     public PROTO_Leg_Animator LF, LB, RF, RB;
-    public float legSpeed = 1, maxLegHeight = 1;
+    public Transform direction;
+    public float legSpeed = 1, maxLegHeight = 1, heightOffset = 1, rotationMultiplier;
+
+    [HideInInspector] public int engagedLegs;
+    [HideInInspector] public bool opposites;
 
     private PlayerInput playerInput;
-    private bool LFHeld, LBHeld, RFHeld, RBHeld;
-    [SerializeField] private bool opposites;
+    private int directionChange;
 
     void Start()
     {
+        //Initialize vars and legs
         playerInput = new PlayerInput();
-        LF.legSpeed = legSpeed; LF.maxLegHeight = maxLegHeight;
-        LB.legSpeed = legSpeed; LB.maxLegHeight = maxLegHeight;
-        RF.legSpeed = legSpeed; RF.maxLegHeight = maxLegHeight;
-        RB.legSpeed = legSpeed; RB.maxLegHeight = maxLegHeight;
+        LF.legSpeed = legSpeed; LF.controllerRef = this;
+        LB.legSpeed = legSpeed; LB.controllerRef = this;
+        RF.legSpeed = legSpeed; RF.controllerRef = this;
+        RB.legSpeed = legSpeed; RB.controllerRef = this;
     }
 
     #region
     public void ForwardLeft(InputAction.CallbackContext ctx) 
     {
-        if (ctx.performed) { LF.isHeld = true; }
-        if (ctx.canceled) { LF.isHeld = false; }
+        if (ctx.performed) { LF.isHeld = true; engagedLegs++; }
+        if (ctx.canceled) { LF.isHeld = false; engagedLegs--; }
     }
     public void BackwardLeft(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { LB.isHeld = true; }
-        if (ctx.canceled) { LB.isHeld = false; }
+        if (ctx.performed) { LB.isHeld = true; engagedLegs++; }
+        if (ctx.canceled) { LB.isHeld = false; engagedLegs--; }
     }
     public void ForwardRight(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { RF.isHeld = true; }
-        if (ctx.canceled) { RF.isHeld = false; }
+        if (ctx.performed) { RF.isHeld = true; engagedLegs++; }
+        if (ctx.canceled) { RF.isHeld = false; engagedLegs--; }
     }
     public void BackwardRight(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { RB.isHeld = true; }
-        if (ctx.canceled) { RB.isHeld = false; }
+        if (ctx.performed) { RB.isHeld = true; engagedLegs++; }
+        if (ctx.canceled) { RB.isHeld = false; engagedLegs--; }
+    }
+    public void Turn(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) { directionChange = Mathf.RoundToInt(ctx.ReadValue<float>()); }
+        if (ctx.canceled) { directionChange = 0; }
     }
     #endregion //Input Handling
 
@@ -48,8 +57,12 @@ public class PROTO_Dog_Controller : MonoBehaviour
     {
         opposites = false;
 
+        Vector3 delta = new Vector3(0, directionChange, 0);
+        direction.Rotate(delta, Time.deltaTime * 20);
+        LF.Rotate(delta); LB.Rotate(delta); RF.Rotate(delta); RB.Rotate(delta);
+
         //Check if opposite legs are active
-        if(RB.isHeld && LF.isHeld && !RF.isHeld && !LB.isHeld) {
+        if (RB.isHeld && LF.isHeld && !RF.isHeld && !LB.isHeld) {
             opposites = true;
             RB.canMove = true;
             LF.canMove = true;
@@ -62,12 +75,28 @@ public class PROTO_Dog_Controller : MonoBehaviour
         }
 
         MoveBody();
+        RotateBody();
     }
 
     void MoveBody()
     {
         float averageZ = (LF.legTarget.position.z + LB.legTarget.position.z + RF.legTarget.position.z + RB.legTarget.position.z) / 4;
+        float averageX = (LF.legTarget.position.x + LB.legTarget.position.x + RF.legTarget.position.x + RB.legTarget.position.x) / 4;
+        float averageY = (LF.legTarget.position.y + LB.legTarget.position.y + RF.legTarget.position.y + RB.legTarget.position.y) / 4;
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, averageZ);
+        maxLegHeight = (averageY + heightOffset) * 0.9f;
+        transform.position = new Vector3(averageX, averageY + heightOffset, averageZ);
+    }
+
+    void RotateBody()
+    {
+        float angleX = (LB.legTarget.position.y + RB.legTarget.position.y) - (LF.legTarget.position.y + RF.legTarget.position.y);
+
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
+    }
+
+    public void AddMoveRotation()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, direction.eulerAngles.y / 2 * Time.deltaTime, 0);
     }
 }
