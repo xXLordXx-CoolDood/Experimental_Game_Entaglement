@@ -14,7 +14,6 @@ public class PROTO_Dog_Controller : MonoBehaviour
 
     private PlayerInput playerInput;
     private int directionChange;
-    private bool LFHeld, LBHeld, RFHeld, RBHeld;
 
     void Start()
     {
@@ -60,6 +59,7 @@ public class PROTO_Dog_Controller : MonoBehaviour
 
         Vector3 delta = new Vector3(0, directionChange, 0);
         direction.Rotate(delta, Time.deltaTime * 20);
+        LF.Rotate(delta); LB.Rotate(delta); RF.Rotate(delta); RB.Rotate(delta);
 
         //Check if opposite legs are active
         if (RB.isHeld && LF.isHeld && !RF.isHeld && !LB.isHeld) {
@@ -81,14 +81,22 @@ public class PROTO_Dog_Controller : MonoBehaviour
     void MoveBody()
     {
         float averageZ = (LF.legTarget.position.z + LB.legTarget.position.z + RF.legTarget.position.z + RB.legTarget.position.z) / 4;
+        float averageX = (LF.legTarget.position.x + LB.legTarget.position.x + RF.legTarget.position.x + RB.legTarget.position.x) / 4;
         float averageY = (LF.legTarget.position.y + LB.legTarget.position.y + RF.legTarget.position.y + RB.legTarget.position.y) / 4;
+
         maxLegHeight = (averageY + heightOffset) * 0.9f;
-        transform.position = new Vector3(transform.position.x, averageY + heightOffset, averageZ);
+        transform.position = new Vector3(averageX, averageY + heightOffset, averageZ);
     }
 
     void RotateBody()
     {
-        float angle = (LB.legTarget.position.y + RB.legTarget.position.y) - (LF.legTarget.position.y + RF.legTarget.position.y);
-        transform.eulerAngles = new Vector3(angle * rotationMultiplier, 0, 0);
+        float angleX = (LB.legTarget.position.y + RB.legTarget.position.y) - (LF.legTarget.position.y + RF.legTarget.position.y);
+
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
+    }
+
+    public void AddMoveRotation()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, direction.eulerAngles.y / 2 * Time.deltaTime, 0);
     }
 }

@@ -41,19 +41,26 @@ public class PROTO_Leg_Animator : MonoBehaviour
         }
     }
 
+    public void Rotate(Vector3 delta)
+    {
+        legTarget.transform.Rotate(delta, Time.deltaTime * 20);
+    }
+
     void UpdateLeg()
     {
         if (isHeld && (controllerRef.engagedLegs == 1 || controllerRef.opposites)) {
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y + (Time.deltaTime * legSpeed)
-                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z);
+                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z) + (legTarget.transform.forward.normalized * Time.deltaTime);
         }
         else if(canMove){
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y - (Time.deltaTime * legSpeed
-                 ), -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z + (Time.deltaTime * legSpeed));
+                 ), -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z + (Time.deltaTime * legSpeed)) 
+                + (legTarget.transform.forward.normalized * Time.deltaTime);
+            controllerRef.AddMoveRotation();
         }
         else if(!grounded){
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y - (Time.deltaTime * legSpeed)
-                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z);
+                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z) + (legTarget.transform.forward.normalized * Time.deltaTime);
         }
     }
 }
