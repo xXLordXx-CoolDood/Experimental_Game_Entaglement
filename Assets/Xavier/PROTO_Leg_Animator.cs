@@ -11,6 +11,7 @@ public class PROTO_Leg_Animator : MonoBehaviour
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
     [HideInInspector] public bool isHeld, canMove, grounded;
     [HideInInspector] public float legSpeed;
+    [HideInInspector] public int forwardMultiplier = 1;
 
     float maxLegDistance;
 
@@ -24,7 +25,7 @@ public class PROTO_Leg_Animator : MonoBehaviour
     void LateUpdate()
     {
         if (!isHeld) { CheckForGround(); }
-
+        Debug.Log(forwardMultiplier);
         UpdateLeg();
     }
 
@@ -50,17 +51,17 @@ public class PROTO_Leg_Animator : MonoBehaviour
     {
         if (isHeld && (controllerRef.engagedLegs == 1 || controllerRef.opposites)) {
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y + (Time.deltaTime * legSpeed)
-                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z) + (legTarget.transform.forward.normalized * Time.deltaTime);
+                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z)/* + (legTarget.transform.forward.normalized * Time.deltaTime)*/;
         }
         else if(canMove){
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y - (Time.deltaTime * legSpeed
-                 ), -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z + (Time.deltaTime * legSpeed)) 
-                + (legTarget.transform.forward.normalized * Time.deltaTime);
+                 ), -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z + (Time.deltaTime * legSpeed * forwardMultiplier)) 
+                + (legTarget.transform.forward.normalized * Time.deltaTime * forwardMultiplier);
             controllerRef.AddMoveRotation();
         }
         else if(!grounded){
             legTarget.transform.position = new Vector3(legTarget.position.x, Mathf.Clamp(legTarget.position.y - (Time.deltaTime * legSpeed)
-                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z) + (legTarget.transform.forward.normalized * Time.deltaTime);
+                , -controllerRef.maxLegHeight, controllerRef.maxLegHeight), legTarget.position.z) + (legTarget.transform.forward.normalized * Time.deltaTime * forwardMultiplier);
         }
     }
 }

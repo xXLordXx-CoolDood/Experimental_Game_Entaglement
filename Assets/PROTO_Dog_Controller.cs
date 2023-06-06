@@ -7,13 +7,14 @@ public class PROTO_Dog_Controller : MonoBehaviour
 {
     public PROTO_Leg_Animator LF, LB, RF, RB;
     public Transform direction;
-    public float legSpeed = 1, maxLegHeight = 1, heightOffset = 1, rotationMultiplier;
+    public float legSpeed = 1, maxLegHeight = 1, heightOffset = 1, rotationMultiplier, maxRotation = 33f;
 
     [HideInInspector] public int engagedLegs;
     [HideInInspector] public bool opposites;
 
     private PlayerInput playerInput;
     private int directionChange;
+    private Vector2 prevPosition;
 
     void Start()
     {
@@ -23,6 +24,8 @@ public class PROTO_Dog_Controller : MonoBehaviour
         LB.legSpeed = legSpeed; LB.controllerRef = this;
         RF.legSpeed = legSpeed; RF.controllerRef = this;
         RB.legSpeed = legSpeed; RB.controllerRef = this;
+
+        prevPosition = new Vector2(transform.position.x, transform.position.z);
     }
 
     #region
@@ -50,6 +53,13 @@ public class PROTO_Dog_Controller : MonoBehaviour
     {
         if (ctx.performed) { directionChange = Mathf.RoundToInt(ctx.ReadValue<float>()); }
         if (ctx.canceled) { directionChange = 0; }
+    }
+    public void Reverse(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) 
+        { 
+            LF.forwardMultiplier *= -1; LB.forwardMultiplier *= -1; RF.forwardMultiplier *= -1; RB.forwardMultiplier *= -1;
+        }
     }
     #endregion //Input Handling
 
@@ -85,6 +95,7 @@ public class PROTO_Dog_Controller : MonoBehaviour
         float averageY = (LF.legTarget.position.y + LB.legTarget.position.y + RF.legTarget.position.y + RB.legTarget.position.y) / 4;
 
         maxLegHeight = (averageY + heightOffset) * 0.9f;
+
         transform.position = new Vector3(averageX, averageY + heightOffset, averageZ);
     }
 
@@ -92,11 +103,17 @@ public class PROTO_Dog_Controller : MonoBehaviour
     {
         float angleX = (LB.legTarget.position.y + RB.legTarget.position.y) - (LF.legTarget.position.y + RF.legTarget.position.y);
 
-        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
+        Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
+        float angleY = Vector2.Angle(prevPosition, currentPos);
+        Debug.Log(angleY);
+
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y - angleY, 0);
+
+        prevPosition = currentPos;
     }
 
     public void AddMoveRotation()
     {
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, direction.eulerAngles.y / 2 * Time.deltaTime, 0);
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, direction.eulerAngles.y / 2 * Time.deltaTime, 0);
     }
 }
