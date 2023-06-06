@@ -7,6 +7,7 @@ public class PROTO_Dog_Controller : MonoBehaviour
 {
     public PROTO_Leg_Animator LF, LB, RF, RB;
     public Transform direction;
+    public bool rotate;
     public float legSpeed = 1, maxLegHeight = 1, heightOffset = 1, rotationMultiplier, maxRotation = 33f;
 
     [HideInInspector] public int engagedLegs;
@@ -105,7 +106,8 @@ public class PROTO_Dog_Controller : MonoBehaviour
 
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
         float angleY = Vector2.Angle(prevPosition, currentPos);
-        Debug.Log(angleY);
+
+        if (!rotate) { angleY = 0; }
 
         transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y - angleY, 0);
 
