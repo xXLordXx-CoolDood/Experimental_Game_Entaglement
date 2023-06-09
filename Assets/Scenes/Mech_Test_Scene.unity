@@ -348,6 +348,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &867079265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3500687816532514994, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+  m_PrefabInstance: {fileID: 1658144657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207623448
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,9 +698,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8664310726653115686, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5782619786385313524, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 357374199910483868, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
       propertyPath: m_Name
       value: leg_fbx
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515092911393375079, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302315917869575022, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
@@ -886,9 +915,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 2097257774}
+  footBone: {fileID: 867079265}
   ankleBone: {fileID: 764192709}
+  kneeBone: {fileID: 734733277}
   hipBone: {fileID: 612566395}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   rotationMultiplier: 2
+  groundCheckDistance: 1.4
+  ankleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -919,7 +978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097257773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.002, z: 0.001}
+  m_LocalPosition: {x: 0, y: 0.243, z: -0.135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
