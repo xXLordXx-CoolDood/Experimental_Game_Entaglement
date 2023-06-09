@@ -5,7 +5,7 @@ using UnityEngine;
 public class Leg_Animator : MonoBehaviour
 {
     public Transform targetPoint, ankleBone, hipBone;
-    public float rotationMultiplier, backRotationMultiplier;
+    public float rotationMultiplier;
 
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
     [HideInInspector] public bool isHeld, canMove, grounded;
@@ -19,21 +19,28 @@ public class Leg_Animator : MonoBehaviour
 
     void Update()
     {
+        //HandleTarget();
         RotateAnkleBone();
-        Debug.Log($"Offset = {ankleBone.position.z - hipBone.position.z}");
+    }
+
+    private void HandleTarget()
+    {
+
     }
 
     private void RotateAnkleBone()
     {
-        float rotAmnt = 0;
+        Vector2 hip = new Vector2(hipBone.position.x, hipBone.position.z);
+        Vector2 ankle = new Vector2(ankleBone.position.x, ankleBone.position.z);
 
-        //If ankle is forward, use forward rotation equation. If not, use backwards rotation equation
-        if (ankleBone.position.z - hipBone.position.z > 0) { rotAmnt = (ankleBone.position.z - hipBone.position.z) 
-                * -rotationMultiplier; }
-        else { rotAmnt = (ankleBone.position.z - hipBone.position.z) * backRotationMultiplier; }
+        float rotAmnt = Vector2.Angle(ankle, hip);
 
-        Vector3 ankleRotation = new Vector3(rotAmnt, 0, 0);
+        if(ankleBone.position.z - hipBone.position.z > 0) { rotAmnt *= -1; }
 
-        targetPoint.rotation = Quaternion.Euler(ankleRotation);
+        rotAmnt *= rotationMultiplier;
+
+        Vector3 ankleRot = new Vector3(rotAmnt, 0, 0);
+
+        targetPoint.rotation = Quaternion.Euler(ankleRot);
     }
 }
