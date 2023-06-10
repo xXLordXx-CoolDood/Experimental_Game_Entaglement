@@ -15,7 +15,7 @@ public class Leg_Animator : MonoBehaviour
     [HideInInspector] public int forwardMultiplier = 1;
 
     private Vector3 initialDir = Vector3.zero, prevTargetPos = Vector3.zero;
-    private float maxLegDistance = 0;
+    private float maxLegDistance = 0, defaultHeightDif;
 
     void Start()
     {
@@ -30,9 +30,11 @@ public class Leg_Animator : MonoBehaviour
 
         maxLegDistance = Vector2.Distance(hip, knee) + 
             Vector2.Distance(knee, ankle);
+
+        defaultHeightDif = hipBone.position.y - ankleBone.position.y;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleTarget();
         RotateAnkleBone();
@@ -40,9 +42,10 @@ public class Leg_Animator : MonoBehaviour
 
     private void HandleTarget()
     {
+        if(targetPoint.position == prevTargetPos) { return; }
+
         initialDir = footBone.position - ankleBone.position;
         initialDir.Normalize();
-
         grounded = false;
 
         RaycastHit hit;
@@ -52,24 +55,27 @@ public class Leg_Animator : MonoBehaviour
             footBone.position = hit.point;
         }
 
-        //if (legLength > maxLegDistance) { targetPoint.position = prevTargetPos; return; }
-
-        //prevTargetPos = targetPoint.position;
+        prevTargetPos = targetPoint.position;
     }
 
     private void RotateAnkleBone()
     {
-        if (grounded) { Vector3 rot = new Vector3(0, 0, 0); targetPoint.rotation = Quaternion.Euler(rot); return; }
+        if (grounded) { /*Vector3 rot = new Vector3(0, 0, 0); targetPoint.rotation = Quaternion.Euler(rot);*/ return; }
 
         Vector2 hip = new Vector2(hipBone.position.y / 2, hipBone.position.z);
         Vector2 ankle = new Vector2(ankleBone.position.y / 2, ankleBone.position.z);
 
-        float currentLegLength = Vector2.Distance(hip, ankle);
-        float displacement = currentLegLength / maxLegDistance;
+        float ZDif = ankleBone.position.z - hipBone.position.z;
+        float heightDif = hipBone.position.y - ankleBone.position.y;
+
+        float displacement = (ZDif / maxLegDistance) * -1;
 
         float rotAmnt = Vector2.Angle(ankle, hip);
+        rotAmnt *= defaultHeightDif + 1.1f - heightDif;
 
-        if(ankleBone.position.z - hipBone.position.z > 0) { rotAmnt *= -1; }
+        Debug.Log(defaultHeightDif + 1.1f - heightDif);
+
+        if (ankleBone.position.z - hipBone.position.z > 0) { rotAmnt *= -1.2f; displacement *= -1; }
 
         rotAmnt *= rotationMultiplier * ankleCurve.Evaluate(displacement);
 
