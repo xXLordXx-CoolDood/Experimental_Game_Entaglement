@@ -8,6 +8,9 @@ public class Leg_Animator : MonoBehaviour
     public LayerMask groundLayer;
     public float rotationMultiplier, groundCheckDistance = 1;
     public AnimationCurve ankleCurve;
+    public Animator legAnimations;
+
+    public bool nextState, prevState;
 
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
     [HideInInspector] public bool isHeld, canMove, grounded;
@@ -34,13 +37,24 @@ public class Leg_Animator : MonoBehaviour
         defaultHeightDif = hipBone.position.y - ankleBone.position.y;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        HandleTarget();
+        if (prevState) { legAnimations.SetTrigger("Prev_State"); prevState = false; }
+        if (nextState) { legAnimations.SetTrigger("Next_State"); nextState = false; }
+
+
+        if (!grounded) { TargetGravity(); }
+        if (!isHeld) { CheckForGround(); }
+
         RotateAnkleBone();
     }
 
-    private void HandleTarget()
+    private void TargetGravity()
+    {
+        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+    }
+
+    private void CheckForGround()
     {
         if(targetPoint.position == prevTargetPos) { return; }
 
@@ -52,7 +66,9 @@ public class Leg_Animator : MonoBehaviour
         if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance))
         {
             grounded = true;
+            canMove = false;
             footBone.position = hit.point;
+            targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + groundCheckDistance, targetPoint.position.z);
         }
 
         prevTargetPos = targetPoint.position;
