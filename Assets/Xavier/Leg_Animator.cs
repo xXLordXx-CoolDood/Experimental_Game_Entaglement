@@ -51,7 +51,7 @@ public class Leg_Animator : MonoBehaviour
 
     private void TargetGravity()
     {
-        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+        //targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
     }
 
     private void CheckForGround()
@@ -68,7 +68,8 @@ public class Leg_Animator : MonoBehaviour
             grounded = true;
             canMove = false;
             footBone.position = hit.point;
-            targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + groundCheckDistance, targetPoint.position.z);
+            float ydif = targetPoint.localPosition.y - footBone.localPosition.y; 
+            targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + ydif, targetPoint.position.z);
         }
 
         prevTargetPos = targetPoint.position;
@@ -88,8 +89,6 @@ public class Leg_Animator : MonoBehaviour
 
         float rotAmnt = Vector2.Angle(ankle, hip);
         rotAmnt *= defaultHeightDif + 1.1f - heightDif;
-
-        Debug.Log(defaultHeightDif + 1.1f - heightDif);
 
         if (ankleBone.position.z - hipBone.position.z > 0) { rotAmnt *= -1.2f; displacement *= -1; }
 

@@ -992,5 +992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa79b836f5c8d64aa92b12771716dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1285646317}
   target: {fileID: 502026451}
-  follow: 1
+  zOffset: 0
