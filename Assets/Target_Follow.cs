@@ -8,7 +8,7 @@ public class Target_Follow : MonoBehaviour
     public Transform target;
 
     private Vector2 prevTargetZY = Vector2.zero;
-    public float zOffset = 0;
+    private float zOffset = 0;
 
     private void Start()
     {
