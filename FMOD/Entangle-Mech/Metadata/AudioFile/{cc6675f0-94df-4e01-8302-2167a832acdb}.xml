@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cc6675f0-94df-4e01-8302-2167a832acdb}">
+		<property name="assetPath">
+			<value>Cymatics - LIFE - Forest 1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>37</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{15d0a97c-00e7-4db2-aea6-778facc4445a}</destination>
+		</relationship>
+	</object>
+</objects>
