@@ -7,6 +7,9 @@ public class Target_Follow : MonoBehaviour
     public Animator anim;
     public Transform target;
 
+    [HideInInspector] public bool follow = true;
+
+    private Vector3 initialDir = Vector3.zero, prevTargetPos = Vector3.zero;
     private Vector2 prevTargetZY = Vector2.zero;
     private float zOffset = 0;
 
@@ -17,7 +20,15 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Change")) {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid"))
+        {
+            prevTargetZY = new Vector2(target.position.z, target.position.y);
+            zOffset = target.position.z - transform.position.z;
+        }
+
+        if (!follow) { return; }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")) {
             Vector2 targetZY = new Vector2(target.position.z, target.position.y);
 
             Vector2 zyDelta = targetZY - prevTargetZY;
@@ -27,10 +38,10 @@ public class Target_Follow : MonoBehaviour
 
             prevTargetZY = targetZY;
         }
+    }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) {
-            prevTargetZY = new Vector2(target.position.z, target.position.y);
-            zOffset = target.position.z - transform.position.z;
-        }
+    private void CheckForGround()
+    {
+
     }
 }

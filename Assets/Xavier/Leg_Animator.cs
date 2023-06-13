@@ -13,7 +13,7 @@ public class Leg_Animator : MonoBehaviour
     public bool nextState, prevState;
 
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
-    [HideInInspector] public bool isHeld, canMove, grounded;
+     public bool isHeld, canMove, grounded;
     [HideInInspector] public float legSpeed;
     [HideInInspector] public int forwardMultiplier = 1;
 
@@ -56,19 +56,21 @@ public class Leg_Animator : MonoBehaviour
 
     private void CheckForGround()
     {
-        if(targetPoint.position == prevTargetPos) { return; }
+        if (targetPoint.position == prevTargetPos) { return; }
 
         initialDir = footBone.position - ankleBone.position;
         initialDir.Normalize();
         grounded = false;
+        targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
 
         RaycastHit hit;
-        if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance))
+        if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance, groundLayer))
         {
+            SetTargetFollowState(false);
             grounded = true;
             canMove = false;
             footBone.position = hit.point;
-            float ydif = targetPoint.localPosition.y - footBone.localPosition.y; 
+            float ydif = targetPoint.position.y - footBone.position.y;
             targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + ydif, targetPoint.position.z);
         }
 
@@ -98,4 +100,6 @@ public class Leg_Animator : MonoBehaviour
 
         targetPoint.rotation = Quaternion.Euler(ankleRot);
     }
+
+    public void SetTargetFollowState(bool newState) { targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
 }
