@@ -7,70 +7,105 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public float heightOffset = 0.5f;
+    public Transform body;
+    public float heightOffset = 0.5f, rotationMultiplier = 1;
+    public LayerMask groundLayer;
 
     private PlayerInput playerInput;
+    private int activeLegs = 0;
 
     void Start()
     {
         playerInput = new PlayerInput();
     }
 
-    #region
+    #region //input
 
     public void FR(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !FRLeg.isHeld) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); }
+        if (ctx.canceled && FRLeg.isHeld) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.canceled && FRLeg.isHeld) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; }
+        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
+        if (activeLegs > 1 || !BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
+
+        if (ctx.performed && !FRLeg.isHeld) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !BRLeg.isHeld) { BRAnim.SetTrigger("Next_State"); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); }
+        if (ctx.canceled && BRLeg.isHeld) { CheckLegStatus(BRAnim, false); BRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.canceled && BRLeg.isHeld) { BRLeg.isHeld = false; }
+        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
+        if (activeLegs > 1 || !FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
+
+        if (ctx.performed && !BRLeg.isHeld) { CheckLegStatus(BRAnim, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !FLLeg.isHeld) { FLAnim.SetTrigger("Next_State"); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); }
+        if (ctx.canceled && FLLeg.isHeld) { CheckLegStatus(FLAnim, false); FLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.canceled && FLLeg.isHeld) { FLLeg.isHeld = false; }
+        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
+        if (activeLegs > 1 || !BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
+
+        if (ctx.performed && !FLLeg.isHeld) { CheckLegStatus(FLAnim, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !BLLeg.isHeld) { BLAnim.SetTrigger("Next_State"); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); }
+        if (ctx.canceled && BLLeg.isHeld) { CheckLegStatus(BLAnim, false); BLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.canceled && BLLeg.isHeld) { BLLeg.isHeld = false; }
+        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
+        if (activeLegs > 1 || !FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
+
+        if (ctx.performed && !BLLeg.isHeld) { CheckLegStatus(BLAnim, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+    }
+    public void Reverse(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) { ChangeGears(!FRAnim.GetBool("Forward")); }
     }
 
-    #endregion
+    #endregion 
 
     void Update()
     {
         UpdateBodyPosition();
+        UpdateBodyRotation();
     }
 
     private void UpdateBodyPosition() {
         float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
-        float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 4;
+        float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
         float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
 
-        transform.position = new Vector3(averageX, averageY + heightOffset, averageZ);
+        transform.position = new Vector3(averageX, averageY, averageZ);
     }
 
+    private void UpdateBodyRotation() {
+        float angleX = (BLLeg.footBone.position.y + BRLeg.footBone.position.y) - (FLLeg.footBone.position.y + FRLeg.footBone.position.y);
+
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
+    }
 
     private void CheckLegStatus(Animator anim, bool held)
     {
         //If pressed and leg is idle, move leg up
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { anim.SetTrigger("Next_State"); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
+            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); }
 
         //If released and leg is idle in air, move leg down
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { anim.SetTrigger("Next_State"); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { 
+            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); }
 
         //If pressed and leg is falling, reverse anim to leg idle
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -1f); }
 
         //If released and leg is rising, reverse anim to leg idle
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -1f); }
+    }
+
+    private void ChangeGears(bool newState) {
+        Debug.Log(newState);
+        FRAnim.SetBool("Forward", newState);
+        BRAnim.SetBool("Forward", newState);
+        FLAnim.SetBool("Forward", newState);
+        BLAnim.SetBool("Forward", newState);
     }
 }

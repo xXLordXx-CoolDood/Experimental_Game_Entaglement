@@ -6,12 +6,11 @@ public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
     public Transform target;
+    public Transform mech;
 
     [HideInInspector] public bool follow = true;
 
-    private Vector3 initialDir = Vector3.zero, prevTargetPos = Vector3.zero;
     private Vector2 prevTargetZY = Vector2.zero;
-    private float zOffset = 0;
 
     private void Start()
     {
@@ -23,7 +22,6 @@ public class Target_Follow : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid"))
         {
             prevTargetZY = new Vector2(target.position.z, target.position.y);
-            zOffset = target.position.z - transform.position.z;
         }
 
         if (!follow) { return; }

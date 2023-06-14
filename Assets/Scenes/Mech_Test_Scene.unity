@@ -520,7 +520,12 @@ MonoBehaviour:
   BRAnim: {fileID: 1285646317}
   FLAnim: {fileID: 1524337476}
   BLAnim: {fileID: 645508859}
+  body: {fileID: 1858359323}
   heightOffset: -0.3
+  rotationMultiplier: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &775218466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +620,19 @@ MonoBehaviour:
     m_ActionId: c13eb223-088f-484c-8cb5-4ebba84e6310
     m_ActionName: DogMech/Turn[/Keyboard/d,/Keyboard/j]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 775218465}
+        m_TargetAssemblyTypeName: Mech_Controller, Assembly-CSharp
+        m_MethodName: Reverse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2bbdac8f-7d29-4f25-b14e-503cbb03b323
     m_ActionName: DogMech/Reverse[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
@@ -1217,6 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1524337476}
   target: {fileID: 297842422}
+  mech: {fileID: 775218464}
   follow: 1
 --- !u!1 &1153272464 stripped
 GameObject:
@@ -1651,6 +1669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 645508859}
   target: {fileID: 2025285995}
+  mech: {fileID: 775218464}
   follow: 1
 --- !u!4 &1432847952 stripped
 Transform:
@@ -2503,6 +2522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1153272466}
   target: {fileID: 316504929}
+  mech: {fileID: 775218464}
   follow: 1
 --- !u!1 &1926662909
 GameObject:
@@ -2649,4 +2669,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1285646317}
   target: {fileID: 502026451}
+  mech: {fileID: 775218464}
   follow: 1
