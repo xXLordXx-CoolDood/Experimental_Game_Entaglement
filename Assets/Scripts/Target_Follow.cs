@@ -10,31 +10,30 @@ public class Target_Follow : MonoBehaviour
 
     [HideInInspector] public bool follow = true;
 
-    private Vector2 prevTargetZY = Vector2.zero;
+    private Vector3 prevTargetPos = Vector3.zero;
 
     private void Start()
     {
-        prevTargetZY = new Vector2(target.position.z, target.position.y);
+        prevTargetPos = target.position;
     }
 
     private void Update()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid"))
         {
-            prevTargetZY = new Vector2(target.position.z, target.position.y);
+            prevTargetPos = target.position;
         }
 
         if (!follow) { return; }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")) {
-            Vector2 targetZY = new Vector2(target.position.z, target.position.y);
 
-            Vector2 zyDelta = targetZY - prevTargetZY;
+            Vector3 delta = target.position - prevTargetPos;
 
-            transform.position = new Vector3(transform.position.x, transform.position.y + zyDelta.y, 
-                transform.position.z + zyDelta.x);
+            transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, 
+                transform.position.z + delta.x);
 
-            prevTargetZY = targetZY;
+            prevTargetPos = target.position;
         }
     }
 

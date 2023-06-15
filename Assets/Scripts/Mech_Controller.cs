@@ -7,12 +7,13 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform body;
+    public Transform body, dirIndicator;
     public float heightOffset = 0.5f, rotationMultiplier = 1;
     public LayerMask groundLayer;
 
     private PlayerInput playerInput;
     private int activeLegs = 0;
+    private int direction;
 
     void Start()
     {
@@ -61,6 +62,11 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.performed) { ChangeGears(!FRAnim.GetBool("Forward")); }
     }
+    public void Turn(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) { direction = Mathf.RoundToInt(ctx.ReadValue<float>()) * 45; ChangeDirection(direction / 45); }
+        if (ctx.canceled) { direction = 0; ChangeDirection(0); }
+    }
 
     #endregion 
 
@@ -81,6 +87,7 @@ public class Mech_Controller : MonoBehaviour
     private void UpdateBodyRotation() {
         float angleX = (BLLeg.footBone.position.y + BRLeg.footBone.position.y) - (FLLeg.footBone.position.y + FRLeg.footBone.position.y);
 
+        dirIndicator.eulerAngles = new Vector3(0, direction, 0);
         transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
     }
 
@@ -102,10 +109,16 @@ public class Mech_Controller : MonoBehaviour
     }
 
     private void ChangeGears(bool newState) {
-        Debug.Log(newState);
         FRAnim.SetBool("Forward", newState);
         BRAnim.SetBool("Forward", newState);
         FLAnim.SetBool("Forward", newState);
         BLAnim.SetBool("Forward", newState);
+    }
+
+    private void ChangeDirection(int newDirection) {
+        FRAnim.SetInteger("Turn", newDirection);
+        BRAnim.SetInteger("Turn", newDirection);
+        FLAnim.SetInteger("Turn", newDirection);
+        BLAnim.SetInteger("Turn", newDirection);
     }
 }
