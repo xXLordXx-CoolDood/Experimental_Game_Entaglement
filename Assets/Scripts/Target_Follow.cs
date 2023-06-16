@@ -27,11 +27,10 @@ public class Target_Follow : MonoBehaviour
         if (!follow) { return; }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")) {
-
             Vector3 delta = target.position - prevTargetPos;
 
             transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, 
-                transform.position.z + delta.x);
+                transform.position.z + delta.z);
 
             prevTargetPos = target.position;
         }

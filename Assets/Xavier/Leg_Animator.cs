@@ -96,7 +96,7 @@ public class Leg_Animator : MonoBehaviour
 
         rotAmnt *= rotationMultiplier * ankleCurve.Evaluate(displacement);
 
-        Vector3 ankleRot = new Vector3(rotAmnt, 0, 0);
+        Vector3 ankleRot = new Vector3(rotAmnt, targetPoint.GetComponent<Target_Follow>().mech.transform.eulerAngles.y, 0);
 
         targetPoint.rotation = Quaternion.Euler(ankleRot);
     }

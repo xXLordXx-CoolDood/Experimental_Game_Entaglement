@@ -8,10 +8,11 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
     public Transform body, dirIndicator;
-    public float heightOffset = 0.5f, rotationMultiplier = 1;
+    public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f;
     public LayerMask groundLayer;
 
     private PlayerInput playerInput;
+    private Vector2 prevPosition;
     private int activeLegs = 0;
     private int direction;
 
@@ -64,7 +65,7 @@ public class Mech_Controller : MonoBehaviour
     }
     public void Turn(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { direction = Mathf.RoundToInt(ctx.ReadValue<float>()) * 45; ChangeDirection(direction / 45); }
+        if (ctx.performed) { direction = Mathf.RoundToInt(ctx.ReadValue<float>()) * -45; ChangeDirection(direction / 45); }
         if (ctx.canceled) { direction = 0; ChangeDirection(0); }
     }
 
@@ -87,8 +88,13 @@ public class Mech_Controller : MonoBehaviour
     private void UpdateBodyRotation() {
         float angleX = (BLLeg.footBone.position.y + BRLeg.footBone.position.y) - (FLLeg.footBone.position.y + FRLeg.footBone.position.y);
 
-        dirIndicator.eulerAngles = new Vector3(0, direction, 0);
-        transform.eulerAngles = new Vector3(angleX * rotationMultiplier, transform.eulerAngles.y, 0);
+        Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
+        float angleY = Vector2.Angle(prevPosition, currentPos);
+
+        dirIndicator.localEulerAngles = new Vector3(0, direction / 2, 0);
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplierX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0);
+
+        prevPosition = currentPos;
     }
 
     private void CheckLegStatus(Animator anim, bool held)
