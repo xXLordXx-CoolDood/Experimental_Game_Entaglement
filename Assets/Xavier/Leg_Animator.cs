@@ -54,7 +54,7 @@ public class Leg_Animator : MonoBehaviour
         //targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
     }
 
-    private void CheckForGround()
+    public void CheckForGround()
     {
         if (targetPoint.position == prevTargetPos) { return; }
 
@@ -62,6 +62,8 @@ public class Leg_Animator : MonoBehaviour
         initialDir.Normalize();
         grounded = false;
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
+
+        Debug.DrawRay(ankleBone.position, initialDir, Color.red);
 
         RaycastHit hit;
         if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance, groundLayer))

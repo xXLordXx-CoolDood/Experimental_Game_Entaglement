@@ -26,7 +26,8 @@ public class Target_Follow : MonoBehaviour
 
         if (!follow) { return; }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")) {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") ||
+                anim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel")) {
             Vector3 delta = target.position - prevTargetPos;
 
             transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, 

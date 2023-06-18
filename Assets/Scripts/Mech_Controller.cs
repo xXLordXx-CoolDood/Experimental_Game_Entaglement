@@ -6,15 +6,14 @@ using UnityEngine.InputSystem;
 public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform body, dirIndicator;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim, MechAnim;
+    public Transform body, dirIndicator, gun;
     public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f;
     public LayerMask groundLayer;
 
     private PlayerInput playerInput;
     private Vector2 prevPosition;
-    private int activeLegs = 0;
-    private int direction;
+    private int activeLegs = 0, direction, gunDirection;
 
     void Start()
     {
@@ -68,13 +67,45 @@ public class Mech_Controller : MonoBehaviour
         if (ctx.performed) { direction = Mathf.RoundToInt(ctx.ReadValue<float>()) * -45; ChangeDirection(direction / 45); }
         if (ctx.canceled) { direction = 0; ChangeDirection(0); }
     }
+    
+    public void Gun_Turn(InputAction.CallbackContext ctx)
+    {
+        if (ctx.ReadValue<float>() != 0) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); Debug.Log("Schmiz"); }
+        if (ctx.canceled) { gunDirection = 0; }
+    }
 
     #endregion 
 
     void Update()
     {
+        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 0);
+
+        CheckLegCombos();
         UpdateBodyPosition();
         UpdateBodyRotation();
+    }
+
+    private void CheckLegCombos()
+    {
+        //If both back legs are active(rising with rise tag) instead force them to kneel.
+        if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+        {
+            MechAnim.SetBool("LegDown", true);
+            MechAnim.SetFloat("Speed", 1);
+        }
+
+        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel") && (
+            !BRLeg.isHeld || !BLLeg.isHeld))
+        {
+            MechAnim.SetBool("LegDown", false);
+            MechAnim.SetFloat("Speed", -1);
+        }
+
+        if (MechAnim.GetBool("LegDown"))
+        {
+            BRLeg.CheckForGround();
+            BLLeg.CheckForGround();
+        }
     }
 
     private void UpdateBodyPosition() {

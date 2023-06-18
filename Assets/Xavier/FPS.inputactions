@@ -51,6 +51,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Gun_Turn",
+                    "type": "Value",
+                    "id": "19ade2d4-34d0-42a4-890f-cad1f7284db1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Reverse",
                     "type": "Button",
                     "id": "2bbdac8f-7d29-4f25-b14e-503cbb03b323",
@@ -148,6 +157,39 @@
                     "action": "Reverse",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "4661ca2b-ebc3-4c19-941f-6705d7a721cc",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "84c87112-7083-485c-893f-25b1baf45b47",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b8f2a80c-27af-49f3-bd59-e4fbd389c285",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
