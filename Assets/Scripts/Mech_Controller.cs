@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
+    public GameObject bullet;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim, MechAnim;
-    public Transform body, dirIndicator, gun;
+    public Transform body, dirIndicator, gun, shotSpawn;
     public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f;
     public LayerMask groundLayer;
 
@@ -74,6 +75,11 @@ public class Mech_Controller : MonoBehaviour
         if (ctx.canceled) { gunDirection = 0; }
     }
 
+    public void Gun_Shoot(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) { ShootGun(); }
+    }
+
     #endregion 
 
     void Update()
@@ -85,27 +91,52 @@ public class Mech_Controller : MonoBehaviour
         UpdateBodyRotation();
     }
 
+    #region UpdateFunctions
     private void CheckLegCombos()
     {
-        //If both back legs are active(rising with rise tag) instead force them to kneel.
+        #region sitLogic
+        //If both back legs are active(rising with rise tag) instead force them to sit.
         if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
         {
-            MechAnim.SetBool("LegDown", true);
+            MechAnim.SetBool("Sit", true);
             MechAnim.SetFloat("Speed", 1);
         }
 
-        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel") && (
+        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Sit") && (
             !BRLeg.isHeld || !BLLeg.isHeld))
         {
-            MechAnim.SetBool("LegDown", false);
+            MechAnim.SetBool("Sit", false);
             MechAnim.SetFloat("Speed", -1);
         }
 
-        if (MechAnim.GetBool("LegDown"))
+        if (MechAnim.GetBool("Sit"))
         {
             BRLeg.CheckForGround();
             BLLeg.CheckForGround();
         }
+        #endregion
+
+        #region kneelLogic
+        if (FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+        {
+            MechAnim.SetBool("Kneel", true);
+            MechAnim.SetFloat("Speed", 1);
+        }
+
+        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel") && (
+            !FRLeg.isHeld || !FLLeg.isHeld))
+        {
+            MechAnim.SetBool("Kneel", false);
+            MechAnim.SetFloat("Speed", -1);
+        }
+
+        if (MechAnim.GetBool("Kneel"))
+        {
+            Debug.Log("Checking for ground :)");
+            FRLeg.CheckForGround();
+            FLLeg.CheckForGround();
+        }
+        #endregion
     }
 
     private void UpdateBodyPosition() {
@@ -116,7 +147,8 @@ public class Mech_Controller : MonoBehaviour
         transform.position = new Vector3(averageX, averageY, averageZ);
     }
 
-    private void UpdateBodyRotation() {
+    private void UpdateBodyRotation()
+    {
         float angleX = (BLLeg.footBone.position.y + BRLeg.footBone.position.y) - (FLLeg.footBone.position.y + FRLeg.footBone.position.y);
 
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
@@ -127,7 +159,9 @@ public class Mech_Controller : MonoBehaviour
 
         prevPosition = currentPos;
     }
+    #endregion
 
+    #region CallableFunctions
     private void CheckLegStatus(Animator anim, bool held)
     {
         //If pressed and leg is idle, move leg up
@@ -158,4 +192,11 @@ public class Mech_Controller : MonoBehaviour
         FLAnim.SetInteger("Turn", newDirection);
         BLAnim.SetInteger("Turn", newDirection);
     }
+
+    private void ShootGun()
+    {
+        GameObject _bullet = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
+        _bullet.GetComponent<Rigidbody>().AddForce(shotSpawn.forward * 10, ForceMode.Impulse);
+    }
+    #endregion
 }

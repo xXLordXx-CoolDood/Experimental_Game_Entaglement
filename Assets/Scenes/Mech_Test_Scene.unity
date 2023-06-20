@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &36144416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36144417}
+  m_Layer: 0
+  m_Name: Shoot_Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &36144417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36144416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.652}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 979688131}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &75515937
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556639931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4, y: -0.11, z: 5.2}
+  m_LocalPosition: {x: 0.82, y: -0.11, z: 5.2}
   m_LocalScale: {x: 4.4564, y: 1, z: 6.950994}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -713,6 +744,7 @@ MonoBehaviour:
   BRLeg: {fileID: 1813155725}
   FLLeg: {fileID: 1111352290}
   BLLeg: {fileID: 1633708591}
+  bullet: {fileID: 8874649003006798199, guid: 8e2f891a721e67a4bb454984704a12c3, type: 3}
   FRAnim: {fileID: 1153272466}
   BRAnim: {fileID: 1285646317}
   FLAnim: {fileID: 1524337476}
@@ -721,6 +753,7 @@ MonoBehaviour:
   body: {fileID: 1858359323}
   dirIndicator: {fileID: 680943807}
   gun: {fileID: 979688131}
+  shotSpawn: {fileID: 36144417}
   heightOffset: -0.3
   rotationMultiplierX: 3
   rotationMultiplierY: 0.5
@@ -864,6 +897,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 19ade2d4-34d0-42a4-890f-cad1f7284db1
     m_ActionName: DogMech/Gun_Turn[/Keyboard/rightArrow,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 775218465}
+        m_TargetAssemblyTypeName: Mech_Controller, Assembly-CSharp
+        m_MethodName: Gun_Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9b7a5184-7dfc-4de9-b99d-95ec70674108
+    m_ActionName: DogMech/Shoot[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DogMech
@@ -1306,6 +1355,7 @@ Transform:
   m_Children:
   - {fileID: 491531110}
   - {fileID: 1574863798}
+  - {fileID: 36144417}
   m_Father: {fileID: 775218464}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1380,7 +1430,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
-  groundCheckDistance: 0.5
+  groundCheckDistance: 0.75
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -1620,7 +1670,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
-  groundCheckDistance: 0.5
+  groundCheckDistance: 0.75
   ankleCurve:
     serializedVersion: 2
     m_Curve:
