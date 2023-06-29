@@ -11,13 +11,14 @@ public class Mech_Controller : MonoBehaviour
     public Transform body, dirIndicator, gun, shotSpawn;
     public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
+    public GameObject stumbleIndicatorL, stumbleIndicatorR;
 
     private PlayerInput playerInput;
     private Vector2 prevPosition;
     private Vector3 skidDir;
     private int activeLegs = 0, direction, gunDirection;
-    private float _skidMultiplier, tiltMultiplier;
-    private bool kneeling;
+    private float _skidMultiplier, tiltMultiplier, timer;
+    private bool kneeling, stumbled, recovering;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
@@ -32,17 +33,11 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; activeLegs--; }
 
-        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
-        if (activeLegs > 1 || !BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
-
         if (ctx.performed /*&& !FRLeg.isHeld*/) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, false); BRLeg.isHeld = false; activeLegs--; }
-
-        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
-        if (activeLegs > 1 || !FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
         if (ctx.performed /*&& !BRLeg.isHeld*/) { CheckLegStatus(BRAnim, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
     }
@@ -50,17 +45,11 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, false); FLLeg.isHeld = false; activeLegs--; }
 
-        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
-        if (activeLegs > 1 || !BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
-
         if (ctx.performed /*&& !FLLeg.isHeld*/) { CheckLegStatus(FLAnim, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, false); BLLeg.isHeld = false; activeLegs--; }
-
-        //If more than 2 legs are engaged or the other right leg is engaged, stop any input
-        if (activeLegs > 1 || !FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
         if (ctx.performed /*&& !BLLeg.isHeld*/) { CheckLegStatus(BLAnim, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
     }
@@ -76,7 +65,8 @@ public class Mech_Controller : MonoBehaviour
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() != 0) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); }
+        if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); }
+        if(ctx.ReadValue<float>() != 0 && stumbled) { recovering = true; }
         if (ctx.canceled) { gunDirection = 0; }
     }
 
@@ -89,29 +79,61 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 0);
 
         if(_skidMultiplier > 0) { 
-            if(resistor1.isHeld && resistor2.isHeld) { _skidMultiplier -= Time.deltaTime * skidStrength; }
-            _skidMultiplier -= Time.deltaTime * skidStrength; 
+            if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
+            _skidMultiplier -= Time.deltaTime * skidStrength / 2; 
         }
         if(_skidMultiplier < 0) {
             FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
             BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
             FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
-            BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
+            BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
+            FRAnim.SetBool("Stumbling", false);
+            FRAnim.ResetTrigger("Next_State");
+            FLAnim.SetBool("Stumbling", false);
+            FLAnim.ResetTrigger("Next_State");
+            BRAnim.SetBool("Stumbling", false);
+            BRAnim.ResetTrigger("Next_State");
+            BLAnim.SetBool("Stumbling", false);
+            BLAnim.ResetTrigger("Next_State");
+
+            if (stumbled)
+            {
+                Splat();
+                float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
+                float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
+                float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
+                skidDir = new Vector3(averageX, averageY, averageZ);
+                timer = 0;
+            }
+
             _skidMultiplier = 0;
+            stumbleIndicatorR.SetActive(false);
+            stumbleIndicatorL.SetActive(false);
             isSkidding = false; 
         }
 
-        if(isSkidding) {
-            transform.Translate(skidDir * Time.deltaTime * _skidMultiplier, Space.World);
-            return; 
+        if(isSkidding) { transform.Translate(skidDir * Time.deltaTime * _skidMultiplier, Space.World); return; }
+
+        if (recovering)
+        {
+            timer = Mathf.Clamp(timer + Time.deltaTime, 0, 1);
+
+            transform.position = Vector3.Lerp(prevPosition, skidDir, timer);
+            transform.eulerAngles = new Vector3(0, 0, 90 - (timer * 90));
+
+            if(timer == 1) { recovering = false; stumbled = false; prevPosition = transform.position; }
         }
+
+        if (stumbled) { return; }
 
         CheckLegCombos();
         UpdateBodyPosition();
         UpdateBodyRotation();
+        CheckForStumbling();
     }
 
     #region UpdateFunctions
@@ -170,9 +192,16 @@ public class Mech_Controller : MonoBehaviour
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
         float angleY = Vector2.Angle(prevPosition, currentPos);
 
-        transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0);
+        float angleZ = (BLLeg.targetPoint.position.y + FLLeg.targetPoint.position.y) - (BRLeg.targetPoint.position.y + FRLeg.targetPoint.position.y);
+
+        transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), angleZ * rotationMultiplierX);
 
         prevPosition = currentPos;
+    }
+
+    private void CheckForStumbling()
+    {
+
     }
     #endregion
 
@@ -219,18 +248,36 @@ public class Mech_Controller : MonoBehaviour
         _skidMultiplier = skidStrength;
         skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
         isSkidding = true;
+        stumbled = true;
 
         FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        FRAnim.SetBool("Stumbling", true);
+        FRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
+
         BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        BRAnim.SetBool("Stumbling", true);
+        BRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
+
         FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        FLAnim.SetBool("Stumbling", true);
+        FLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
+
         BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        BLAnim.SetBool("Stumbling", true);
+        BLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
 
         angle += 90;
 
-        if (angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Brace back!"); }
-        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace left!"); }
-        if (angle > 150 && angle < 240) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace front!"); }
-        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace right!"); }
+        if (angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg;  }
+        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; stumbleIndicatorR.SetActive(true); }
+        if (angle > 150 && angle < 240) { resistor1 = FLLeg; resistor2 = FRLeg; }
+        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; stumbleIndicatorL.SetActive(true); }
+    }
+
+    private void Splat()
+    {
+        transform.eulerAngles = new Vector3(0, 0, 90);
+        prevPosition = transform.position;
     }
 
     #endregion
