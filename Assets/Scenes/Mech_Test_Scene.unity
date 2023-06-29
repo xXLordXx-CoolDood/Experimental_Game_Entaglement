@@ -706,7 +706,6 @@ GameObject:
   - component: {fileID: 775218464}
   - component: {fileID: 775218465}
   - component: {fileID: 775218466}
-  - component: {fileID: 775218467}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -757,7 +756,6 @@ MonoBehaviour:
   BRAnim: {fileID: 1285646317}
   FLAnim: {fileID: 1524337476}
   BLAnim: {fileID: 645508859}
-  MechAnim: {fileID: 775218467}
   body: {fileID: 1858359323}
   dirIndicator: {fileID: 680943807}
   gun: {fileID: 979688131}
@@ -928,26 +926,6 @@ MonoBehaviour:
   m_DefaultActionMap: DogMech
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &775218467
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775218463}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0accd47f1a21e02428e6bcb2d06ec209, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &802494286
 GameObject:
   m_ObjectHideFlags: 0

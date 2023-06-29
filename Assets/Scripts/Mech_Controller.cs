@@ -7,7 +7,7 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim, MechAnim;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim;
     public Transform body, dirIndicator, gun, shotSpawn;
     public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
@@ -16,7 +16,8 @@ public class Mech_Controller : MonoBehaviour
     private Vector2 prevPosition;
     private Vector3 skidDir;
     private int activeLegs = 0, direction, gunDirection;
-    private float _skidMultiplier;
+    private float _skidMultiplier, tiltMultiplier;
+    private bool kneeling;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
@@ -116,47 +117,26 @@ public class Mech_Controller : MonoBehaviour
     #region UpdateFunctions
     private void CheckLegCombos()
     {
+        kneeling = false;
+
         #region sitLogic
         //If both back legs are active(rising with rise tag) instead force them to sit.
-        if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+        if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BRAnim.GetBool("LegDown") && BLAnim.GetBool("LegDown"))
         {
-            MechAnim.SetBool("Sit", true);
-            MechAnim.SetFloat("Speed", 1);
+            BRAnim.SetFloat("Speed_Multiplier", -1);
+            BLAnim.SetFloat("Speed_Multiplier", -1);
+            tiltMultiplier += Time.deltaTime * -15;
+            kneeling = true;
+        }
+        else if (FRAnim.GetBool("LegDown") && FLAnim.GetBool("LegDown") && FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+        {
+            FRAnim.SetFloat("Speed_Multiplier", -1);
+            FLAnim.SetFloat("Speed_Multiplier", -1);
+            tiltMultiplier += Time.deltaTime * 15;
+            kneeling = true;
         }
 
-        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Sit") && (
-            !BRLeg.isHeld || !BLLeg.isHeld))
-        {
-            MechAnim.SetBool("Sit", false);
-            MechAnim.SetFloat("Speed", -1);
-        }
-
-        if (MechAnim.GetBool("Sit"))
-        {
-            BRLeg.CheckForGround();
-            BLLeg.CheckForGround();
-        }
-        #endregion
-
-        #region kneelLogic
-        if (FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
-        {
-            MechAnim.SetBool("Kneel", true);
-            MechAnim.SetFloat("Speed", 1);
-        }
-
-        if (MechAnim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel") && (
-            !FRLeg.isHeld || !FLLeg.isHeld))
-        {
-            MechAnim.SetBool("Kneel", false);
-            MechAnim.SetFloat("Speed", -1);
-        }
-
-        if (MechAnim.GetBool("Kneel"))
-        {
-            FRLeg.CheckForGround();
-            FLLeg.CheckForGround();
-        }
+        tiltMultiplier = Mathf.Clamp(tiltMultiplier, -15, 15);
         #endregion
     }
 
@@ -170,13 +150,27 @@ public class Mech_Controller : MonoBehaviour
 
     private void UpdateBodyRotation()
     {
-        float angleX = (BLLeg.footBone.position.y + BRLeg.footBone.position.y) - (FLLeg.footBone.position.y + FRLeg.footBone.position.y);
+        float angleX = 0;
+
+        if (!kneeling)
+        {
+            if(tiltMultiplier > 0) { tiltMultiplier = Mathf.Clamp(tiltMultiplier - (Time.deltaTime  * 15), 0, 15); angleX = tiltMultiplier; }
+            if(tiltMultiplier < 0) { tiltMultiplier = Mathf.Clamp(tiltMultiplier + (Time.deltaTime * 15), -15, 0); angleX = tiltMultiplier; }
+            if(tiltMultiplier == 0) { angleX = (BLLeg.targetPoint.position.y + BRLeg.targetPoint.position.y) - (FLLeg.targetPoint.position.y + FRLeg.targetPoint.position.y); }   
+        }
+        else
+        {
+            angleX = tiltMultiplier;
+            BRLeg.CheckForGround();
+            FRLeg.CheckForGround();
+            BLLeg.CheckForGround();
+            FLLeg.CheckForGround();
+        }
 
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
         float angleY = Vector2.Angle(prevPosition, currentPos);
 
-        dirIndicator.localEulerAngles = new Vector3(0, direction / 2, 0);
-        transform.eulerAngles = new Vector3(angleX * rotationMultiplierX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0);
+        transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0);
 
         prevPosition = currentPos;
     }
@@ -187,17 +181,17 @@ public class Mech_Controller : MonoBehaviour
     {
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); }
+            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
 
         //If released and leg is idle in air, move leg down
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); }
+            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); }
 
         //If pressed and leg is falling, reverse anim to leg idle
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -1f); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", true); }
 
         //If released and leg is rising, reverse anim to leg idle
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -1f); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", false); }
     }
 
     private void ChangeGears(bool newState) {
