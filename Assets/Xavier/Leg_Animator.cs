@@ -10,10 +10,10 @@ public class Leg_Animator : MonoBehaviour
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
 
-    public bool nextState, prevState;
+    public bool isSkidding;
 
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
-     public bool isHeld, canMove, grounded;
+    [HideInInspector] public bool isHeld, canMove, grounded;
     [HideInInspector] public float legSpeed;
     [HideInInspector] public int forwardMultiplier = 1;
 
@@ -39,10 +39,6 @@ public class Leg_Animator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (prevState) { legAnimations.SetTrigger("Prev_State"); prevState = false; }
-        if (nextState) { legAnimations.SetTrigger("Next_State"); nextState = false; }
-
-
         if (!grounded) { TargetGravity(); }
         if (!isHeld) { CheckForGround(); }
 
@@ -103,5 +99,5 @@ public class Leg_Animator : MonoBehaviour
         targetPoint.rotation = Quaternion.Euler(ankleRot);
     }
 
-    public void SetTargetFollowState(bool newState) { targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
+    public void SetTargetFollowState(bool newState) { if (isSkidding) { return; } targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
 }

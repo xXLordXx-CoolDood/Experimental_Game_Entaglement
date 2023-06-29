@@ -9,12 +9,16 @@ public class Mech_Controller : MonoBehaviour
     public GameObject bullet;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim, MechAnim;
     public Transform body, dirIndicator, gun, shotSpawn;
-    public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f;
+    public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
 
     private PlayerInput playerInput;
     private Vector2 prevPosition;
+    private Vector3 skidDir;
     private int activeLegs = 0, direction, gunDirection;
+    private float _skidMultiplier;
+    private Leg_Animator resistor1, resistor2;
+    [SerializeField] private bool isSkidding = false;
 
     void Start()
     {
@@ -25,39 +29,39 @@ public class Mech_Controller : MonoBehaviour
 
     public void FR(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled && FRLeg.isHeld) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; activeLegs--; }
 
         //If more than 2 legs are engaged or the other right leg is engaged, stop any input
         if (activeLegs > 1 || !BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
-        if (ctx.performed && !FRLeg.isHeld) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !FRLeg.isHeld*/) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled && BRLeg.isHeld) { CheckLegStatus(BRAnim, false); BRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, false); BRLeg.isHeld = false; activeLegs--; }
 
         //If more than 2 legs are engaged or the other right leg is engaged, stop any input
         if (activeLegs > 1 || !FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
-        if (ctx.performed && !BRLeg.isHeld) { CheckLegStatus(BRAnim, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !BRLeg.isHeld*/) { CheckLegStatus(BRAnim, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled && FLLeg.isHeld) { CheckLegStatus(FLAnim, false); FLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, false); FLLeg.isHeld = false; activeLegs--; }
 
         //If more than 2 legs are engaged or the other right leg is engaged, stop any input
         if (activeLegs > 1 || !BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
-        if (ctx.performed && !FLLeg.isHeld) { CheckLegStatus(FLAnim, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !FLLeg.isHeld*/) { CheckLegStatus(FLAnim, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled && BLLeg.isHeld) { CheckLegStatus(BLAnim, false); BLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, false); BLLeg.isHeld = false; activeLegs--; }
 
         //If more than 2 legs are engaged or the other right leg is engaged, stop any input
         if (activeLegs > 1 || !FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle")) { return; }
 
-        if (ctx.performed && !BLLeg.isHeld) { CheckLegStatus(BLAnim, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !BLLeg.isHeld*/) { CheckLegStatus(BLAnim, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void Reverse(InputAction.CallbackContext ctx)
     {
@@ -71,13 +75,13 @@ public class Mech_Controller : MonoBehaviour
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() != 0) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); Debug.Log("Schmiz"); }
+        if (ctx.ReadValue<float>() != 0) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); }
         if (ctx.canceled) { gunDirection = 0; }
     }
 
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { ShootGun(); }
+        if (ctx.performed && !isSkidding) { ShootGun(); }
     }
 
     #endregion 
@@ -85,6 +89,24 @@ public class Mech_Controller : MonoBehaviour
     void Update()
     {
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 0);
+
+        if(_skidMultiplier > 0) { 
+            if(resistor1.isHeld && resistor2.isHeld) { _skidMultiplier -= Time.deltaTime * skidStrength; }
+            _skidMultiplier -= Time.deltaTime * skidStrength; 
+        }
+        if(_skidMultiplier < 0) {
+            FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
+            BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
+            FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
+            BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
+            _skidMultiplier = 0;
+            isSkidding = false; 
+        }
+
+        if(isSkidding) {
+            transform.Translate(skidDir * Time.deltaTime * _skidMultiplier, Space.World);
+            return; 
+        }
 
         CheckLegCombos();
         UpdateBodyPosition();
@@ -132,7 +154,6 @@ public class Mech_Controller : MonoBehaviour
 
         if (MechAnim.GetBool("Kneel"))
         {
-            Debug.Log("Checking for ground :)");
             FRLeg.CheckForGround();
             FLLeg.CheckForGround();
         }
@@ -197,6 +218,27 @@ public class Mech_Controller : MonoBehaviour
     {
         GameObject _bullet = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
         _bullet.GetComponent<Rigidbody>().AddForce(shotSpawn.forward * 10, ForceMode.Impulse);
+
+        //Calculate shot backward angle
+        float angle = gun.eulerAngles.y - 90;
+
+        _skidMultiplier = skidStrength;
+        skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
+        isSkidding = true;
+
+        FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+        BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
+
+        angle += 90;
+
+        if (angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Brace back!"); }
+        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace left!"); }
+        if (angle > 150 && angle < 240) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace front!"); }
+        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace right!"); }
     }
+
     #endregion
+
 }

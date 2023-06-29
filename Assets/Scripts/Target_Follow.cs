@@ -5,10 +5,9 @@ using UnityEngine;
 public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
-    public Transform target;
-    public Transform mech;
+    public Transform target, mech;
 
-    [HideInInspector] public bool follow = true;
+    [SerializeField] public bool follow = true, isSkidding;
 
     private Vector3 prevTargetPos = Vector3.zero;
 
@@ -24,7 +23,14 @@ public class Target_Follow : MonoBehaviour
             prevTargetPos = target.position;
         }
 
-        if (!follow) { return; }
+        if (!follow && !isSkidding) { return; }
+
+        if (isSkidding)
+        {
+            transform.position = target.position;
+            prevTargetPos = target.position;
+            return;
+        }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") ||
                 anim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel")) {
@@ -35,10 +41,5 @@ public class Target_Follow : MonoBehaviour
 
             prevTargetPos = target.position;
         }
-    }
-
-    private void CheckForGround()
-    {
-
     }
 }
