@@ -173,7 +173,6 @@ public class Mech_Controller : MonoBehaviour
     private void UpdateBodyRotation()
     {
         float angleX = 0;
-
         if (!kneeling)
         {
             if(tiltMultiplier > 0) { tiltMultiplier = Mathf.Clamp(tiltMultiplier - (Time.deltaTime  * 15), 0, 15); angleX = tiltMultiplier; }
@@ -194,9 +193,11 @@ public class Mech_Controller : MonoBehaviour
 
         float angleZ = (BLLeg.targetPoint.position.y + FLLeg.targetPoint.position.y) - (BRLeg.targetPoint.position.y + FRLeg.targetPoint.position.y);
 
+        //Apply rotations to the mech
         transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), angleZ * rotationMultiplierX);
 
-        prevPosition = currentPos;
+        //Update pre position
+        prevPosition = currentPos; 
     }
 
     private void CheckForStumbling()
