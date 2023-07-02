@@ -80,7 +80,7 @@ public class Mech_Controller : MonoBehaviour
     void Update()
     {
 
-        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 0);
+        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 90);
 
         if(_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
@@ -164,7 +164,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void UpdateBodyPosition() {
         float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
-        float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
+        float averageY = (FRLeg.footBone.localPosition.y + BRLeg.footBone.localPosition.y + FLLeg.footBone.localPosition.y + BLLeg.footBone.localPosition.y) - heightOffset;
         float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
 
         transform.position = new Vector3(averageX, averageY, averageZ);
@@ -253,19 +253,15 @@ public class Mech_Controller : MonoBehaviour
 
         FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
         FRAnim.SetBool("Stumbling", true);
-        FRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
 
         BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
         BRAnim.SetBool("Stumbling", true);
-        BRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
 
         FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
         FLAnim.SetBool("Stumbling", true);
-        FLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
 
         BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
         BLAnim.SetBool("Stumbling", true);
-        BLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
 
         angle += 90;
 

@@ -21,6 +21,7 @@ public class Target_Follow : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid"))
         {
             prevTargetPos = target.position;
+            return;
         }
 
         if (!follow && !isSkidding) { return; }

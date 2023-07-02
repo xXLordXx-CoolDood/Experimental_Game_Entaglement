@@ -6,7 +6,7 @@ public class Leg_Animator : MonoBehaviour
 {
     public Transform targetPoint, footBone, ankleBone, kneeBone, hipBone;
     public LayerMask groundLayer;
-    public float rotationMultiplier, groundCheckDistance = 1;
+    public float rotationMultiplier, groundCheckDistance = 1, groundDistanceOffset = 0;
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
 
@@ -57,9 +57,6 @@ public class Leg_Animator : MonoBehaviour
         initialDir = footBone.position - ankleBone.position;
         initialDir.Normalize();
         grounded = false;
-        targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
-
-        Debug.DrawRay(ankleBone.position, initialDir, Color.red);
 
         RaycastHit hit;
         if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance, groundLayer))
@@ -67,9 +64,13 @@ public class Leg_Animator : MonoBehaviour
             SetTargetFollowState(false);
             grounded = true;
             canMove = false;
-            footBone.position = hit.point;
+            footBone.position = new Vector3(hit.point.x, hit.point.y + groundDistanceOffset, hit.point.z);
             float ydif = targetPoint.position.y - footBone.position.y;
             targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + ydif, targetPoint.position.z);
+        }
+        else
+        {
+            targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
         }
 
         prevTargetPos = targetPoint.position;
@@ -99,5 +100,10 @@ public class Leg_Animator : MonoBehaviour
         targetPoint.rotation = Quaternion.Euler(ankleRot);
     }
 
-    public void SetTargetFollowState(bool newState) { if (isSkidding) { return; } targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
+    public void SetTargetFollowState(bool newState) 
+    { 
+        if (isSkidding) { return; } 
+
+        targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; 
+    }
 }
