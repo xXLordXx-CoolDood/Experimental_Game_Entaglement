@@ -163,13 +163,8 @@ public class Mech_Controller : MonoBehaviour
     }
 
     private void UpdateBodyPosition() {
-<<<<<<< HEAD
-        float averageX = (FRLeg.targetPoint.position.x + BRLeg.targetPoint.position.x + FLLeg.targetPoint.position.x + BLLeg.targetPoint.position.x) / positionOffset;
-        float averageY = ((FRLeg.heightOffset + BRLeg.heightOffset + FLLeg.heightOffset + BLLeg.heightOffset) / 4) - heightOffset;
-=======
         float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
         float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
->>>>>>> parent of c049983 (:()
         float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
 
         transform.position = new Vector3(averageX, averageY, averageZ);
