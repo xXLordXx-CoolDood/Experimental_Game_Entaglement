@@ -9,7 +9,7 @@ public class Mech_Controller : MonoBehaviour
     public GameObject bullet;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
     public Transform body, dirIndicator, gun, shotSpawn;
-    public float heightOffset = 0.5f, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
+    public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public GameObject stumbleIndicatorL, stumbleIndicatorR;
 
@@ -163,8 +163,8 @@ public class Mech_Controller : MonoBehaviour
     }
 
     private void UpdateBodyPosition() {
-        float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
-        float averageY = (FRLeg.footBone.localPosition.y + BRLeg.footBone.localPosition.y + FLLeg.footBone.localPosition.y + BLLeg.footBone.localPosition.y) - heightOffset;
+        float averageX = (FRLeg.targetPoint.position.x + BRLeg.targetPoint.position.x + FLLeg.targetPoint.position.x + BLLeg.targetPoint.position.x) / positionOffset;
+        float averageY = ((FRLeg.heightOffset + BRLeg.heightOffset + FLLeg.heightOffset + BLLeg.heightOffset) / 4) - heightOffset;
         float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
 
         transform.position = new Vector3(averageX, averageY, averageZ);
@@ -194,7 +194,7 @@ public class Mech_Controller : MonoBehaviour
         float angleZ = (BLLeg.targetPoint.position.y + FLLeg.targetPoint.position.y) - (BRLeg.targetPoint.position.y + FRLeg.targetPoint.position.y);
 
         //Apply rotations to the mech
-        transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), angleZ * rotationMultiplierX);
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplierX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0/*angleZ * rotationMultiplierX*/);
 
         //Update pre position
         prevPosition = currentPos; 
