@@ -6,7 +6,11 @@ public class Leg_Animator : MonoBehaviour
 {
     public Transform targetPoint, groundSnap, footBone, ankleBone, kneeBone, hipBone, mechHolder;
     public LayerMask groundLayer;
+<<<<<<< HEAD
     public float rotationMultiplier, groundCheckDistance = 1, groundDistanceOffset = 0, leftMultiplier = 1, xRot;
+=======
+    public float rotationMultiplier, groundCheckDistance = 1;
+>>>>>>> parent of c049983 (:()
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
 
@@ -43,7 +47,36 @@ public class Leg_Animator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+<<<<<<< HEAD
         Gizmos.DrawWireSphere(groundSnap.position, 0.33f);
+=======
+        //targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+    }
+
+    public void CheckForGround()
+    {
+        if (targetPoint.position == prevTargetPos) { return; }
+
+        initialDir = footBone.position - ankleBone.position;
+        initialDir.Normalize();
+        grounded = false;
+        targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
+
+        Debug.DrawRay(ankleBone.position, initialDir, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance, groundLayer))
+        {
+            SetTargetFollowState(false);
+            grounded = true;
+            canMove = false;
+            footBone.position = hit.point;
+            float ydif = targetPoint.position.y - footBone.position.y;
+            targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + ydif, targetPoint.position.z);
+        }
+
+        prevTargetPos = targetPoint.position;
+>>>>>>> parent of c049983 (:()
     }
 
     private void RotateAnkleBone()
@@ -98,10 +131,5 @@ public class Leg_Animator : MonoBehaviour
         prevTargetPos = targetPoint.position;
     }
 
-    public void SetTargetFollowState(bool newState) 
-    { 
-        if (isSkidding) { return; } 
-
-        targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; 
-    }
+    public void SetTargetFollowState(bool newState) { if (isSkidding) { return; } targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
 }
