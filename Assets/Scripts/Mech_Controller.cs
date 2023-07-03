@@ -31,27 +31,27 @@ public class Mech_Controller : MonoBehaviour
 
     public void FR(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, false); FRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !FRLeg.isHeld*/) { CheckLegStatus(FRAnim, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, false); BRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !BRLeg.isHeld*/) { CheckLegStatus(BRAnim, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, false); FLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !FLLeg.isHeld*/) { CheckLegStatus(FLAnim, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
     {
-        if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, false); BLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !BLLeg.isHeld*/) { CheckLegStatus(BLAnim, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed /*&& !BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
     }
     public void Reverse(InputAction.CallbackContext ctx)
     {
@@ -207,7 +207,7 @@ public class Mech_Controller : MonoBehaviour
     #endregion
 
     #region CallableFunctions
-    private void CheckLegStatus(Animator anim, bool held)
+    private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 

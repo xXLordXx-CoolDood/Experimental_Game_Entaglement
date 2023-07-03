@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207178020}
   m_LocalRotation: {x: 0.53468925, y: -0.46271774, z: 0.53468883, w: 0.46271753}
-  m_LocalPosition: {x: 3, y: -3, z: -0}
+  m_LocalPosition: {x: 4.21, y: -11.35, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -465,12 +465,15 @@ MonoBehaviour:
   ankleBone: {fileID: 3530662285966024965}
   kneeBone: {fileID: 7009462042378458133}
   hipBone: {fileID: 6687029948815011033}
+  mechHolder: {fileID: 2102938500}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1.8
   groundDistanceOffset: 0.75
+  leftMultiplier: -1
+  xRot: -90
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -497,6 +500,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 785897379}
   isSkidding: 0
+  showDebug: 1
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -757,7 +761,7 @@ MonoBehaviour:
   dirIndicator: {fileID: 680943807}
   gun: {fileID: 3232466479101467216}
   shotSpawn: {fileID: 1437604819}
-  heightOffset: 0.25
+  heightOffset: -0.25
   positionOffset: 200
   rotationMultiplierX: 4
   rotationMultiplierY: 0.5
@@ -1319,6 +1323,103 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529009411}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &532737335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532737339}
+  - component: {fileID: 532737338}
+  - component: {fileID: 532737337}
+  - component: {fileID: 532737336}
+  m_Layer: 6
+  m_Name: Cube (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &532737336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532737335}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &532737337
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532737335}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 02506bc640f98194987c9feee1708a18, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &532737338
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532737335}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &532737339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532737335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.25, z: 3.69}
+  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554893205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554893205}
   m_LocalRotation: {x: 0.53468925, y: -0.46271774, z: 0.53468883, w: 0.46271753}
-  m_LocalPosition: {x: 3, y: -3, z: -0}
+  m_LocalPosition: {x: 4.21, y: -11.35, z: -0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1445,7 +1546,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &573496949
 GameObject:
@@ -1556,12 +1657,15 @@ MonoBehaviour:
   ankleBone: {fileID: 8331640664290767301}
   kneeBone: {fileID: 1028430038374015653}
   hipBone: {fileID: 8964270075907098266}
+  mechHolder: {fileID: 2102938500}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1.8
   groundDistanceOffset: 0.75
+  leftMultiplier: -1
+  xRot: -90
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -1588,6 +1692,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 1879887846}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -1763,7 +1868,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 02506bc640f98194987c9feee1708a18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1801,12 +1906,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644121696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.85, y: -0.27, z: 9.46}
+  m_LocalPosition: {x: -0.85, y: -0.8800001, z: 13.15}
   m_LocalScale: {x: 11.50623, y: 2.5114, z: 8.090475}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &645508857 stripped
 GameObject:
@@ -1996,7 +2101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704976595}
   m_LocalRotation: {x: 0.53468925, y: -0.46271774, z: 0.53468883, w: 0.46271753}
-  m_LocalPosition: {x: 3, y: -3, z: -0}
+  m_LocalPosition: {x: 4.21, y: -11.35, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2921,22 +3026,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -6963762654935753050, guid: eee27ef98aefc8244a4f6d4ecc3b231e, type: 3}
   m_PrefabInstance: {fileID: 1832895297}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1063711372
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762597499140487109}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1068263396
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,12 +3186,15 @@ MonoBehaviour:
   ankleBone: {fileID: 1035730921}
   kneeBone: {fileID: 702059321}
   hipBone: {fileID: 1105862982}
+  mechHolder: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 4
   groundCheckDistance: 0.75
   groundDistanceOffset: 0
+  leftMultiplier: 1
+  xRot: 0
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -3129,6 +3221,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 1524337476}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -3524,12 +3617,15 @@ MonoBehaviour:
   ankleBone: {fileID: 942658813}
   kneeBone: {fileID: 1104191966}
   hipBone: {fileID: 763438226}
+  mechHolder: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 0.75
   groundDistanceOffset: 0
+  leftMultiplier: 1
+  xRot: 0
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -3556,6 +3652,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 1153272466}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -3587,104 +3684,6 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 1
---- !u!1 &1207623448
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1207623452}
-  - component: {fileID: 1207623451}
-  - component: {fileID: 1207623450}
-  - component: {fileID: 1207623449}
-  m_Layer: 6
-  m_Name: Plane
-  m_TagString: Ground
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &1207623449
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207623448}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1207623450
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207623448}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 02506bc640f98194987c9feee1708a18, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1207623451
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207623448}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1207623452
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207623448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1265275916
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,7 +4173,7 @@ Transform:
   - {fileID: 1129679407}
   - {fileID: 775218464}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411707361
 GameObject:
@@ -4751,12 +4750,15 @@ MonoBehaviour:
   ankleBone: {fileID: 1942540842}
   kneeBone: {fileID: 813105525}
   hipBone: {fileID: 1791231290}
+  mechHolder: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1
   groundDistanceOffset: 0
+  leftMultiplier: 1
+  xRot: 0
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -4783,6 +4785,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 645508859}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -5409,12 +5412,15 @@ MonoBehaviour:
   ankleBone: {fileID: 764192709}
   kneeBone: {fileID: 734733277}
   hipBone: {fileID: 612566395}
+  mechHolder: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1
   groundDistanceOffset: 0
+  leftMultiplier: 1
+  xRot: 0
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5441,6 +5447,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 1285646317}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -5569,7 +5576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838792309}
   m_LocalRotation: {x: 0.53468925, y: -0.46271774, z: 0.53468883, w: 0.46271753}
-  m_LocalPosition: {x: 3, y: -3, z: -0}
+  m_LocalPosition: {x: 6.44, y: -1.63, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5797,12 +5804,15 @@ MonoBehaviour:
   ankleBone: {fileID: 7398623404984620944}
   kneeBone: {fileID: 8478571095033037781}
   hipBone: {fileID: 8483362941411230826}
+  mechHolder: {fileID: 2102938500}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1.8
   groundDistanceOffset: 0.75
+  leftMultiplier: 1
+  xRot: -90
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5829,6 +5839,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 526015836}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -6155,12 +6166,15 @@ MonoBehaviour:
   ankleBone: {fileID: 4331649790894487344}
   kneeBone: {fileID: 3158617769336031430}
   hipBone: {fileID: 5655417622994323946}
+  mechHolder: {fileID: 2102938500}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   rotationMultiplier: 2
   groundCheckDistance: 1.8
   groundDistanceOffset: 0.75
+  leftMultiplier: 1
+  xRot: -90
   ankleCurve:
     serializedVersion: 2
     m_Curve:
@@ -6187,6 +6201,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   legAnimations: {fileID: 1730641930}
   isSkidding: 0
+  showDebug: 0
   controllerRef: {fileID: 0}
   isHeld: 0
   canMove: 0
@@ -6494,7 +6509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102938499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0, y: -1.25, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6504,7 +6519,7 @@ Transform:
   - {fileID: 1999365069}
   - {fileID: 543450653044811400}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6390979760553973
 GameObject:
@@ -19785,7 +19800,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6641577983317483519}
   - component: {fileID: 3690123836422600910}
-  - component: {fileID: 1063711372}
   m_Layer: 0
   m_Name: character_mesh
   m_TagString: Untagged
