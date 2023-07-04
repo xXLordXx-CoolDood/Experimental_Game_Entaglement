@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Leg_Animator : MonoBehaviour
 {
-    public Transform targetPoint, groundSnap, footBone, ankleBone, kneeBone, hipBone, mechHolder;
+    public Transform targetPoint, groundSnap, footBone, ankleBone, kneeBone, hipBone;
     public LayerMask groundLayer;
     public float rotationMultiplier, groundCheckDistance = 1;
     public AnimationCurve ankleCurve;
@@ -13,17 +13,16 @@ public class Leg_Animator : MonoBehaviour
     public bool isSkidding, showDebug;
 
     [HideInInspector] public PROTO_Dog_Controller controllerRef;
-    [HideInInspector] public bool isHeld, canMove, grounded;
-    [HideInInspector] public float legSpeed, heightOffset = 0;
+    public bool isHeld, canMove, grounded = true;
+    [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
 
     private Vector3 prevTargetPos = Vector3.zero, initialDir;
-    private float defaultHeightDif, maxLegDistance;
+    private float maxLegDistance;
 
     void Start()
     {
-        defaultHeightDif = ankleBone.position.y;
-        heightOffset = -defaultHeightDif;
+        legHeight = targetPoint.position.y;
 
         prevTargetPos = targetPoint.position;
 
@@ -31,36 +30,43 @@ public class Leg_Animator : MonoBehaviour
         Vector2 knee = new Vector2(kneeBone.position.y, kneeBone.position.z);
         Vector2 ankle = new Vector2(ankleBone.position.y, ankleBone.position.z);
 
-        maxLegDistance = Vector2.Distance(hip, knee) +
-    Vector2.Distance(knee, ankle);
+        maxLegDistance = Vector2.Distance(hip, knee) + Vector2.Distance(knee, ankle);
     }
 
     void LateUpdate()
     {
         if (!isHeld) { CheckForGround(); }
-        RotateAnkleBone();
+        //RotateAnkleBone();
+    }
+
+    private void ApplyGravity()
+    {
+        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundSnap.position, groundCheckDistance * 3);
     }
 
     public void CheckForGround()
     {
-        if (targetPoint.position == prevTargetPos) { return; }
-
-        initialDir = footBone.position - ankleBone.position;
         initialDir.Normalize();
-        grounded = false;
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
-
-        Debug.DrawRay(ankleBone.position, initialDir, Color.red);
-
+        
         RaycastHit hit;
-        if (Physics.Raycast(ankleBone.position, initialDir, out hit, groundCheckDistance, groundLayer))
+        if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
         {
+            legHeight = targetPoint.position.y;
+            Debug.Log("Grounded");
             SetTargetFollowState(false);
             grounded = true;
             canMove = false;
-            footBone.position = hit.point;
-            float ydif = targetPoint.position.y - footBone.position.y;
-            targetPoint.position = new Vector3(targetPoint.position.x, hit.point.y + ydif, targetPoint.position.z);
+        }
+        else
+        {
+            grounded = false;
+            ApplyGravity();
         }
 
         prevTargetPos = targetPoint.position;
@@ -87,5 +93,9 @@ public class Leg_Animator : MonoBehaviour
         ankleBone.eulerAngles = ankleRot;
     }
 
-    public void SetTargetFollowState(bool newState) { if (isSkidding) { return; } targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; }
+    public void SetTargetFollowState(bool newState) 
+    { 
+        if (isSkidding) { return; } 
+        targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; 
+    }
 }

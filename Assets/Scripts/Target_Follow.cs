@@ -5,7 +5,7 @@ using UnityEngine;
 public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
-    public Transform target, mech;
+    public Transform target;
 
     [SerializeField] public bool follow = true, isSkidding;
 

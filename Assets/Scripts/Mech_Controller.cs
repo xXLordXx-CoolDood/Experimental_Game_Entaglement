@@ -8,10 +8,9 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform body, dirIndicator, gun, shotSpawn;
+    public Transform gun, shotSpawn;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
-    public GameObject stumbleIndicatorL, stumbleIndicatorR;
 
     private PlayerInput playerInput;
     private Vector2 prevPosition;
@@ -80,7 +79,7 @@ public class Mech_Controller : MonoBehaviour
     void Update()
     {
 
-        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 0);
+        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 90);
 
         if(_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
@@ -111,8 +110,6 @@ public class Mech_Controller : MonoBehaviour
             }
 
             _skidMultiplier = 0;
-            stumbleIndicatorR.SetActive(false);
-            stumbleIndicatorL.SetActive(false);
             isSkidding = false; 
         }
 
@@ -163,11 +160,11 @@ public class Mech_Controller : MonoBehaviour
     }
 
     private void UpdateBodyPosition() {
-        float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
-        float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
-        float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
+        float averageX = (FRLeg.targetPoint.position.x + BRLeg.targetPoint.position.x + FLLeg.targetPoint.position.x + BLLeg.targetPoint.position.x) / 4;
+        float averageY = (FRLeg.legHeight + BRLeg.legHeight + FLLeg.legHeight + BLLeg.legHeight) / 4;
+        float averageZ = (FRLeg.targetPoint.position.z + BRLeg.targetPoint.position.z + FLLeg.targetPoint.position.z + BLLeg.targetPoint.position.z) / 4;
 
-        transform.position = new Vector3(averageX, averageY, averageZ);
+        transform.position = new Vector3(transform.position.x, averageY - heightOffset, averageZ);
     }
 
     private void UpdateBodyRotation()
@@ -270,9 +267,9 @@ public class Mech_Controller : MonoBehaviour
         angle += 90;
 
         if (angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg;  }
-        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; stumbleIndicatorR.SetActive(true); }
+        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; /*stumbleIndicatorR.SetActive(true);*/ }
         if (angle > 150 && angle < 240) { resistor1 = FLLeg; resistor2 = FRLeg; }
-        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; stumbleIndicatorL.SetActive(true); }
+        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; /*stumbleIndicatorL.SetActive(true);*/ }
     }
 
     private void Splat()
