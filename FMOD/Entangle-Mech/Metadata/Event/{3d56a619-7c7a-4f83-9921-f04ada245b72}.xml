@@ -5,7 +5,7 @@
 			<value>Red Light 1</value>
 		</property>
 		<property name="name">
-			<value>Gun_Aim</value>
+			<value>GUN_Aim</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>

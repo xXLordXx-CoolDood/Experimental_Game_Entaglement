@@ -5,7 +5,7 @@
 			<value>Red Light 1</value>
 		</property>
 		<property name="name">
-			<value>Gun</value>
+			<value>GUN</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c8c9ff6d-1558-4962-925e-788c35505dd6}</destination>
