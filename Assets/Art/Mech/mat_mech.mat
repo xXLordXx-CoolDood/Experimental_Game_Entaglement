@@ -136,7 +136,7 @@ Material:
     - _Roughness: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
-    - _SnowIntensity: 1.5
+    - _SnowIntensity: 3
     - _SnowSpeed: -0.02
     - _SnowSpeedX: 0.06
     - _SnowSpeedY: -0.06
