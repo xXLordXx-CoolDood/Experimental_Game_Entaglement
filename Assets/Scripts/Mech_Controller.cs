@@ -8,15 +8,16 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, shotSpawn;
+    public Transform gun, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
 
+    [HideInInspector] public Vector2 prevPosition;
+
     private PlayerInput playerInput;
-    private Vector2 prevPosition;
     private Vector3 skidDir;
-    private int activeLegs = 0, direction, gunDirection;
-    private float _skidMultiplier, tiltMultiplier, timer;
+    private int activeLegs = 0, gunDirection;
+    private float _skidMultiplier, tiltMultiplier, timer, direction;
     private bool kneeling, stumbled, recovering;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
@@ -58,8 +59,8 @@ public class Mech_Controller : MonoBehaviour
     }
     public void Turn(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { direction = Mathf.RoundToInt(ctx.ReadValue<float>()) * -45; ChangeDirection(direction / 45); }
-        if (ctx.canceled) { direction = 0; ChangeDirection(0); }
+        if (ctx.performed) { direction = ctx.ReadValue<float>() * -15; /*ChangeDirection(direction / 45);*/ }
+        if (ctx.canceled) { direction = 0;/* ChangeDirection(0);*/ }
     }
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
@@ -78,12 +79,11 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
-
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 90);
 
         if(_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
-            _skidMultiplier -= Time.deltaTime * skidStrength / 2; 
+            _skidMultiplier -= Time.deltaTime * skidStrength / 2;
         }
         if(_skidMultiplier < 0) {
             FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
@@ -130,10 +130,24 @@ public class Mech_Controller : MonoBehaviour
         CheckLegCombos();
         UpdateBodyPosition();
         UpdateBodyRotation();
+
+        if(direction != 0) { UpdateDirectionRotations(); }
+ 
         CheckForStumbling();
     }
 
     #region UpdateFunctions
+    private void UpdateDirectionRotations()
+    {
+        chest.localEulerAngles = new Vector3(180, Mathf.Clamp(chest.localEulerAngles.y + (direction * Time.deltaTime) - 180, 75, 105), 0);
+        waist.localEulerAngles = new Vector3(180, Mathf.Clamp(waist.localEulerAngles.y + (direction * Time.deltaTime) - 180, 75, 105), 0);
+
+        BLAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        BRAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        FLAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+        FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+    }
+
     private void CheckLegCombos()
     {
         kneeling = false;
@@ -164,7 +178,7 @@ public class Mech_Controller : MonoBehaviour
         float averageY = (FRLeg.legHeight + BRLeg.legHeight + FLLeg.legHeight + BLLeg.legHeight) / 4;
         float averageZ = (FRLeg.targetPoint.position.z + BRLeg.targetPoint.position.z + FLLeg.targetPoint.position.z + BLLeg.targetPoint.position.z) / 4;
 
-        transform.position = new Vector3(transform.position.x, averageY - heightOffset, averageZ);
+        transform.position = new Vector3(averageX, averageY - heightOffset, averageZ);
     }
 
     private void UpdateBodyRotation()
@@ -186,12 +200,18 @@ public class Mech_Controller : MonoBehaviour
         }
 
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.z);
-        float angleY = Vector2.Angle(prevPosition, currentPos);
+        float angleY = (waist.localEulerAngles.y - 270) * Vector2.Distance(currentPos, prevPosition);
 
         float angleZ = (BLLeg.targetPoint.position.y + FLLeg.targetPoint.position.y) - (BRLeg.targetPoint.position.y + FRLeg.targetPoint.position.y);
 
         //Apply rotations to the mech
-        transform.eulerAngles = new Vector3(angleX * rotationMultiplierX, transform.eulerAngles.y + (angleY * rotationMultiplierY * (direction / 45)), 0/*angleZ * rotationMultiplierX*/);
+        transform.eulerAngles = new Vector3(angleX * rotationMultiplierX, transform.eulerAngles.y - (angleY * rotationMultiplierY), 0/*angleZ * rotationMultiplierX*/);
+
+        //Fix feet rotation
+        FLLeg.targetPoint.eulerAngles = new Vector3(0, transform.eulerAngles.y - (waist.localEulerAngles.y + 90), 0);
+        FRLeg.targetPoint.eulerAngles = new Vector3(0, transform.eulerAngles.y - (waist.localEulerAngles.y + 90), 0);
+        BLLeg.targetPoint.eulerAngles = new Vector3(0, transform.eulerAngles.y - (waist.localEulerAngles.y + 90), 0);
+        BRLeg.targetPoint.eulerAngles = new Vector3(0, transform.eulerAngles.y - (waist.localEulerAngles.y + 90), 0);
 
         //Update pre position
         prevPosition = currentPos; 
@@ -228,12 +248,12 @@ public class Mech_Controller : MonoBehaviour
         BLAnim.SetBool("Forward", newState);
     }
 
-    private void ChangeDirection(int newDirection) {
-        FRAnim.SetInteger("Turn", newDirection);
-        BRAnim.SetInteger("Turn", newDirection);
-        FLAnim.SetInteger("Turn", newDirection);
-        BLAnim.SetInteger("Turn", newDirection);
-    }
+    //private void ChangeDirection(int newDirection) {
+    //    FRAnim.SetInteger("Turn", newDirection);
+    //    BRAnim.SetInteger("Turn", newDirection);
+    //    FLAnim.SetInteger("Turn", newDirection);
+    //    BLAnim.SetInteger("Turn", newDirection);
+    //}
 
     private void ShootGun()
     {

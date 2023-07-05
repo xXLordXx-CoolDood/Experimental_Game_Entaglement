@@ -58,8 +58,8 @@ public class Leg_Animator : MonoBehaviour
         if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
         {
             legHeight = targetPoint.position.y;
-            Debug.Log("Grounded");
             SetTargetFollowState(false);
+            
             grounded = true;
             canMove = false;
         }
