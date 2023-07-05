@@ -122,8 +122,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FresnelContrast: 6
-    - _FresnelPower: 4
+    - _FresnelContrast: 2
+    - _FresnelPower: 6
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -133,6 +133,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Roughness: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SnowIntensity: 1.5
@@ -149,7 +150,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 4, g: 1.0890051, b: 0, a: 1}
     - _EmmisiveColor: {r: 23.968628, g: 3.137255, b: 0, a: 1}
-    - _FresnelColor: {r: 0.12032752, g: 0.13698617, b: 0.1509434, a: 0}
+    - _FresnelColor: {r: 0.20369053, g: 0, b: 1, a: 0}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor1: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor2: {r: 0.7505075, g: 0.7122642, b: 1, a: 0}
