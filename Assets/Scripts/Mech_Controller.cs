@@ -79,6 +79,8 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(gun.eulerAngles.y);
+
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 90);
 
         if(_skidMultiplier > 0) { 
@@ -248,54 +250,28 @@ public class Mech_Controller : MonoBehaviour
         BLAnim.SetBool("Forward", newState);
     }
 
-    //private void ChangeDirection(int newDirection) {
-    //    FRAnim.SetInteger("Turn", newDirection);
-    //    BRAnim.SetInteger("Turn", newDirection);
-    //    FLAnim.SetInteger("Turn", newDirection);
-    //    BLAnim.SetInteger("Turn", newDirection);
-    //}
-
     private void ShootGun()
     {
         GameObject _bullet = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
         _bullet.GetComponent<Rigidbody>().AddForce(shotSpawn.forward * 10, ForceMode.Impulse);
 
         //Calculate shot backward angle
-        float angle = gun.eulerAngles.y - 90;
+        float angle = gun.eulerAngles.y;
 
         _skidMultiplier = skidStrength;
         skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
         isSkidding = true;
         stumbled = true;
 
-        FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
-        FRAnim.SetBool("Stumbling", true);
-        FRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
-
-        BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
-        BRAnim.SetBool("Stumbling", true);
-        BRAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
-
-        FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
-        FLAnim.SetBool("Stumbling", true);
-        FLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
-
-        BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true;
-        BLAnim.SetBool("Stumbling", true);
-        BLAnim.SetFloat("CycleOffset", Random.Range(0f, 1f));
-
-        angle += 90;
-
-        if (angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg;  }
-        if (angle > 30 && angle < 150) { resistor1 = FLLeg; resistor2 = BLLeg; /*stumbleIndicatorR.SetActive(true);*/ }
-        if (angle > 150 && angle < 240) { resistor1 = FLLeg; resistor2 = FRLeg; }
-        if (angle > 240) { resistor1 = FRLeg; resistor2 = BRLeg; /*stumbleIndicatorL.SetActive(true);*/ }
+        if (angle > 240 && angle < 300) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Brace Back"); }
+        if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace Front"); }
+        if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace Right"); }
+        if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace Left"); }
     }
 
     private void Splat()
     {
-        transform.eulerAngles = new Vector3(0, 0, 90);
-        prevPosition = transform.position;
+        
     }
 
     #endregion
