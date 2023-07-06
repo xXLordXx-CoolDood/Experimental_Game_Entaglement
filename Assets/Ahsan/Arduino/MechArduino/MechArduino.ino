@@ -16,6 +16,10 @@ void setup() {
   for(int i=2; i <=12;i++){
     pinMode(i, INPUT_PULLUP);  
   }
+
+  for(int i = 4; i <=9; i++){
+    pinMode(i, INPUT);  
+  }
   
   
 }
@@ -23,6 +27,15 @@ void loop() {
   int input = 0;
   for(int i=2; i <=12;i++){
     if(digitalRead(i) == LOW){
+      input |= (1 << (i-2));
+    }
+    else{
+      input |= (0 << (i-2));
+    }
+  }
+
+  for(int i=4; i <=9;i++){
+    if(digitalRead(i) == HIGH){
       input |= (1 << (i-2));
     }
     else{
