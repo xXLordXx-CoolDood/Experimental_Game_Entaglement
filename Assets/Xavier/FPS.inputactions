@@ -60,6 +60,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Gun_Tilt",
+                    "type": "Value",
+                    "id": "a31487c8-c74c-43a7-a7cf-1c166f0f8c93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Reverse",
                     "type": "Button",
                     "id": "2bbdac8f-7d29-4f25-b14e-503cbb03b323",
@@ -192,7 +201,7 @@
                 {
                     "name": "positive",
                     "id": "b8f2a80c-27af-49f3-bd59-e4fbd389c285",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -203,13 +212,46 @@
                 {
                     "name": "",
                     "id": "d3a406bc-49cf-4fff-9840-238fde0edca5",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "71cb4438-f31f-4f42-953e-9409c268cd0c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Tilt",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1c04019c-6d2a-4223-b4ce-633cd23905ea",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7191c207-30b0-454f-88e8-883e8d1321b2",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

@@ -659,7 +659,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: -36.49, y: 25.79, z: -79.53}
-  m_TranslationOffset: {x: -49.338894, y: 20.27777, z: 75.591995}
+  m_TranslationOffset: {x: -49.338894, y: 20.27777, z: -41.93801}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 0
   m_AffectTranslationZ: 1
@@ -828,6 +828,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3067702263348717684, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067702263348717684, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6339796907511836340, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
@@ -2370,13 +2374,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895367576}
-  m_LocalRotation: {x: -0.50000006, y: 0.50000006, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -1.58, y: 1.68, z: -0}
+  m_LocalRotation: {x: 0.000000029802322, y: 0.00000008940697, z: 0.000000029802322, w: 1}
+  m_LocalPosition: {x: 0, y: 1.0963526, z: 0.79179704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 889920017}
-  m_RootOrder: 3
+  m_Father: {fileID: 693213382}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &895367578
 MonoBehaviour:
@@ -2980,6 +2984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1276077735}
+  - component: {fileID: 1276077736}
   m_Layer: 0
   m_Name: Mech_Holder
   m_TagString: Untagged
@@ -2995,7 +3000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276077734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.3, y: 4.44, z: -126.1}
+  m_LocalPosition: {x: 12.3, y: 4.44, z: -8.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3007,6 +3012,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276077736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276077734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b542d5d4945ab140a3231c339f7ade4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mech: {fileID: 1859878107}
 --- !u!1 &1296924861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4036,11 +4054,13 @@ MonoBehaviour:
   FLLeg: {fileID: 753990843}
   BLLeg: {fileID: 156416387}
   bullet: {fileID: 8874649003006798199, guid: 8e2f891a721e67a4bb454984704a12c3, type: 3}
+  splatMech: {fileID: 1336238366602787197, guid: 2a6c196baf1042a4dab0f05836bc6a8a, type: 3}
   FRAnim: {fileID: 1133809838}
   BRAnim: {fileID: 1596091430}
   FLAnim: {fileID: 2085630599}
   BLAnim: {fileID: 1990681512}
   gun: {fileID: 889920017}
+  gunYaw: {fileID: 693213382}
   shotSpawn: {fileID: 2097727480}
   chest: {fileID: 221554135}
   waist: {fileID: 850956041}
@@ -4207,6 +4227,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9b7a5184-7dfc-4de9-b99d-95ec70674108
     m_ActionName: DogMech/Shoot[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1859878109}
+        m_TargetAssemblyTypeName: Mech_Controller, Assembly-CSharp
+        m_MethodName: Gun_Tilt
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a31487c8-c74c-43a7-a7cf-1c166f0f8c93
+    m_ActionName: DogMech/Gun_Tilt[/Keyboard/downArrow,/Keyboard/upArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DogMech

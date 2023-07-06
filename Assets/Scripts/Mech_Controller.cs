@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
-    public GameObject bullet;
+    public GameObject bullet, splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, shotSpawn, chest, waist;
+    public Transform gun, gunYaw, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
 
@@ -16,8 +16,8 @@ public class Mech_Controller : MonoBehaviour
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
-    private int activeLegs = 0, gunDirection;
-    private float _skidMultiplier, tiltMultiplier, timer, direction;
+    private int activeLegs = 0, gunDirectionX, gunDirectionY;
+    private float _skidMultiplier, tiltMultiplier, timer, direction, prevRot;
     private bool kneeling, stumbled, recovering;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
@@ -33,25 +33,29 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        else if(ctx.performed && isSkidding) { FRLeg.isHeld = true; activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        else if (ctx.performed && isSkidding) { BRLeg.isHeld = true; activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        else if (ctx.performed && isSkidding) { FLLeg.isHeld = true; activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed /*&& !BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        else if (ctx.performed && isSkidding) { BLLeg.isHeld = true; activeLegs++; }
     }
     public void Reverse(InputAction.CallbackContext ctx)
     {
@@ -65,9 +69,16 @@ public class Mech_Controller : MonoBehaviour
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirection = Mathf.RoundToInt(ctx.ReadValue<float>()); }
+        if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirectionY = Mathf.RoundToInt(ctx.ReadValue<float>()); }
         if(ctx.ReadValue<float>() != 0 && stumbled) { recovering = true; }
-        if (ctx.canceled) { gunDirection = 0; }
+        if (ctx.canceled) { gunDirectionY = 0; }
+    }
+
+    public void Gun_Tilt(InputAction.CallbackContext ctx)
+    {
+        if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirectionX = Mathf.RoundToInt(ctx.ReadValue<float>()); }
+        if (ctx.ReadValue<float>() != 0 && stumbled) { recovering = true; }
+        if (ctx.canceled) { gunDirectionX = 0; }
     }
 
     public void Gun_Shoot(InputAction.CallbackContext ctx)
@@ -79,11 +90,13 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(gun.eulerAngles.y);
+        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90);
+        gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime);
+        if ((gunYaw.eulerAngles.x > 200 && gunYaw.eulerAngles.x < 275) || (gunYaw.eulerAngles.x > 15 && gunYaw.eulerAngles.x < 275)) { gunYaw.eulerAngles = new Vector3(prevRot, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z); }
 
-        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirection * 60 * Time.deltaTime), 90);
+        prevRot = gunYaw.eulerAngles.x;
 
-        if(_skidMultiplier > 0) { 
+        if (_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
             _skidMultiplier -= Time.deltaTime * skidStrength / 2;
         }
@@ -271,9 +284,25 @@ public class Mech_Controller : MonoBehaviour
 
     private void Splat()
     {
-        
+        GameObject newMech = Instantiate(splatMech, transform.position, transform.rotation);
+
+        List<Transform> children = new List<Transform>(0);
+
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            children.Add(transform.GetChild(i));
+        }
+
+        int c = 0;
+        foreach(Transform trans in children)
+        {
+            newMech.transform.GetChild(c).position = trans.position;
+            newMech.transform.GetChild(c).rotation = trans.rotation;
+            c++;
+        }
+
+        transform.parent.GetComponent<Mech_Holder>().MechDie(newMech);
     }
 
     #endregion
-
 }
