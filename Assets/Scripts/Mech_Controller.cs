@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -51,6 +52,11 @@ public class Mech_Controller : MonoBehaviour
     }
 
     #endregion
+
+    public void Switch_Camera(InputAction.CallbackContext ctx)
+    {
+        GetComponent<CameraSwitcher>().CycleCamera();
+    }
 
     public void FR(InputAction.CallbackContext ctx)
     {
@@ -141,6 +147,8 @@ public class Mech_Controller : MonoBehaviour
             }
         }
     }
+
+    
 
     #endregion 
 
