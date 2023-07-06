@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
-    public GameObject bullet, splatMech;
+    public GameObject splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
     public Transform gun, gunYaw, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
@@ -279,8 +279,12 @@ public class Mech_Controller : MonoBehaviour
 
     private void ShootGun()
     {
-        GameObject _bullet = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
-        _bullet.GetComponent<Rigidbody>().AddForce(shotSpawn.forward * 10, ForceMode.Impulse);
+        RaycastHit hit;
+        if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.gameObject.GetComponent<Score>())
+        {
+            GetComponent<Point_Getter>().GetPoints(hit.collider.gameObject.GetComponent<Score>().value, hit.collider.gameObject);
+            Destroy(hit.collider.gameObject);
+        }
 
         //Calculate shot backward angle
         float angle = gun.eulerAngles.y;
