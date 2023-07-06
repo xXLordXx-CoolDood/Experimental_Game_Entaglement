@@ -16,6 +16,7 @@ public class Mech_Holder : MonoBehaviour
         mech.SetActive(false);
         yield return new WaitForSeconds(5);
         mech.SetActive(true);
+        mech.GetComponent<Mech_Controller>().Respawn();
         Destroy(debris);
     }
 }
