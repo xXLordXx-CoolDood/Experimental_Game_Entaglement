@@ -1,5 +1,4 @@
 
-bool led;
 
 void setup() {
   Serial.begin(9600);
@@ -25,12 +24,16 @@ void setup() {
   
 }
 void loop() {
-  if(led){
-    digitalWrite(13, HIGH);
+  if(Serial.available() > 0){
+    char led = Serial.read();
+    if(led == '1'){
+      digitalWrite(13, HIGH);
+    }
+    if(led == '0'){
+      digitalWrite(13, LOW);
+    }
   }
-  else{
-    digitalWrite(13, LOW);
-  }
+  
 
   uint32_t input = 0;
     
