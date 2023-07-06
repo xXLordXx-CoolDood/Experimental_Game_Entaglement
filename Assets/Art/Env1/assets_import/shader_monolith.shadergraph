@@ -14,6 +14,9 @@
         },
         {
             "m_Id": "447ccd3597e2426d84296668262940e5"
+        },
+        {
+            "m_Id": "179e956fd7dd49a4b82932e17eaec672"
         }
     ],
     "m_Keywords": [],
@@ -1063,6 +1066,33 @@
         "m_SerializableColors": []
     },
     "m_Value": 0.0
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "179e956fd7dd49a4b82932e17eaec672",
+    "m_Guid": {
+        "m_GuidSerialized": "1c54723b-df78-459d-8af2-ab73fbabcb84"
+    },
+    "m_Name": "SnowBuildup",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "SnowBuildup",
+    "m_DefaultReferenceName": "_SnowBuildup",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 1.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
 }
 
 {
@@ -3691,6 +3721,9 @@
         },
         {
             "m_Id": "447ccd3597e2426d84296668262940e5"
+        },
+        {
+            "m_Id": "179e956fd7dd49a4b82932e17eaec672"
         }
     ]
 }
@@ -4518,10 +4551,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -708.9999389648438,
-            "y": -543.0,
+            "x": -839.9999389648438,
+            "y": -528.0,
             "width": 208.0,
-            "height": 302.0
+            "height": 301.99993896484377
         }
     },
     "m_Slots": [
@@ -5149,10 +5182,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1753.0001220703125,
-            "y": -343.0,
-            "width": 208.0,
-            "height": 315.0
+            "x": -2056.0,
+            "y": -617.9999389648438,
+            "width": 207.9998779296875,
+            "height": 314.9999694824219
         }
     },
     "m_Slots": [
