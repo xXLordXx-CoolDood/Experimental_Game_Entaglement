@@ -11,14 +11,15 @@ public class Mech_Controller : MonoBehaviour
     public Transform gun, gunYaw, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
+    public bool isAiming = true;
 
     [HideInInspector] public Vector2 prevPosition;
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
     private int activeLegs = 0, gunDirectionX, gunDirectionY;
-    private float _skidMultiplier, tiltMultiplier, timer, direction, prevRot;
-    private bool kneeling, stumbled, recovering;
+    private float _skidMultiplier, tiltMultiplier, timer, direction;
+    private bool kneeling, stumbled;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
@@ -31,6 +32,13 @@ public class Mech_Controller : MonoBehaviour
 
     public void FR(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionX = 1; }
+            if (ctx.canceled) { gunDirectionX = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
@@ -38,6 +46,13 @@ public class Mech_Controller : MonoBehaviour
     }
     public void BR(InputAction.CallbackContext ctx)
     {
+        if (isAiming) 
+        {
+            if (ctx.performed) { gunDirectionX = -1; }
+            if (ctx.canceled) { gunDirectionX = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
@@ -45,6 +60,13 @@ public class Mech_Controller : MonoBehaviour
     }
     public void FL(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionY = 1; }
+            if (ctx.canceled) { gunDirectionY = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
@@ -52,6 +74,12 @@ public class Mech_Controller : MonoBehaviour
     }
     public void BL(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionY = -1; }
+            if (ctx.canceled) { gunDirectionY = 0; }
+            return;
+        }
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
@@ -70,14 +98,12 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Turn(InputAction.CallbackContext ctx)
     {
         if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirectionY = Mathf.RoundToInt(ctx.ReadValue<float>()); }
-        if(ctx.ReadValue<float>() != 0 && stumbled) { recovering = true; }
         if (ctx.canceled) { gunDirectionY = 0; }
     }
 
     public void Gun_Tilt(InputAction.CallbackContext ctx)
     {
         if (ctx.ReadValue<float>() != 0 && !stumbled) { gunDirectionX = Mathf.RoundToInt(ctx.ReadValue<float>()); }
-        if (ctx.ReadValue<float>() != 0 && stumbled) { recovering = true; }
         if (ctx.canceled) { gunDirectionX = 0; }
     }
 
@@ -90,11 +116,15 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
-        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90);
-        gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime);
-        if ((gunYaw.eulerAngles.x > 200 && gunYaw.eulerAngles.x < 275) || (gunYaw.eulerAngles.x > 15 && gunYaw.eulerAngles.x < 275)) { gunYaw.eulerAngles = new Vector3(prevRot, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z); }
+        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90); //Gun Left/Right
+        gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime); //Gun Up/Down
 
-        prevRot = gunYaw.eulerAngles.x;
+        float rot = gunYaw.eulerAngles.x - 180;
+
+        if(rot > -170 && rot < 0) { rot = -170; }
+        if(rot < 100 && rot > 0) { rot = 100; }
+        gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
+        
 
         if (_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
@@ -105,40 +135,18 @@ public class Mech_Controller : MonoBehaviour
             BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
             FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
             BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
-            FRAnim.SetBool("Stumbling", false);
             FRAnim.ResetTrigger("Next_State");
-            FLAnim.SetBool("Stumbling", false);
             FLAnim.ResetTrigger("Next_State");
-            BRAnim.SetBool("Stumbling", false);
             BRAnim.ResetTrigger("Next_State");
-            BLAnim.SetBool("Stumbling", false);
             BLAnim.ResetTrigger("Next_State");
 
-            if (stumbled)
-            {
-                Splat();
-                float averageX = (FRLeg.footBone.position.x + BRLeg.footBone.position.x + FLLeg.footBone.position.x + BLLeg.footBone.position.x) / 4;
-                float averageY = (FRLeg.footBone.position.y + BRLeg.footBone.position.y + FLLeg.footBone.position.y + BLLeg.footBone.position.y) / 6;
-                float averageZ = (FRLeg.footBone.position.z + BRLeg.footBone.position.z + FLLeg.footBone.position.z + BLLeg.footBone.position.z) / 4;
-                skidDir = new Vector3(averageX, averageY, averageZ);
-                timer = 0;
-            }
+            if (stumbled) { Splat(); }
 
             _skidMultiplier = 0;
             isSkidding = false; 
         }
 
         if(isSkidding) { transform.Translate(skidDir * Time.deltaTime * _skidMultiplier, Space.World); return; }
-
-        if (recovering)
-        {
-            timer = Mathf.Clamp(timer + Time.deltaTime, 0, 1);
-
-            transform.position = Vector3.Lerp(prevPosition, skidDir, timer);
-            transform.eulerAngles = new Vector3(0, 0, 90 - (timer * 90));
-
-            if(timer == 1) { recovering = false; stumbled = false; prevPosition = transform.position; }
-        }
 
         if (stumbled) { return; }
 
@@ -239,6 +247,12 @@ public class Mech_Controller : MonoBehaviour
     #endregion
 
     #region CallableFunctions
+    public void Respawn()
+    {
+        stumbled = false; 
+        prevPosition = transform.position;
+    }
+
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
         //If pressed and leg is idle, move leg up
