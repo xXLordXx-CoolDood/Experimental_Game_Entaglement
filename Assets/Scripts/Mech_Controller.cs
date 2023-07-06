@@ -23,12 +23,34 @@ public class Mech_Controller : MonoBehaviour
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
+    MechGun mechGun;
+
     void Start()
     {
         playerInput = new PlayerInput();
+        mechGun = GetComponent<MechGun>();
     }
 
     #region //input
+
+    #region Gun
+
+    public void Gun1(InputAction.CallbackContext ctx)
+    {
+        mechGun.gun1 = ctx.ReadValue<float>();
+    }
+
+    public void Gun2(InputAction.CallbackContext ctx)
+    {
+        mechGun.gun2 = ctx.ReadValue<float>();
+    }
+
+    public void Gun3(InputAction.CallbackContext ctx)
+    {
+        mechGun.gun3 = ctx.ReadValue<float>();
+    }
+
+    #endregion
 
     public void FR(InputAction.CallbackContext ctx)
     {
@@ -109,7 +131,14 @@ public class Mech_Controller : MonoBehaviour
 
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !isSkidding) { ShootGun(); }
+        if (ctx.performed && !isSkidding) { 
+            if(mechGun.isReadyToShoot) {
+                ShootGun(); 
+                //Reset sequence in MechGun
+                mechGun.GenerateSequence();
+                mechGun.isReadyToShoot = false;
+            }
+        }
     }
 
     #endregion 
@@ -294,6 +323,9 @@ public class Mech_Controller : MonoBehaviour
         if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace Front"); }
         if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace Right"); }
         if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace Left"); }
+
+        
+
     }
 
     private void Splat()
