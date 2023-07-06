@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Leg_Animator : MonoBehaviour
 {
@@ -9,10 +10,10 @@ public class Leg_Animator : MonoBehaviour
     public float rotationMultiplier, groundCheckDistance = 1;
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
-
     public bool isSkidding, showDebug;
+    [SerializeField] private EventReference legActiveEvent, legInactiveEvent, legIceCrash, legSnowCrash;
 
-    [HideInInspector] public PROTO_Dog_Controller controllerRef;
+    public Mech_Controller controllerRef;
     public bool isHeld, canMove, grounded = true;
     [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
@@ -35,7 +36,8 @@ public class Leg_Animator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isHeld) { CheckForGround(); }
+        if (!isHeld) { CheckForGround(); return; }
+        grounded = false;
         //RotateAnkleBone();
     }
 
@@ -51,22 +53,32 @@ public class Leg_Animator : MonoBehaviour
 
     public void CheckForGround()
     {
+        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position));
+
         initialDir.Normalize();
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
         
         RaycastHit hit;
-        if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
+        if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer)) //Initial check to see if we need to apply leg gravity
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
-            
+
+            controllerRef.CheckLegIdleStatus();
             grounded = true;
             canMove = false;
         }
-        else
+        else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
             grounded = false;
             ApplyGravity();
+        }
+        else //If we did clip through the ground, ground the leg back on top
+        {
+            SetTargetFollowState(false);
+            Debug.Log("CLIPPING STOPPED");
+            grounded = true;
+            canMove = false;
         }
 
         prevTargetPos = targetPoint.position;
@@ -97,5 +109,11 @@ public class Leg_Animator : MonoBehaviour
     { 
         if (isSkidding) { return; } 
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; 
+    }
+
+    public void LegActiveStatus(bool active)
+    {
+        if (active) { Audio_Manager.instance.PlayOneShot(legActiveEvent, transform.position); return; }
+        Audio_Manager.instance.PlayOneShot(legInactiveEvent, transform.position);
     }
 }

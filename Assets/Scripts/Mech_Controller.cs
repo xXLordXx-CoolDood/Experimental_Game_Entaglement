@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using FMODUnity;
 
 public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines;
+    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public bool isAiming = true;
-
+    [SerializeField] private EventReference shootEvent, explodeEvent;
     [HideInInspector] public Vector2 prevPosition;
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
     private int activeLegs = 0, gunDirectionX, gunDirectionY;
     private float _skidMultiplier, tiltMultiplier, timer, direction;
-    private bool kneeling, stumbled;
+    private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
@@ -69,7 +71,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FLLeg.isHeld && !BRLeg.isHeld) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
         else if(ctx.performed && isSkidding) { FRLeg.isHeld = true; activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
@@ -83,7 +85,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BLLeg.isHeld && !FRLeg.isHeld) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BRLeg.isHeld = true; activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
@@ -97,7 +99,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FRLeg.isHeld && !BLLeg.isHeld) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { FLLeg.isHeld = true; activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
@@ -110,7 +112,7 @@ public class Mech_Controller : MonoBehaviour
         }
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BRLeg.isHeld && !FLLeg.isHeld) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BLLeg.isHeld = true; activeLegs++; }
     }
     public void Reverse(InputAction.CallbackContext ctx)
@@ -139,7 +141,7 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.performed && !isSkidding) {
             ShootGun();
-            if (mechGun.isReadyToShoot) {
+            if (mechGun.isReadyToShoot && GetComponent<CameraSwitcher>().cameraList[1].enabled) {
                 ShootGun(); 
                 //Reset sequence in MechGun
                 mechGun.GenerateSequence();
@@ -154,6 +156,13 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        #region //Blocked logic & gun rotation
+        RaycastHit hit;
+        if ((Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) && FRAnim.GetBool("Forward")) ||
+            (Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer) && !FRAnim.GetBool("Forward"))) 
+        { blocked = true; Debug.Log("Blocked"); }
+        else { blocked = false; }
+
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90); //Gun Left/Right
         gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime); //Gun Up/Down
 
@@ -165,7 +174,9 @@ public class Mech_Controller : MonoBehaviour
         if (rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
         gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
-        
+
+        gunRotIndicator.Rotate(new Vector3(0, 0, 1), gunDirectionY * 60 * Time.deltaTime);
+        #endregion
 
         if (_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
@@ -191,14 +202,12 @@ public class Mech_Controller : MonoBehaviour
 
         if (stumbled) { return; }
 
-        CheckLegCombos();
+        //CheckLegCombos();
         UpdateBodyPosition();
         UpdateBodyRotation();
 
         if(direction != 0) { UpdateDirectionRotations(); }
- 
-        CheckForStumbling();
-    }
+     }
 
     #region UpdateFunctions
     private void UpdateDirectionRotations()
@@ -212,30 +221,30 @@ public class Mech_Controller : MonoBehaviour
         FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
     }
 
-    private void CheckLegCombos()
-    {
-        kneeling = false;
+    //private void CheckLegCombos()
+    //{
+    //    kneeling = false;
 
-        #region sitLogic
-        //If both back legs are active(rising with rise tag) instead force them to sit.
-        if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BRAnim.GetBool("LegDown") && BLAnim.GetBool("LegDown"))
-        {
-            BRAnim.SetFloat("Speed_Multiplier", -1);
-            BLAnim.SetFloat("Speed_Multiplier", -1);
-            tiltMultiplier += Time.deltaTime * -15;
-            kneeling = true;
-        }
-        else if (FRAnim.GetBool("LegDown") && FLAnim.GetBool("LegDown") && FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
-        {
-            FRAnim.SetFloat("Speed_Multiplier", -1);
-            FLAnim.SetFloat("Speed_Multiplier", -1);
-            tiltMultiplier += Time.deltaTime * 15;
-            kneeling = true;
-        }
+    //    #region sitLogic
+    //    //If both back legs are active(rising with rise tag) instead force them to sit.
+    //    if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BRAnim.GetBool("LegDown") && BLAnim.GetBool("LegDown"))
+    //    {
+    //        BRAnim.SetFloat("Speed_Multiplier", -1);
+    //        BLAnim.SetFloat("Speed_Multiplier", -1);
+    //        tiltMultiplier += Time.deltaTime * -15;
+    //        kneeling = true;
+    //    }
+    //    else if (FRAnim.GetBool("LegDown") && FLAnim.GetBool("LegDown") && FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+    //    {
+    //        FRAnim.SetFloat("Speed_Multiplier", -1);
+    //        FLAnim.SetFloat("Speed_Multiplier", -1);
+    //        tiltMultiplier += Time.deltaTime * 15;
+    //        kneeling = true;
+    //    }
 
-        tiltMultiplier = Mathf.Clamp(tiltMultiplier, -15, 15);
-        #endregion
-    }
+    //    tiltMultiplier = Mathf.Clamp(tiltMultiplier, -15, 15);
+    //    #endregion
+    //}
 
     private void UpdateBodyPosition() {
         float averageX = (FRLeg.targetPoint.position.x + BRLeg.targetPoint.position.x + FLLeg.targetPoint.position.x + BLLeg.targetPoint.position.x) / 4;
@@ -280,11 +289,6 @@ public class Mech_Controller : MonoBehaviour
         //Update pre position
         prevPosition = currentPos; 
     }
-
-    private void CheckForStumbling()
-    {
-
-    }
     #endregion
 
     #region CallableFunctions
@@ -296,19 +300,23 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
+        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
+
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); script.LegActiveStatus(true);
+        }
 
         //If released and leg is idle in air, move leg down
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); script.LegActiveStatus(false);
+        }
 
         //If pressed and leg is falling, reverse anim to leg idle
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", true); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); script.LegActiveStatus(true); }
 
         //If released and leg is rising, reverse anim to leg idle
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", false); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); script.LegActiveStatus(false); }
     }
 
     private void ChangeGears(bool newState) {
@@ -321,6 +329,8 @@ public class Mech_Controller : MonoBehaviour
     private void ShootGun()
     {
         GetComponent<CameraSwitcher>().CycleCamera();
+        isAiming = false;
+        Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
 
         //Calculate shot backward angle
         float angle = gun.eulerAngles.y;
@@ -347,6 +357,7 @@ public class Mech_Controller : MonoBehaviour
     private void Splat()
     {
         GameObject newMech = Instantiate(splatMech, transform.position, transform.rotation);
+        Audio_Manager.instance.PlayOneShot(explodeEvent, transform.position);
 
         List<Transform> children = new List<Transform>(0);
 
@@ -364,6 +375,24 @@ public class Mech_Controller : MonoBehaviour
         }
 
         transform.parent.GetComponent<Mech_Holder>().MechDie(newMech);
+    }
+
+    public void CheckLegIdleStatus()
+    {
+        //If all legs are grounded or idling, set all legs to idle state
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
+        {
+            Debug.Log("Idle");
+            IdleAllLegs();
+        }
+    }
+
+    private void IdleAllLegs()
+    {
+        FRAnim.SetTrigger("Idle"); FRAnim.SetFloat("Speed_Multiplier", 1); FRAnim.ResetTrigger("Next_State");
+        FLAnim.SetTrigger("Idle"); FLAnim.SetFloat("Speed_Multiplier", 1); FLAnim.ResetTrigger("Next_State");
+        BRAnim.SetTrigger("Idle"); BRAnim.SetFloat("Speed_Multiplier", 1); BRAnim.ResetTrigger("Next_State");
+        BLAnim.SetTrigger("Idle"); BLAnim.SetFloat("Speed_Multiplier", 1); BLAnim.ResetTrigger("Next_State");
     }
 
     #endregion
