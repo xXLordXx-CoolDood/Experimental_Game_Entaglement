@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using FMODUnity;
+using UnityEngine.VFX;
 
 public class Mech_Controller : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Mech_Controller : MonoBehaviour
     public bool isAiming = true;
     [SerializeField] private EventReference shootEvent, explodeEvent;
     [HideInInspector] public Vector2 prevPosition;
+    [SerializeField] private VisualEffect gunLaser;
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
@@ -332,6 +334,7 @@ public class Mech_Controller : MonoBehaviour
         GetComponent<CameraSwitcher>().CycleCamera();
         isAiming = false;
         Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
+        gunLaser.SendEvent("MechShot");
 
         //Calculate shot backward angle
         float angle = gun.eulerAngles.y;

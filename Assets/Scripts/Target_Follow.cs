@@ -17,7 +17,7 @@ public class Target_Follow : MonoBehaviour
 
     private void Start()
     {
-        maxLegDistance = 2.3f;
+        maxLegDistance = 4.5f;
         prevTargetPos = target.position;
     }
 
@@ -61,8 +61,8 @@ public class Target_Follow : MonoBehaviour
     }
 
     private void TryMoveToPos(Vector3 newPos)
-    { 
-        if(Vector3.Distance(pivot.position, newPos) < maxLegDistance) { transform.position = newPos; return; }
+    {
+        if (Vector3.Distance(pivot.position, newPos) < maxLegDistance) { transform.position = newPos; return; }
 
         Vector3 fixedPos = Vector3.Normalize(pivot.position - newPos);
         fixedPos += transform.position;

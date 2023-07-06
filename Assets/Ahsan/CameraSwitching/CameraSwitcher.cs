@@ -12,6 +12,7 @@ public class CameraSwitcher : MonoBehaviour
     [SerializeField] private EventReference camSwitchSound;
     public Camera[] cameraList;
     [SerializeField] GameObject gunUI;
+    public int gunCam = 1;
 
     void Update()
     {
@@ -28,7 +29,7 @@ public class CameraSwitcher : MonoBehaviour
         cameraList[index].enabled = false;
         cameraList[(index + 1)  % cameraList.Length].enabled = true;
 
-        if (cameraList[1].enabled) { gunUI.SetActive(true); GetComponent<Mech_Controller>().isAiming = true; Debug.Log("Aiming enabled"); }
+        if (cameraList[gunCam].enabled) { gunUI.SetActive(true); GetComponent<Mech_Controller>().isAiming = true; Debug.Log("Aiming enabled"); }
         else { gunUI.SetActive(false); GetComponent<Mech_Controller>().isAiming = false; }
     }
 }
