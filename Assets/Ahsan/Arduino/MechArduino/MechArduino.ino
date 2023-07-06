@@ -10,7 +10,7 @@ void setup() {
   pinMode(A3, INPUT);
   pinMode(A4, INPUT);
   pinMode(A5, INPUT);
-  pinMode(A6, INPUT);
+  pinMode(A6, OUTPUT);
   pinMode(A7, OUTPUT);
 
   pinMode(2, INPUT_PULLUP);
@@ -25,19 +25,6 @@ void setup() {
   
 }
 void loop() {
-  if(Serial.available() > 0){
-    int read = Serial.read();
-    if (read >= 0)
-    {
-      if(!strcmp(read, "stumble"))
-      {
-        digitalWrite(13, HIGH);
-      }
-      else{
-        digitalWrite(13, LOW);
-      }
-    }
-  }
   if(led){
     digitalWrite(13, HIGH);
   }
@@ -66,7 +53,7 @@ void loop() {
     }
   }
   Serial.println((input));
-  delay(200);
+  delay(200); 
 }
 
 float floatMap(float x, float in_min, float in_max, float out_min, float out_max)
