@@ -11,7 +11,7 @@ public class Mech_Controller : MonoBehaviour
     public Transform gun, gunYaw, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
-    public bool isAiming;
+    public bool isAiming = true;
 
     [HideInInspector] public Vector2 prevPosition;
 
@@ -120,7 +120,6 @@ public class Mech_Controller : MonoBehaviour
         gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime); //Gun Up/Down
 
         float rot = gunYaw.eulerAngles.x - 180;
-        Debug.Log(rot);
 
         if(rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
