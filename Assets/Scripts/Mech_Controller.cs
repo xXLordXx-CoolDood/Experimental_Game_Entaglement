@@ -280,7 +280,7 @@ public class Mech_Controller : MonoBehaviour
     private void ShootGun()
     {
         RaycastHit hit;
-        if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.gameObject.GetComponent<Score>())
+        if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.gameObject.GetComponent<Score>() && hit.collider.tag != "Points")
         {
             GetComponent<Point_Getter>().GetPoints(hit.collider.gameObject.GetComponent<Score>().value, hit.collider.gameObject);
             Destroy(hit.collider.gameObject);
@@ -298,6 +298,8 @@ public class Mech_Controller : MonoBehaviour
         if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace Front"); }
         if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace Right"); }
         if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace Left"); }
+
+        GetComponent<CameraSwitcher>().CycleCamera();
     }
 
     private void Splat()
