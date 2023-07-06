@@ -85,15 +85,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Cam_Cycle",
-                    "type": "Button",
-                    "id": "0c2b2ed5-42a3-44e2-8a43-28246be0072b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -296,6 +287,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "1D Axis",
+                    "id": "20c2f62d-16e8-4504-a167-5b9752f68fd8",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9927a014-1831-4d87-92de-151ad55a2942",
+                    "path": "<ArduinoDevice>/Button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "33731470-720f-41f3-8643-947759f6faef",
+                    "path": "<ArduinoDevice>/Button14",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "d3a406bc-49cf-4fff-9840-238fde0edca5",
                     "path": "<Keyboard>/space",
@@ -340,15 +364,37 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "b49cbca4-9c3a-4b77-ad31-b7f8c015bd10",
-                    "path": "<Keyboard>/q",
+                    "name": "1D Axis",
+                    "id": "ff2fcf29-8d1f-46a7-8cec-9a7b77f60ef9",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cam_Cycle",
-                    "isComposite": false,
+                    "action": "Gun_Tilt",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e5720d6d-5830-4d5e-ae1d-4751e25e99de",
+                    "path": "<ArduinoDevice>/Button15",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e4d3aad5-4148-4084-a66e-0d7b443a075f",
+                    "path": "<ArduinoDevice>/Button12",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gun_Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
