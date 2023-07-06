@@ -68,7 +68,7 @@ public class ArduinoHandler : MonoBehaviour
             var arduinoDeviceState = new ArduinoDeviceState();
 
             int inputValue = 0;
-            if(int.TryParse(incomingMsg, out inputValue))
+            if (int.TryParse(incomingMsg, out inputValue))
             {
                 Debug.Log(inputValue.ToBinaryString());
                 arduinoDeviceState.buttons = inputValue;
