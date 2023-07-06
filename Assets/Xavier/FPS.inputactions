@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Cam_Cycle",
+                    "type": "Button",
+                    "id": "0c2b2ed5-42a3-44e2-8a43-28246be0072b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -329,6 +338,17 @@
                     "action": "Gun_Tilt",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "b49cbca4-9c3a-4b77-ad31-b7f8c015bd10",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cam_Cycle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

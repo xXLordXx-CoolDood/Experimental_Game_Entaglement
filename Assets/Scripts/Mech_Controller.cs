@@ -11,6 +11,7 @@ public class Mech_Controller : MonoBehaviour
     public Transform gun, gunYaw, shotSpawn, chest, waist;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
+    public bool isAiming;
 
     [HideInInspector] public Vector2 prevPosition;
 
@@ -31,6 +32,13 @@ public class Mech_Controller : MonoBehaviour
 
     public void FR(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionX = 1; }
+            if (ctx.canceled) { gunDirectionX = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
@@ -38,6 +46,13 @@ public class Mech_Controller : MonoBehaviour
     }
     public void BR(InputAction.CallbackContext ctx)
     {
+        if (isAiming) 
+        {
+            if (ctx.performed) { gunDirectionX = -1; }
+            if (ctx.canceled) { gunDirectionX = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
@@ -45,6 +60,13 @@ public class Mech_Controller : MonoBehaviour
     }
     public void FL(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionY = 1; }
+            if (ctx.canceled) { gunDirectionY = 0; }
+            return;
+        }
+
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
@@ -52,6 +74,12 @@ public class Mech_Controller : MonoBehaviour
     }
     public void BL(InputAction.CallbackContext ctx)
     {
+        if (isAiming)
+        {
+            if (ctx.performed) { gunDirectionY = -1; }
+            if (ctx.canceled) { gunDirectionY = 0; }
+            return;
+        }
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
         if (ctx.performed && !isSkidding) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }

@@ -15,14 +15,16 @@ public class CameraSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.qKey.isPressed)
         {
+            GetComponent<Mech_Controller>().isAiming = false;
             cameraList[0].enabled = false;
             cameraList[1].enabled = true;
         }
 
         if (Keyboard.current.enterKey.isPressed)
         {
+            GetComponent<Mech_Controller>().isAiming = true;
             cameraList[1].enabled = false;
             cameraList[0].enabled = true;
         }
