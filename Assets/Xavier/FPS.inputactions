@@ -92,8 +92,30 @@
                 },
                 {
                     "name": "",
+                    "id": "996893fe-de0d-4856-82d9-b8f647462caa",
+                    "path": "<ArduinoDevice>/Button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Front_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c070afec-1aed-41d2-890d-d223656a8515",
                     "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Front_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c3c2fa0-9569-4a8c-bcbf-0f62fcf8d0df",
+                    "path": "<ArduinoDevice>/Button14",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -114,8 +136,30 @@
                 },
                 {
                     "name": "",
+                    "id": "99373592-ff53-4a14-97b8-86c2654441e2",
+                    "path": "<ArduinoDevice>/Button15",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "800a0a0c-42eb-491b-9f8d-0b2aebd4c7e4",
                     "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6fc0b11-de55-4f53-b4af-025fd6a3bee9",
+                    "path": "<ArduinoDevice>/Button12",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
