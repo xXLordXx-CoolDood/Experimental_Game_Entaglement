@@ -10,7 +10,7 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines;
+    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public bool isAiming = true;
@@ -21,7 +21,7 @@ public class Mech_Controller : MonoBehaviour
     private Vector3 skidDir;
     private int activeLegs = 0, gunDirectionX, gunDirectionY;
     private float _skidMultiplier, tiltMultiplier, timer, direction;
-    private bool kneeling, stumbled;
+    private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
 
@@ -155,6 +155,12 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        RaycastHit hit;
+        if ((Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) && FRAnim.GetBool("Forward")) ||
+            (Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer) && !FRAnim.GetBool("Forward"))) 
+        { blocked = true; }
+        else { blocked = false; }
+
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90); //Gun Left/Right
         gunYaw.Rotate(new Vector3(-1, 0, 0), gunDirectionX * 30 * Time.deltaTime); //Gun Up/Down
 
@@ -297,6 +303,8 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
+        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetTrigger("Next_State"); return; }
+
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
             anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
