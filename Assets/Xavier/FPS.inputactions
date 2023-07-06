@@ -358,6 +358,39 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "Arduino Shoot",
+                    "id": "a3c0fe59-ba54-42cc-a917-4aab63803f2d",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "568f2fe1-2bdf-4dc9-858f-a8cc423b0a65",
+                    "path": "<ArduinoDevice>/Button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "ef886a25-f219-47a1-b9cc-2be4ce340adb",
+                    "path": "<ArduinoDevice>/Button11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "1D Axis",
                     "id": "71cb4438-f31f-4f42-953e-9409c268cd0c",
                     "path": "1DAxis",
