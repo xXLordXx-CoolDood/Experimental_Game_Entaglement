@@ -35,6 +35,15 @@ public class ArduinoHandler : MonoBehaviour
         }
     }
 
+    public static void LightOn() {
+        outgoingMsg = "stumble";
+    }
+
+    public static void LightOff()
+    {
+        outgoingMsg = "off";
+    }
+
     private void OnDestroy()
     {
         // Closes the thread and serial port when the game ends

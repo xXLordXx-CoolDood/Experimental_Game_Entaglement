@@ -1,6 +1,6 @@
 
-int buttons[] = {1,2,3,4,5,6,7,8};
-int potentiometers[] = {9,10,11,12,13,14,15,16};
+bool led;
+
 void setup() {
   Serial.begin(9600);
 
@@ -25,6 +25,26 @@ void setup() {
   
 }
 void loop() {
+  if(Serial.available() > 0){
+    int read = Serial.read();
+    if (read >= 0)
+    {
+      if(!strcmp(read, "stumble"))
+      {
+        digitalWrite(13, HIGH);
+      }
+      else{
+        digitalWrite(13, LOW);
+      }
+    }
+  }
+  if(led){
+    digitalWrite(13, HIGH);
+  }
+  else{
+    digitalWrite(13, LOW);
+  }
+
   uint32_t input = 0;
     
   input |= digitalButton(input, 2);
