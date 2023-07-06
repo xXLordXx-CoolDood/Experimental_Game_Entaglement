@@ -74,7 +74,7 @@ Material:
     - _SnowDepth: 0.7
     - _SnowScale: 100
     - _SnowSparkles: 64
-    - _VertexOffset: 1
+    - _VertexOffset: 0
     - _VertexOffsetSubtract: 1.1
     - _VertexPatternScale: 100
     m_Colors:
