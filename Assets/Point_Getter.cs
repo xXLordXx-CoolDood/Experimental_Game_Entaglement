@@ -16,6 +16,7 @@ public class Point_Getter : MonoBehaviour
 
     public void GetPoints(int _points, GameObject _object)
     {
+        Debug.Log(_points);
         points += _points;
         scoreText.text = $"Score - {points}pts";
         Destroy(_object);

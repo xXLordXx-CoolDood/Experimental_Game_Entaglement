@@ -8,7 +8,8 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    [SerializeField] Camera[] cameraList;   
+    [SerializeField] Camera[] cameraList;
+    [SerializeField] GameObject gunUI;
 
     void Update()
     {
@@ -22,5 +23,8 @@ public class CameraSwitcher : MonoBehaviour
         int index = Array.IndexOf(cameraList, Array.Find(cameraList, x => x.enabled));
         cameraList[index].enabled = false;
         cameraList[(index + 1)  % cameraList.Length].enabled = true;
+
+        if (cameraList[0].enabled) { gunUI.SetActive(true); }
+        else { gunUI.SetActive(false); }
     }
 }

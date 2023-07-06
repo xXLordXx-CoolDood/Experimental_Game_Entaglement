@@ -8,7 +8,7 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, gunYaw, shotSpawn, chest, waist;
+    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public bool isAiming = true;
@@ -131,8 +131,9 @@ public class Mech_Controller : MonoBehaviour
 
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !isSkidding) { 
-            if(mechGun.isReadyToShoot) {
+        if (ctx.performed && !isSkidding) {
+            ShootGun();
+            if (mechGun.isReadyToShoot) {
                 ShootGun(); 
                 //Reset sequence in MechGun
                 mechGun.GenerateSequence();
@@ -150,7 +151,10 @@ public class Mech_Controller : MonoBehaviour
 
         float rot = gunYaw.eulerAngles.x - 180;
 
-        if(rot > -170 && rot < 0) { rot = -170; }
+        if(rot * 1.25f > 0) { heightLines.localPosition = new Vector3(0, (rot * 1.25f) - 225, 0); }
+        else { heightLines.localPosition = new Vector3(0, (rot * 1.25f) + 225, 0); }
+
+        if (rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
         gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
         
@@ -308,8 +312,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void ShootGun()
     {
-        GameObject _bullet = Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
-        _bullet.GetComponent<Rigidbody>().AddForce(shotSpawn.forward * 10, ForceMode.Impulse);
+        GetComponent<CameraSwitcher>().CycleCamera();
 
         //Calculate shot backward angle
         float angle = gun.eulerAngles.y;
@@ -324,7 +327,12 @@ public class Mech_Controller : MonoBehaviour
         if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace Right"); }
         if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace Left"); }
 
-        
+        RaycastHit hit;
+        if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.GetComponent<Score>() && hit.collider.tag != "Points")
+        {
+            GetComponent<Point_Getter>().GetPoints(hit.collider.GetComponent<Score>().value, hit.collider.gameObject);
+            Destroy(hit.collider.gameObject);
+        }
 
     }
 
