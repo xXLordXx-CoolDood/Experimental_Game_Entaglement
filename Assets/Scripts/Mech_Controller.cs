@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Mech_Controller : MonoBehaviour
 {
@@ -132,7 +133,7 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isSkidding) {
-            ShootGun();
+            mechGun.GenerateSequence();
             if (mechGun.isReadyToShoot) {
                 ShootGun(); 
                 //Reset sequence in MechGun
@@ -189,7 +190,7 @@ public class Mech_Controller : MonoBehaviour
 
         if(direction != 0) { UpdateDirectionRotations(); }
  
-        CheckForStumbling();
+        HandleUI();
     }
 
     #region UpdateFunctions
@@ -273,7 +274,7 @@ public class Mech_Controller : MonoBehaviour
         prevPosition = currentPos; 
     }
 
-    private void CheckForStumbling()
+    private void HandleUI()
     {
 
     }
