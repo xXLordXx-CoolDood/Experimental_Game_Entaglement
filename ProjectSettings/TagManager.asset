@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - GroundCheck
+  - Points
   layers:
   - Default
   - TransparentFX
