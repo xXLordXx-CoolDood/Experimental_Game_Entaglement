@@ -151,8 +151,8 @@ public class Mech_Controller : MonoBehaviour
 
         float rot = gunYaw.eulerAngles.x - 180;
 
-        if(rot * 1.25f > 0) { heightLines.localPosition = new Vector3(0, (rot * 1.25f) - 225, 0); }
-        else { heightLines.localPosition = new Vector3(0, (rot * 1.25f) + 225, 0); }
+        if(rot * 1.25f > 0) { heightLines.localPosition = new Vector3(0, (rot * 1.5f) - 270, 0); }
+        else { heightLines.localPosition = new Vector3(0, (rot * 1.5f) + 270, 0); }
 
         if (rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
