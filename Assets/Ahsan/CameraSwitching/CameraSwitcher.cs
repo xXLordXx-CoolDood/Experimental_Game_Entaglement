@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class CameraSwitcher : MonoBehaviour
 {
@@ -15,16 +18,15 @@ public class CameraSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            cameraList[0].enabled = false;
-            cameraList[1].enabled = true;
+            CycleCamera();
         }
+    }
 
-        if (Keyboard.current.enterKey.isPressed)
-        {
-            cameraList[1].enabled = false;
-            cameraList[0].enabled = true;
-        }
+    public void CycleCamera() {
+        int index = Array.IndexOf(cameraList, Array.Find(cameraList, x => x.enabled));
+        cameraList[index].enabled = false;
+        cameraList[(index + 1)  % cameraList.Length].enabled = true;
     }
 }
