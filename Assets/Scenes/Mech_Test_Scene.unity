@@ -2124,6 +2124,70 @@ PrefabInstance:
       propertyPath: heightLines
       value: 
       objectReference: {fileID: 932416089}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: c9cd3c44-6702-467c-bd98-14c4b6d91464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: d7c7c081-ae28-48e7-acab-dc4cb75502d8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 481d18a6-9b9b-4d80-a6b6-571b3399bd95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: 998dcf98-293a-43cb-82fe-506537bbab1f
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: DogMech/GunSwitchOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: DogMech/GunSwitchTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: DogMech/GunSwitchThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: DogMech/SwitchCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1697465691348680709}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Switch_Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Mech_Controller, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: gunUI
       value: 
@@ -2194,3 +2258,14 @@ PrefabInstance:
       objectReference: {fileID: 11110889}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+--- !u!114 &1697465691348680709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+  m_PrefabInstance: {fileID: 1697465691348680708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859878107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a555d62b886e6e64297952e953612b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
