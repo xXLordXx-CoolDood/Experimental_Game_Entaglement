@@ -157,6 +157,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Arduino",
+                    "id": "52f56b82-299f-4583-8401-587cd87fce07",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b3fdd0c5-8a27-4996-b60e-df47db9cc2ee",
+                    "path": "<ArduinoDevice>/Button16",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "99f1e3ed-70d3-41ed-afd7-0a27600fc9b6",
+                    "path": "<ArduinoDevice>/Button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "9cda9db3-429c-4fcc-aa65-d1a34f60db13",
                     "path": "<Keyboard>/r",
