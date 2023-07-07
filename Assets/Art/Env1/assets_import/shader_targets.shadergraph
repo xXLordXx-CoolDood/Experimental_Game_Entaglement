@@ -26,6 +26,9 @@
         },
         {
             "m_Id": "4ef8d47b1d084e62945afe0a1aeefe03"
+        },
+        {
+            "m_Id": "80995ef80dd249feafa91d591e7c31d6"
         }
     ],
     "m_Keywords": [],
@@ -2491,6 +2494,9 @@
         },
         {
             "m_Id": "640c1bcd7782433aa77437005905c9ae"
+        },
+        {
+            "m_Id": "80995ef80dd249feafa91d591e7c31d6"
         }
     ]
 }
@@ -2974,6 +2980,33 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "80995ef80dd249feafa91d591e7c31d6",
+    "m_Guid": {
+        "m_GuidSerialized": "9a57ef97-dc08-441d-88cb-ade65fd59a25"
+    },
+    "m_Name": "HueShift",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "HueShift",
+    "m_DefaultReferenceName": "_HueShift",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "848a17a9cf7543a9987d25f5282a5e61",
@@ -3145,10 +3178,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1766.0001220703125,
-            "y": 230.9999542236328,
-            "width": 158.0001220703125,
-            "height": 34.00007629394531
+            "x": -1988.0001220703125,
+            "y": 240.6666717529297,
+            "width": 158.6666259765625,
+            "height": 36.00001525878906
         }
     },
     "m_Slots": [

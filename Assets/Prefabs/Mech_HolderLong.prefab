@@ -253,20 +253,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -628,20 +639,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -1069,20 +1091,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -1758,20 +1791,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -2461,6 +2505,7 @@ MonoBehaviour:
       Data4: -1888562377
     Path: event:/Mech/MECH_EXPLODE
   prevPosition: {x: 0, y: 0}
+  gunLaser: {fileID: 0}
   isSkidding: 0
 --- !u!114 &6997947681377588121
 MonoBehaviour:
@@ -2485,6 +2530,7 @@ MonoBehaviour:
   - {fileID: 6997947680391918738}
   - {fileID: 6997947680462919386}
   gunUI: {fileID: 0}
+  gunCam: 1
 --- !u!65 &6997947681377588134
 BoxCollider:
   m_ObjectHideFlags: 0

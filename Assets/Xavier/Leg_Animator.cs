@@ -11,15 +11,18 @@ public class Leg_Animator : MonoBehaviour
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
     public bool isSkidding, showDebug;
-    [SerializeField] private EventReference legActiveEvent, legInactiveEvent, legIceCrash, legSnowCrash;
+    [SerializeField] private EventReference legActiveEvent, legInactiveEvent;
+    [SerializeField] private TextureSound[] textureSounds;
 
     public Mech_Controller controllerRef;
     public bool isHeld, canMove, grounded = true;
+    private EventReference currentTerrainSfx;
     [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
 
     private Vector3 prevTargetPos = Vector3.zero, initialDir;
     private float maxLegDistance;
+    private Texture terrainType = null;
 
     void Start()
     {
@@ -65,6 +68,34 @@ public class Leg_Animator : MonoBehaviour
             SetTargetFollowState(false);
 
             controllerRef.CheckLegIdleStatus();
+
+            if (!grounded && Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
+            {
+                if(hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
+                {
+                    Vector3 terrainPos = hit.point - terrain.transform.position;
+                    Vector3 splatMapPos = new Vector3(terrainPos.x / terrain.terrainData.size.x, 0, terrainPos.z / terrain.terrainData.size.z);
+
+                    int x = Mathf.FloorToInt(splatMapPos.x * terrain.terrainData.alphamapWidth);
+                    int z = Mathf.FloorToInt(splatMapPos.z * terrain.terrainData.alphamapHeight);
+
+                    float[,,] alphaMap = terrain.terrainData.GetAlphamaps(x, z, 1, 1);
+
+                    int primaryTexture = 0;
+                    for(int i = 0; i < alphaMap.Length; i++)
+                    {
+                        if(alphaMap[0, 0, i] > alphaMap[0, 0, primaryTexture]) { primaryTexture = i; }
+                    }
+
+                    for(int i = 0; i < textureSounds.Length; i++) 
+                    { 
+                        if(textureSounds[i].texture == terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture) { currentTerrainSfx = textureSounds[i].textureSound; }
+
+                        Audio_Manager.instance.PlayOneShot(currentTerrainSfx, transform.position);
+                    }
+                }
+            }
+
             grounded = true;
             canMove = false;
         }
@@ -115,5 +146,12 @@ public class Leg_Animator : MonoBehaviour
     {
         if (active) { Audio_Manager.instance.PlayOneShot(legActiveEvent, transform.position); return; }
         Audio_Manager.instance.PlayOneShot(legInactiveEvent, transform.position);
+    }
+
+    [System.Serializable]
+    private class TextureSound
+    {
+        public Texture texture;
+        public EventReference textureSound;
     }
 }
