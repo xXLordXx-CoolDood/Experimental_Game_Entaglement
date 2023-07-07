@@ -253,20 +253,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -628,20 +639,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -1069,20 +1091,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -1758,20 +1791,31 @@ MonoBehaviour:
       Data3: 39411892
       Data4: -1852454881
     Path: event:/Mech/Legs/Leg_InActive
-  legIceCrash:
-    Guid:
-      Data1: -1250534114
-      Data2: 1302691139
-      Data3: 829765001
-      Data4: -1552851892
-    Path: event:/Mech/Legs/Footstep_Ice
-  legSnowCrash:
-    Guid:
-      Data1: -412303873
-      Data2: 1225023239
-      Data3: -866977404
-      Data4: -1345976556
-    Path: event:/Mech/Legs/Footstep_Snow
+  textureSounds:
+  - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
+    textureSound:
+      Guid:
+        Data1: -1250534114
+        Data2: 1302691139
+        Data3: 829765001
+        Data4: -1552851892
+      Path: event:/Mech/Legs/Footstep_Ice
+  - texture: {fileID: 2800000, guid: c2240bc8589022e45b9c74fd9d576389, type: 3}
+    textureSound:
+      Guid:
+        Data1: 622976859
+        Data2: 1219397409
+        Data3: -547169136
+        Data4: 86719790
+      Path: event:/Mech/Legs/Footstep_Rock
+  - texture: {fileID: 2800000, guid: c207153c2d2f1b741a0d838e310a8c70, type: 3}
+    textureSound:
+      Guid:
+        Data1: -412303873
+        Data2: 1225023239
+        Data3: -866977404
+        Data4: -1345976556
+      Path: event:/Mech/Legs/Footstep_Snow
   controllerRef: {fileID: 6997947681377588123}
   isHeld: 0
   canMove: 0
@@ -1940,6 +1984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mech: {fileID: 6997947681377588125}
+  cameraFollow: {fileID: 0}
+  initialCamera: {fileID: 0}
 --- !u!1 &6997947680890614619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,10 +2425,6 @@ MonoBehaviour:
     m_ActionName: DogMech/GunSwitchOne
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d7c7c081-ae28-48e7-acab-dc4cb75502d8
-    m_ActionName: DogMech/GunSwitchTwo
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 481d18a6-9b9b-4d80-a6b6-571b3399bd95
     m_ActionName: DogMech/GunSwitchThree
   - m_PersistentCalls:
@@ -2401,6 +2443,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 998dcf98-293a-43cb-82fe-506537bbab1f
     m_ActionName: DogMech/SwitchCamera
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ff00fd1-b2b1-4275-91a2-0edc13a6dd54
+    m_ActionName: DogMech/GunSwitchTwo
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12957ea3-3523-430e-bdeb-5d9cc68661f0
+    m_ActionName: Splat/GunSwitchThree
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0287b772-871a-4c4e-83b1-a2c94c5ee884
+    m_ActionName: Splat/GunSwitchTwo
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: caf430ba-2439-4f93-9478-c9e34a141110
+    m_ActionName: Splat/GunSwitchOne
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de160697-3b67-4a65-91f5-99d395c175b1
+    m_ActionName: Splat/Shoot[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DogMech
@@ -2428,6 +2490,7 @@ MonoBehaviour:
   BRAnim: {fileID: 6997947681100170080}
   FLAnim: {fileID: 6997947681688313281}
   BLAnim: {fileID: 6997947681511017710}
+  gunAnim: {fileID: 4196801243959665369}
   gun: {fileID: 7436100209350573521}
   gunYaw: {fileID: 5444604156041084691}
   shotSpawn: {fileID: 6997947681667819710}
@@ -2461,6 +2524,7 @@ MonoBehaviour:
       Data4: -1888562377
     Path: event:/Mech/MECH_EXPLODE
   prevPosition: {x: 0, y: 0}
+  gunLaser: {fileID: 0}
   isSkidding: 0
 --- !u!114 &6997947681377588121
 MonoBehaviour:
@@ -2485,6 +2549,7 @@ MonoBehaviour:
   - {fileID: 6997947680391918738}
   - {fileID: 6997947680462919386}
   gunUI: {fileID: 0}
+  gunCam: 1
 --- !u!65 &6997947681377588134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2987,6 +3052,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5442560439207060530, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.000000001406779
+      objectReference: {fileID: 0}
+    - target: {fileID: -5442560439207060530, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1398102
+      objectReference: {fileID: 0}
+    - target: {fileID: -5442560439207060530, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.500552
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
       propertyPath: m_Name
       value: mech_body
@@ -3074,6 +3151,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8777548759749743946, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
   m_PrefabInstance: {fileID: 6997947679963502439}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7916445818795813430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c430d7bf9d474bc4d92148e025a982fb, type: 3}
+  m_PrefabInstance: {fileID: 6997947679963502439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4196801243959665369
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916445818795813430}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 55322e6c97f88364ea8c029c7d586583, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6997947680752697325
 PrefabInstance:
   m_ObjectHideFlags: 0

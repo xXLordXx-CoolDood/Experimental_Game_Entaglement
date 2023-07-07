@@ -98,7 +98,7 @@
                 {
                     "name": "GunSwitchTwo",
                     "type": "Value",
-                    "id": "d7c7c081-ae28-48e7-acab-dc4cb75502d8",
+                    "id": "8ff00fd1-b2b1-4275-91a2-0edc13a6dd54",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -467,39 +467,6 @@
                 },
                 {
                     "name": "1D Axis",
-                    "id": "2dbca9f2-4fe0-46d5-ac98-0048fc5bc433",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GunSwitchTwo",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "d90b0ff7-1ca0-4681-b96d-dfd9b3119e1c",
-                    "path": "<ArduinoDevice>/Button5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GunSwitchTwo",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "2efb80f9-1566-41ce-86db-5572c7898d02",
-                    "path": "<ArduinoDevice>/Button6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GunSwitchTwo",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
                     "id": "885401dd-9fc9-4ac9-a58d-5a066f6a079f",
                     "path": "1DAxis",
                     "interactions": "",
@@ -574,6 +541,226 @@
                     "action": "SwitchCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "a090ed74-eabc-4792-ae4d-f4b7f8d9bcce",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ca5c10cc-ea90-49cb-bc1c-3285b91442da",
+                    "path": "<ArduinoDevice>/Button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "976d9b5c-03c7-486f-8341-b90ba8027414",
+                    "path": "<ArduinoDevice>/Button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Splat",
+            "id": "0b4b7cb3-9940-40e2-9573-95f4a5c90b2c",
+            "actions": [
+                {
+                    "name": "GunSwitchThree",
+                    "type": "Value",
+                    "id": "12957ea3-3523-430e-bdeb-5d9cc68661f0",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GunSwitchTwo",
+                    "type": "Value",
+                    "id": "0287b772-871a-4c4e-83b1-a2c94c5ee884",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GunSwitchOne",
+                    "type": "Value",
+                    "id": "caf430ba-2439-4f93-9478-c9e34a141110",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "de160697-3b67-4a65-91f5-99d395c175b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "daf63ff6-ff48-4876-8bb7-5dea2c21da0e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Arduino Shoot",
+                    "id": "ebc72aa8-a906-4111-9fa6-457bf753343a",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "9a2eeadb-d945-405e-816e-23878a4fef95",
+                    "path": "<ArduinoDevice>/Button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "f84676ac-81b9-4b4b-a4ba-c9cff3a27714",
+                    "path": "<ArduinoDevice>/Button11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "0704db36-10c9-4cb0-a6dd-9390b956fc19",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchOne",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e560e436-ef56-4db2-a797-788836c138c4",
+                    "path": "<ArduinoDevice>/Button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchOne",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "c7219125-9894-4bb8-91df-dc19f96e0f9e",
+                    "path": "<ArduinoDevice>/Button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchOne",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "10d4f1e2-4397-4430-9875-9860eb53957e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "95ebdde1-07af-4fa4-8bb3-872622cd454e",
+                    "path": "<ArduinoDevice>/Button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9c1615d3-e817-4053-bd4e-59c7ed6a0c2c",
+                    "path": "<ArduinoDevice>/Button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f921d45a-7589-4d3a-ad90-291b04114c0f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchThree",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4ce47d34-6798-441b-a48e-d79a5d3e7def",
+                    "path": "<ArduinoDevice>/Button7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchThree",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "baac3145-bd04-46f9-b5b7-e889af38e722",
+                    "path": "<ArduinoDevice>/Button8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunSwitchThree",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

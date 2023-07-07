@@ -11,7 +11,7 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim;
     public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
@@ -47,7 +47,7 @@ public class Mech_Controller : MonoBehaviour
 
     public void Gun2(InputAction.CallbackContext ctx)
     {
-        mechGun.gun2 = ctx.ReadValue<float>();
+        mechGun.gun2 = ctx.ReadValue<float>(); 
     }
 
     public void Gun3(InputAction.CallbackContext ctx)
@@ -331,8 +331,12 @@ public class Mech_Controller : MonoBehaviour
 
     private void ShootGun()
     {
+        gunAnim.SetTrigger("Shoot");
         GetComponent<CameraSwitcher>().CycleCamera();
         isAiming = false;
+        isSkidding = true;
+        stumbled = true;
+        Debug.Log($"Stumbled = {stumbled}");
         Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
         gunLaser.SendEvent("MechShot");
 
@@ -341,8 +345,6 @@ public class Mech_Controller : MonoBehaviour
 
         _skidMultiplier = skidStrength;
         skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
-        isSkidding = true;
-        stumbled = true;
 
         if (angle > 240 && angle < 300) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Brace Back"); }
         if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace Front"); }
@@ -360,7 +362,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void Splat()
     {
-        GameObject newMech = Instantiate(splatMech, transform.position, transform.rotation);
+        GameObject newMech = Instantiate(splatMech, transform.position + new Vector3(0, 03f, 0), transform.rotation);
         Audio_Manager.instance.PlayOneShot(explodeEvent, transform.position);
 
         List<Transform> children = new List<Transform>(0);
@@ -373,8 +375,8 @@ public class Mech_Controller : MonoBehaviour
         int c = 0;
         foreach(Transform trans in children)
         {
-            newMech.transform.GetChild(c).position = trans.position;
-            newMech.transform.GetChild(c).rotation = trans.rotation;
+            newMech.transform.GetChild(c).localPosition = trans.localPosition;
+            newMech.transform.GetChild(c).localPosition = trans.localPosition;
             c++;
         }
 
