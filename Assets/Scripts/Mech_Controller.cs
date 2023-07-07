@@ -11,7 +11,7 @@ public class Mech_Controller : MonoBehaviour
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
     public Animator FRAnim, BRAnim, FLAnim, BLAnim;
-    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck;
+    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public bool isAiming = true;
@@ -141,7 +141,7 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.performed && !isSkidding) {
             ShootGun();
-            if (mechGun.isReadyToShoot) {
+            if (mechGun.isReadyToShoot && GetComponent<CameraSwitcher>().cameraList[1].enabled) {
                 ShootGun(); 
                 //Reset sequence in MechGun
                 mechGun.GenerateSequence();
@@ -174,6 +174,8 @@ public class Mech_Controller : MonoBehaviour
         if (rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
         gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
+
+        gunRotIndicator.Rotate(new Vector3(0, 0, 1), gunDirectionY * 60 * Time.deltaTime);
         #endregion
 
         if (_skidMultiplier > 0) { 
@@ -327,6 +329,7 @@ public class Mech_Controller : MonoBehaviour
     private void ShootGun()
     {
         GetComponent<CameraSwitcher>().CycleCamera();
+        isAiming = false;
         Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
 
         //Calculate shot backward angle

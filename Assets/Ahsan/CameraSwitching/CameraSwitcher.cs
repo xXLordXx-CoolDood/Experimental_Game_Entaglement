@@ -10,7 +10,7 @@ using FMODUnity;
 public class CameraSwitcher : MonoBehaviour
 {
     [SerializeField] private EventReference camSwitchSound;
-    [SerializeField] Camera[] cameraList;
+    public Camera[] cameraList;
     [SerializeField] GameObject gunUI;
 
     void Update()
@@ -28,7 +28,7 @@ public class CameraSwitcher : MonoBehaviour
         cameraList[index].enabled = false;
         cameraList[(index + 1)  % cameraList.Length].enabled = true;
 
-        if (cameraList[0].enabled) { gunUI.SetActive(true); }
-        else { gunUI.SetActive(false); }
+        if (cameraList[1].enabled) { gunUI.SetActive(true); GetComponent<Mech_Controller>().isAiming = true; Debug.Log("Aiming enabled"); }
+        else { gunUI.SetActive(false); GetComponent<Mech_Controller>().isAiming = false; }
     }
 }

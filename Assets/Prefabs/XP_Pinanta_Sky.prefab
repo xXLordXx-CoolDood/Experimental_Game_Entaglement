@@ -112,6 +112,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 100
+  matList:
+  - {fileID: 2100000, guid: 424c50ee1d7384a41b9619eb8016ebef, type: 2}
+  - {fileID: 2100000, guid: 4c28b5eaec8bd664bbd2c9cc73fe7808, type: 2}
+  - {fileID: 2100000, guid: 13f0f1f97f05cdc48891d8226e0ad154, type: 2}
+  - {fileID: 2100000, guid: 71ed7f43a3644e749824dfda41e2e9de, type: 2}
+  - {fileID: 2100000, guid: 2cac855a958643c4d9f943a2ab5a698e, type: 2}
 --- !u!54 &219479428194841920
 Rigidbody:
   m_ObjectHideFlags: 0
