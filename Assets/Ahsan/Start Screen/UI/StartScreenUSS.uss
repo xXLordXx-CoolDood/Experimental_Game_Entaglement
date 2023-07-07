@@ -1,0 +1,23 @@
+.background {
+    background-color: rgba(96, 96, 96, 0.5);
+}
+
+.title {
+    color: rgba(255, 255, 255, 255);
+}
+
+.highScoreTitle {
+    color: rgba(255, 255, 255, 255);
+}
+
+.highScoreList {
+    color: rgba(255, 255, 255, 255);
+}
+
+.startMessageContainer {
+    color: rgba(255, 255, 255, 255);
+}
+
+.startMessageText {
+    color: rgba(255, 255, 255, 255);
+}
