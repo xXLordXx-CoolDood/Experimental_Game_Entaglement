@@ -70,7 +70,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FLLeg.isHeld && !BRLeg.isHeld) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
         else if(ctx.performed && isSkidding) { FRLeg.isHeld = true; activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
@@ -84,7 +84,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BLLeg.isHeld && !FRLeg.isHeld) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BRLeg.isHeld = true; activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
@@ -98,7 +98,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FRLeg.isHeld && !BLLeg.isHeld) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { FLLeg.isHeld = true; activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
@@ -111,7 +111,7 @@ public class Mech_Controller : MonoBehaviour
         }
         if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
 
-        if (ctx.performed && !isSkidding) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BRLeg.isHeld && !FLLeg.isHeld) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BLLeg.isHeld = true; activeLegs++; }
     }
     public void Reverse(InputAction.CallbackContext ctx)
@@ -199,7 +199,7 @@ public class Mech_Controller : MonoBehaviour
 
         if (stumbled) { return; }
 
-        CheckLegCombos();
+        //CheckLegCombos();
         UpdateBodyPosition();
         UpdateBodyRotation();
 
@@ -220,30 +220,30 @@ public class Mech_Controller : MonoBehaviour
         FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
     }
 
-    private void CheckLegCombos()
-    {
-        kneeling = false;
+    //private void CheckLegCombos()
+    //{
+    //    kneeling = false;
 
-        #region sitLogic
-        //If both back legs are active(rising with rise tag) instead force them to sit.
-        if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BRAnim.GetBool("LegDown") && BLAnim.GetBool("LegDown"))
-        {
-            BRAnim.SetFloat("Speed_Multiplier", -1);
-            BLAnim.SetFloat("Speed_Multiplier", -1);
-            tiltMultiplier += Time.deltaTime * -15;
-            kneeling = true;
-        }
-        else if (FRAnim.GetBool("LegDown") && FLAnim.GetBool("LegDown") && FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
-        {
-            FRAnim.SetFloat("Speed_Multiplier", -1);
-            FLAnim.SetFloat("Speed_Multiplier", -1);
-            tiltMultiplier += Time.deltaTime * 15;
-            kneeling = true;
-        }
+    //    #region sitLogic
+    //    //If both back legs are active(rising with rise tag) instead force them to sit.
+    //    if (BRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && BRAnim.GetBool("LegDown") && BLAnim.GetBool("LegDown"))
+    //    {
+    //        BRAnim.SetFloat("Speed_Multiplier", -1);
+    //        BLAnim.SetFloat("Speed_Multiplier", -1);
+    //        tiltMultiplier += Time.deltaTime * -15;
+    //        kneeling = true;
+    //    }
+    //    else if (FRAnim.GetBool("LegDown") && FLAnim.GetBool("LegDown") && FRAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && FLAnim.GetCurrentAnimatorStateInfo(0).IsTag("Rise"))
+    //    {
+    //        FRAnim.SetFloat("Speed_Multiplier", -1);
+    //        FLAnim.SetFloat("Speed_Multiplier", -1);
+    //        tiltMultiplier += Time.deltaTime * 15;
+    //        kneeling = true;
+    //    }
 
-        tiltMultiplier = Mathf.Clamp(tiltMultiplier, -15, 15);
-        #endregion
-    }
+    //    tiltMultiplier = Mathf.Clamp(tiltMultiplier, -15, 15);
+    //    #endregion
+    //}
 
     private void UpdateBodyPosition() {
         float averageX = (FRLeg.targetPoint.position.x + BRLeg.targetPoint.position.x + FLLeg.targetPoint.position.x + BLLeg.targetPoint.position.x) / 4;
@@ -381,6 +381,7 @@ public class Mech_Controller : MonoBehaviour
         //If all legs are grounded or idling, set all legs to idle state
         if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
         {
+            Debug.Log("Idle");
             IdleAllLegs();
         }
     }

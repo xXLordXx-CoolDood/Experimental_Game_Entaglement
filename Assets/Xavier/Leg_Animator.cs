@@ -36,7 +36,7 @@ public class Leg_Animator : MonoBehaviour
     void LateUpdate()
     {
         if (!isHeld) { CheckForGround(); return; }
-
+        grounded = false;
         //RotateAnkleBone();
     }
 
@@ -52,11 +52,13 @@ public class Leg_Animator : MonoBehaviour
 
     public void CheckForGround()
     {
+        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position));
+
         initialDir.Normalize();
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
         
         RaycastHit hit;
-        if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
+        if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer)) //Initial check to see if we need to apply leg gravity
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
@@ -65,10 +67,17 @@ public class Leg_Animator : MonoBehaviour
             grounded = true;
             canMove = false;
         }
-        else
+        else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
             grounded = false;
             ApplyGravity();
+        }
+        else //If we did clip through the ground, ground the leg back on top
+        {
+            SetTargetFollowState(false);
+            Debug.Log("CLIPPING STOPPED");
+            grounded = true;
+            canMove = false;
         }
 
         prevTargetPos = targetPoint.position;
