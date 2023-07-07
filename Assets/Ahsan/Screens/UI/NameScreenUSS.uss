@@ -1,0 +1,9 @@
+.slot {
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 85px;
+}
+
+.selectedChar {
+    color: rgb(243, 175, 77);
+}

@@ -27,7 +27,7 @@ public class NameScreenScript: MonoBehaviour
             (elem as ListView).bindItem = bindItem;
             (elem as ListView).itemsSource = chars;
             (elem as ListView).selectionType = SelectionType.Single;
-
+            (elem as ListView).Q<ScrollView>().verticalScrollerVisibility = ScrollerVisibility.Hidden;
         });
     }
 
