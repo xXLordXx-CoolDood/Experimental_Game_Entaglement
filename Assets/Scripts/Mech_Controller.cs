@@ -155,10 +155,11 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        #region //Blocked logic & gun rotation
         RaycastHit hit;
         if ((Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) && FRAnim.GetBool("Forward")) ||
             (Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer) && !FRAnim.GetBool("Forward"))) 
-        { blocked = true; }
+        { blocked = true; Debug.Log("Blocked"); }
         else { blocked = false; }
 
         gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + (gunDirectionY * 60 * Time.deltaTime), 90); //Gun Left/Right
@@ -172,7 +173,7 @@ public class Mech_Controller : MonoBehaviour
         if (rot > -170 && rot < 0) { rot = -170; }
         if(rot < 100 && rot > 0) { rot = 100; }
         gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
-        
+        #endregion
 
         if (_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidStrength * 3; }
@@ -303,21 +304,21 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetTrigger("Next_State"); return; }
+        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); return; }
 
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
 
         //If released and leg is idle in air, move leg down
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { 
-            anim.SetFloat("Speed_Multiplier", 1f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); }
 
         //If pressed and leg is falling, reverse anim to leg idle
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", true); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); }
 
         //If released and leg is rising, reverse anim to leg idle
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -1f); anim.SetBool("LegDown", false); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); }
     }
 
     private void ChangeGears(bool newState) {
@@ -373,6 +374,23 @@ public class Mech_Controller : MonoBehaviour
         }
 
         transform.parent.GetComponent<Mech_Holder>().MechDie(newMech);
+    }
+
+    public void CheckLegIdleStatus()
+    {
+        //If all legs are grounded or idling, set all legs to idle state
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
+        {
+            IdleAllLegs();
+        }
+    }
+
+    private void IdleAllLegs()
+    {
+        FRAnim.SetTrigger("Idle"); FRAnim.SetFloat("Speed_Multiplier", 1); FRAnim.ResetTrigger("Next_State");
+        FLAnim.SetTrigger("Idle"); FLAnim.SetFloat("Speed_Multiplier", 1); FLAnim.ResetTrigger("Next_State");
+        BRAnim.SetTrigger("Idle"); BRAnim.SetFloat("Speed_Multiplier", 1); BRAnim.ResetTrigger("Next_State");
+        BLAnim.SetTrigger("Idle"); BLAnim.SetFloat("Speed_Multiplier", 1); BLAnim.ResetTrigger("Next_State");
     }
 
     #endregion

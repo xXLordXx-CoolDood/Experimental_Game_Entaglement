@@ -12,7 +12,7 @@ public class Leg_Animator : MonoBehaviour
 
     public bool isSkidding, showDebug;
 
-    [HideInInspector] public PROTO_Dog_Controller controllerRef;
+    public Mech_Controller controllerRef;
     public bool isHeld, canMove, grounded = true;
     [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
@@ -35,7 +35,8 @@ public class Leg_Animator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isHeld) { CheckForGround(); }
+        if (!isHeld) { CheckForGround(); return; }
+
         //RotateAnkleBone();
     }
 
@@ -59,7 +60,8 @@ public class Leg_Animator : MonoBehaviour
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
-            
+
+            controllerRef.CheckLegIdleStatus();
             grounded = true;
             canMove = false;
         }
