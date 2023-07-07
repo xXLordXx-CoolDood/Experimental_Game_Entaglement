@@ -25,6 +25,7 @@ void setup() {
 }
 void loop() {
   if(Serial.available() > 0){
+    
     char led = Serial.read();
     if(led == '1'){
       digitalWrite(13, HIGH);

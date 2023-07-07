@@ -26,6 +26,7 @@ public class ArduinoHandler : MonoBehaviour
         {
             if (outgoingMsg != "")
             {
+                Debug.Log(outgoingMsg);
                 sp.Write(outgoingMsg);
                 outgoingMsg = "";
             }
@@ -35,7 +36,8 @@ public class ArduinoHandler : MonoBehaviour
         }
     }
 
-    public static void LightOn() {
+    public static void LightOn()
+    {
         outgoingMsg = "1";
     }
 
@@ -81,6 +83,10 @@ public class ArduinoHandler : MonoBehaviour
             {
                 //Debug.Log(inputValue.ToBinaryString());
                 arduinoDeviceState.buttons = inputValue;
+            }
+            else
+            {
+                Debug.Log(incomingMsg);
             }
 
             InputSystem.QueueStateEvent(ArduinoDevice.current, arduinoDeviceState);

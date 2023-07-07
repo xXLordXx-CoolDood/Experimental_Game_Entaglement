@@ -10,6 +10,11 @@ public class Mech_Holder : MonoBehaviour
     [SerializeField] private GameObject mech, cameraFollow, initialCamera;
     private GameObject debris;
 
+    private void Awake()
+    {
+        //StartCoroutine("StumbleLightOn");
+    }
+
     public void MechDie(GameObject _debris)
     {
         mech.SetActive(false);
@@ -49,9 +54,11 @@ public class Mech_Holder : MonoBehaviour
     {
         while (!mech.activeInHierarchy)
         {
+            Debug.Log("Flash");
             ArduinoHandler.LightOn();
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(1.0f);
             ArduinoHandler.LightOff();
+            yield return new WaitForSeconds(1.0f);
         }
         ArduinoHandler.LightOff();
     }
