@@ -550,6 +550,9 @@ MonoBehaviour:
   shotSpawn: {fileID: 1697465689252071420}
   chest: {fileID: 4644873402262099601}
   waist: {fileID: 1642720267162350259}
+  heightLines: {fileID: 0}
+  frontCheck: {fileID: 0}
+  backCheck: {fileID: 0}
   heightOffset: 2.25
   positionOffset: 1
   rotationMultiplierX: 4
@@ -576,6 +579,7 @@ MonoBehaviour:
   cameraList:
   - {fileID: 1697465690457274776}
   - {fileID: 1697465690662624208}
+  gunUI: {fileID: 0}
 --- !u!1 &1697465689535460381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1186,7 @@ GameObject:
   - component: {fileID: 1697465690457274776}
   - component: {fileID: 1697465690457274783}
   - component: {fileID: 1697465690457274782}
+  - component: {fileID: -2289882612521099354}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1288,6 +1293,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &-2289882612521099354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697465690457274780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &1697465690484329146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,6 +1835,7 @@ GameObject:
   - component: {fileID: 1697465690662624208}
   - component: {fileID: 1697465690662624215}
   - component: {fileID: 1697465690662624214}
+  - component: {fileID: 4257036969473799934}
   m_Layer: 0
   m_Name: Camera_legs
   m_TagString: Untagged
@@ -1923,6 +1942,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &4257036969473799934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697465690662624212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &1697465690725092053
 GameObject:
   m_ObjectHideFlags: 0
