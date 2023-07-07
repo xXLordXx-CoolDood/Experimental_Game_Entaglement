@@ -13,6 +13,7 @@ public class Mech_Holder : MonoBehaviour
     public void MechDie(GameObject _debris)
     {
         mech.SetActive(false);
+        StartCoroutine("StumbleLightOn");
         debris = _debris;
         GameObject cam = Instantiate(cameraFollow, debris.transform.position, debris.transform.rotation);
         Debug.Log(cam.name);
@@ -29,6 +30,7 @@ public class Mech_Holder : MonoBehaviour
         {
             if(initialCamera != null) { Destroy(initialCamera); }
             mech.SetActive(true);
+            StopCoroutine("StumbleLightOn");
             mech.GetComponent<Mech_Controller>().Respawn();
             Destroy(debris);
         }
@@ -37,9 +39,23 @@ public class Mech_Holder : MonoBehaviour
         {
             if (initialCamera != null) { Destroy(initialCamera); }
             mech.SetActive(true);
+            StopCoroutine("StumbleLightOn");
             mech.GetComponent<Mech_Controller>().Respawn();
             Destroy(debris);
         }
     }
 
+    public IEnumerator StumbleLightOn()
+    {
+        while (!mech.activeInHierarchy)
+        {
+            ArduinoHandler.LightOn();
+            yield return new WaitForSeconds(0.75f);
+            ArduinoHandler.LightOff();
+        }
+        ArduinoHandler.LightOff();
+    }
+
 }
+
+

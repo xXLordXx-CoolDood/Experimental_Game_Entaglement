@@ -310,7 +310,7 @@ public class Mech_Controller : MonoBehaviour
     public void Respawn()
     {
         stumbled = false;
-        StopCoroutine("StumbleLightOn");
+        
         prevPosition = transform.position;
     }
 
@@ -396,19 +396,9 @@ public class Mech_Controller : MonoBehaviour
         }
 
         transform.parent.GetComponent<Mech_Holder>().MechDie(newMech);
-        StartCoroutine("StumbleLightOn");
     }
 
-    public IEnumerator StumbleLightOn()
-    {
-        while(stumbled)
-        {
-            ArduinoHandler.LightOn();
-            yield return new WaitForSeconds(0.75f);
-            ArduinoHandler.LightOff();
-        }
-        ArduinoHandler.LightOff();
-    }
+    
 
     public void CheckLegIdleStatus()
     {

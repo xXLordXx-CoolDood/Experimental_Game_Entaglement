@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Ahsan/Start Screen/StartScreenUI.unity
+    path: Assets/Ahsan/Screens/Scenes/StartScreenUI.unity
     guid: 1804f2ea596d22d4f8c00f01d390d594
   - enabled: 1
     path: Assets/Scenes/Mech_Test_Scene.unity
     guid: ed121f045d03393418bd869905cecf51
   - enabled: 1
-    path: Assets/Ahsan/Start Screen/NameScreenUI.unity
+    path: Assets/Ahsan/Screens/Scenes/NameScreenUI.unity
     guid: c5d035ee676288845bf28ac9c15abfaa
   m_configObjects: {}
