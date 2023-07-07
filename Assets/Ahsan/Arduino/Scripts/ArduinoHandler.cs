@@ -36,12 +36,12 @@ public class ArduinoHandler : MonoBehaviour
     }
 
     public static void LightOn() {
-        outgoingMsg = "stumble";
+        outgoingMsg = "1";
     }
 
     public static void LightOff()
     {
-        outgoingMsg = "off";
+        outgoingMsg = "0";
     }
 
     private void OnDestroy()
