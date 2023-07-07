@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{b6b5af45-5820-4492-9b5a-d7fdc275b91f}">
 		<property name="assetPath">
-			<value>Screwdriver-003.wav</value>
+			<value>GUN-Swivel/Screwdriver-003.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

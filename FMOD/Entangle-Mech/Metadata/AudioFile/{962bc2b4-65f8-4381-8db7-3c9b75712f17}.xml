@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{962bc2b4-65f8-4381-8db7-3c9b75712f17}">
 		<property name="assetPath">
-			<value>SoundlyCar.wav</value>
+			<value>GUN-Swivel/SoundlyCar.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

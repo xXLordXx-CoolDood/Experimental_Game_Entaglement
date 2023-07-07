@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{069dee4b-2930-4c64-b7e5-69f196c7430a}">
 		<property name="assetPath">
-			<value>Kaefer-001.wav</value>
+			<value>GUN-Swivel/Kaefer-001.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
