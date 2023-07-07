@@ -11,7 +11,7 @@
                     "id": "29878668-f102-440c-9f23-70e587f5757f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1.401298E-45,pressPoint=1.401298E-45)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -69,13 +69,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Reverse",
-                    "type": "Button",
+                    "name": "Direction",
+                    "type": "Value",
                     "id": "2bbdac8f-7d29-4f25-b14e-503cbb03b323",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Shoot",
@@ -119,7 +119,7 @@
                     "id": "998dcf98-293a-43cb-82fe-506537bbab1f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.6,pressPoint=0.7)",
                     "initialStateCheck": false
                 }
             ],
@@ -138,7 +138,7 @@
                 {
                     "name": "",
                     "id": "996893fe-de0d-4856-82d9-b8f647462caa",
-                    "path": "<ArduinoDevice>/Button13",
+                    "path": "<ArduinoDevice>/Button12",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -160,7 +160,7 @@
                 {
                     "name": "",
                     "id": "1c3c2fa0-9569-4a8c-bcbf-0f62fcf8d0df",
-                    "path": "<ArduinoDevice>/Button14",
+                    "path": "<ArduinoDevice>/Button15",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -182,7 +182,7 @@
                 {
                     "name": "",
                     "id": "99373592-ff53-4a14-97b8-86c2654441e2",
-                    "path": "<ArduinoDevice>/Button15",
+                    "path": "<ArduinoDevice>/Button14",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -204,7 +204,7 @@
                 {
                     "name": "",
                     "id": "f6fc0b11-de55-4f53-b4af-025fd6a3bee9",
-                    "path": "<ArduinoDevice>/Button12",
+                    "path": "<ArduinoDevice>/Button13",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -279,15 +279,70 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "9cda9db3-429c-4fcc-aa65-d1a34f60db13",
+                    "name": "Keyboard",
+                    "id": "94068340-a125-4ca8-812a-1c87d7051b66",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b54c3b97-8e47-4b2a-8448-2fba867ff630",
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reverse",
+                    "action": "Direction",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "88f68ede-5eea-465f-bba1-14d838d433a0",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arduino",
+                    "id": "74959c88-2a60-4db1-babc-f558eea0fe2f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "175519b3-3ac9-4c3d-a450-5c1bbd1e6dbe",
+                    "path": "<ArduinoDevice>/Button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "426df4f6-ee2c-45a9-b2c8-c3607e6b6757",
+                    "path": "<ArduinoDevice>/Button9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "1D Axis",
@@ -315,39 +370,6 @@
                     "name": "positive",
                     "id": "b8f2a80c-27af-49f3-bd59-e4fbd389c285",
                     "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "20c2f62d-16e8-4504-a167-5b9752f68fd8",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Turn",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "9927a014-1831-4d87-92de-151ad55a2942",
-                    "path": "<ArduinoDevice>/Button13",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "33731470-720f-41f3-8643-947759f6faef",
-                    "path": "<ArduinoDevice>/Button14",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -425,39 +447,6 @@
                     "name": "positive",
                     "id": "7191c207-30b0-454f-88e8-883e8d1321b2",
                     "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Tilt",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "ff2fcf29-8d1f-46a7-8cec-9a7b77f60ef9",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Tilt",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "e5720d6d-5830-4d5e-ae1d-4751e25e99de",
-                    "path": "<ArduinoDevice>/Button15",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gun_Tilt",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "e4d3aad5-4148-4084-a66e-0d7b443a075f",
-                    "path": "<ArduinoDevice>/Button12",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

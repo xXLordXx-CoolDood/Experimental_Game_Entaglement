@@ -24,10 +24,10 @@ public struct ArduinoDeviceState : IInputStateTypeInfo
     [InputControl(name = "Button9", layout = "Button", bit = 8, displayName = "Forward")]
     [InputControl(name = "Button10", layout = "Button", bit = 9, displayName = "Reverse")]
     [InputControl(name = "Button11", layout = "Button", bit = 10, displayName = "Shoot Right")]
-    [InputControl(name = "Button12", layout = "Button", bit = 11, displayName = "Back Right Leg")]
-    [InputControl(name = "Button13", layout = "Button", bit = 12, displayName = "Front Left Leg")]
-    [InputControl(name = "Button14", layout = "Button", bit = 13, displayName = "Front Right Leg")]
-    [InputControl(name = "Button15", layout = "Button", bit = 14, displayName = "Back Left Leg")]
+    [InputControl(name = "Button12", layout = "Button", bit = 11, displayName = "Front Left Leg")]
+    [InputControl(name = "Button13", layout = "Button", bit = 12, displayName = "Back Right Leg")]
+    [InputControl(name = "Button14", layout = "Button", bit = 13, displayName = "Back Left Leg")]
+    [InputControl(name = "Button15", layout = "Button", bit = 14, displayName = "Front Right Leg")]
     [InputControl(name = "Button16", layout = "Button", bit = 15, displayName = "Turn Left")]
     [InputControl(name = "Button17", layout = "Button", bit = 16, displayName = "Turn Right")]
 
@@ -66,10 +66,10 @@ public class ArduinoDevice : InputDevice
     public ButtonControl forward { get; private set; }
     public ButtonControl reverse { get; private set; }
     public ButtonControl shootRight { get; private set; }
-    public ButtonControl backRight { get; private set; }
     public ButtonControl frontLeft { get; private set; }
-    public ButtonControl frontRight { get; private set; }
+    public ButtonControl backRight { get; private set; }
     public ButtonControl backLeft { get; private set; }
+    public ButtonControl frontRight { get; private set; }
     public ButtonControl turnLeft { get; private set; }
     public ButtonControl turnRight { get; private set; }
 
@@ -88,10 +88,10 @@ public class ArduinoDevice : InputDevice
         forward    = GetChildControl<ButtonControl>("Button9");
         reverse    = GetChildControl<ButtonControl>("Button10");
         shootRight = GetChildControl<ButtonControl>("Button11");
-        backRight = GetChildControl<ButtonControl>("Button12");
-        frontLeft = GetChildControl<ButtonControl>("Button13");
-        frontRight = GetChildControl<ButtonControl>("Button14");
-        backLeft = GetChildControl<ButtonControl>("Button15");
+        frontLeft = GetChildControl<ButtonControl>("Button12");
+        backRight = GetChildControl<ButtonControl>("Button13");
+        backLeft = GetChildControl<ButtonControl>("Button14");
+        frontRight = GetChildControl<ButtonControl>("Button15");
         turnLeft = GetChildControl<ButtonControl>("Button16");
         turnRight = GetChildControl<ButtonControl>("Button17");
     }

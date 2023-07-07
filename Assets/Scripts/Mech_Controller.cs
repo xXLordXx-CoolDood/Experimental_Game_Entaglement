@@ -27,6 +27,7 @@ public class Mech_Controller : MonoBehaviour
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
+    private float moveDirection;
 
     MechGun mechGun;
 
@@ -59,7 +60,10 @@ public class Mech_Controller : MonoBehaviour
 
     public void Switch_Camera(InputAction.CallbackContext ctx)
     {
-        GetComponent<CameraSwitcher>().CycleCamera();
+        if (ctx.performed)
+        {
+            GetComponent<CameraSwitcher>().CycleCamera();
+        }
     }
 
     public void FR(InputAction.CallbackContext ctx)
@@ -117,9 +121,19 @@ public class Mech_Controller : MonoBehaviour
         if (ctx.performed && !isSkidding && activeLegs < 2 && !BRLeg.isHeld && !FLLeg.isHeld) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BLLeg.isHeld = true; activeLegs++; }
     }
-    public void Reverse(InputAction.CallbackContext ctx)
+    public void Direction(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) { ChangeGears(!FRAnim.GetBool("Forward")); }
+        moveDirection = ctx.ReadValue<float>();
+
+        if (moveDirection > 0)
+        {
+            ChangeGears(true);   
+        }
+
+        if (moveDirection < 0)
+        {
+            ChangeGears(false);
+        }
     }
     public void Turn(InputAction.CallbackContext ctx)
     {
@@ -142,7 +156,6 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isSkidding) {
-            ShootGun();
             if (mechGun.isReadyToShoot && GetComponent<CameraSwitcher>().cameraList[1].enabled) {
                 ShootGun(); 
                 //Reset sequence in MechGun
@@ -303,6 +316,8 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
+        if(moveDirection == 0) { return; }
+
         if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 
         //If pressed and leg is idle, move leg up
