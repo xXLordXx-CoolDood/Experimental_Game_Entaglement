@@ -33,6 +33,11 @@ public class MechGun : MonoBehaviour
         {
             isReadyToShoot = true;
         }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            gun1 = 0; gun2 = 0; gun3 = 0;
+        }
     }
 
     
