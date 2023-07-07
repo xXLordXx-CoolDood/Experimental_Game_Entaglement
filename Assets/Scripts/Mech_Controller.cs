@@ -11,7 +11,7 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim;
     public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
@@ -331,6 +331,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void ShootGun()
     {
+        gunAnim.SetTrigger("Shoot");
         GetComponent<CameraSwitcher>().CycleCamera();
         isAiming = false;
         isSkidding = true;
