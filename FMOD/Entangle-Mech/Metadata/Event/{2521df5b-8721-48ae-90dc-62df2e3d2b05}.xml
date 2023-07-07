@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{2521df5b-8721-48ae-90dc-62df2e3d2b05}">
+		<property name="color">
+			<value>Magenta Light 2</value>
+		</property>
 		<property name="name">
 			<value>Footstep_Rock</value>
 		</property>

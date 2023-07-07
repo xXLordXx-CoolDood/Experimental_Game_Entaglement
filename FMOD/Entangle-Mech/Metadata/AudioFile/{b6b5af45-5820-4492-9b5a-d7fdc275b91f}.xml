@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b6b5af45-5820-4492-9b5a-d7fdc275b91f}">
+		<property name="assetPath">
+			<value>Screwdriver-003.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.48510416666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{15d0a97c-00e7-4db2-aea6-778facc4445a}</destination>
+		</relationship>
+	</object>
+</objects>

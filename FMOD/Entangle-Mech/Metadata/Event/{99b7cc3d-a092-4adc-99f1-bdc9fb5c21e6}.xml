@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{99b7cc3d-a092-4adc-99f1-bdc9fb5c21e6}">
+		<property name="color">
+			<value>Magenta Light 2</value>
+		</property>
 		<property name="name">
 			<value>Leg_Active</value>
 		</property>
