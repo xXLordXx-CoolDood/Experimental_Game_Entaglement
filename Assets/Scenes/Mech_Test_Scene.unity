@@ -258,6 +258,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11110887}
   m_CullTransparentMesh: 1
+--- !u!1 &14565407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14565409}
+  - component: {fileID: 14565408}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &14565408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14565407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39b0ddf843d70b4b859d54daff0afa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &14565409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14565407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -46.483917, y: 8.569995, z: -10.760057}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &222939547
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +550,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: -36.49, y: 25.79, z: -79.53}
-  m_TranslationOffset: {x: 18.912449, y: 19.71777, z: -36.698593}
+  m_TranslationOffset: {x: -29.627554, y: 19.71777, z: -12.738594}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 0
   m_AffectTranslationZ: 1
@@ -2277,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 1859878107}
 --- !u!1 &1854086747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2791,7 +2835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 1859878107}
 --- !u!1 &2075840220
 GameObject:
   m_ObjectHideFlags: 0
@@ -3045,6 +3089,46 @@ PrefabInstance:
       propertyPath: heightLines
       value: 
       objectReference: {fileID: 932416089}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: shootEvent.Path
+      value: event:/Mech/GUN/GUN_Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: explodeEvent.Path
+      value: event:/Mech/MECH_EXPLODE
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: shootEvent.Guid.Data1
+      value: 804164317
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: shootEvent.Guid.Data2
+      value: 1184440290
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: shootEvent.Guid.Data3
+      value: -1781370971
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: shootEvent.Guid.Data4
+      value: -515589497
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: explodeEvent.Guid.Data1
+      value: -200603613
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: explodeEvent.Guid.Data2
+      value: 1295937352
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: explodeEvent.Guid.Data3
+      value: -364732012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149913, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: explodeEvent.Guid.Data4
+      value: -1888562377
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465689509149914, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 13
@@ -3113,6 +3197,26 @@ PrefabInstance:
       propertyPath: gunUI
       value: 
       objectReference: {fileID: 1674053586}
+    - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: camSwitchSound.Path
+      value: event:/Other/Camera_Switching
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: camSwitchSound.Guid.Data1
+      value: 889350386
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: camSwitchSound.Guid.Data2
+      value: 1281641507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: camSwitchSound.Guid.Data3
+      value: -2123585916
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465689509149915, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: camSwitchSound.Guid.Data4
+      value: -703760480
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465689509149919, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -3125,6 +3229,86 @@ PrefabInstance:
       propertyPath: controllerRef
       value: 
       objectReference: {fileID: 1697465691348680709}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Path
+      value: event:/Mech/Legs/Footstep_Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Path
+      value: event:/Mech/Legs/Footstep_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Path
+      value: event:/Mech/Legs/Leg_Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Path
+      value: event:/Mech/Legs/Leg_InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data1
+      value: -1250534114
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data2
+      value: 1302691139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data3
+      value: 829765001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data4
+      value: -1552851892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data1
+      value: -412303873
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data2
+      value: 1225023239
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data3
+      value: -866977404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data4
+      value: -1345976556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data1
+      value: -1716007875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data2
+      value: 1255973010
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data3
+      value: -910298727
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data4
+      value: -434021125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data1
+      value: -810599273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data2
+      value: 1298944808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data3
+      value: 39411892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690019144031, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data4
+      value: -1852454881
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465690074588834, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_Name
       value: Mech_Holder
@@ -3143,7 +3327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1697465690074588835, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.72
+      value: -7.18
       objectReference: {fileID: 0}
     - target: {fileID: 1697465690074588835, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3151,7 +3335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1697465690074588835, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.23
+      value: -36.19
       objectReference: {fileID: 0}
     - target: {fileID: 1697465690074588835, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3189,17 +3373,259 @@ PrefabInstance:
       propertyPath: controllerRef
       value: 
       objectReference: {fileID: 1697465691348680709}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Path
+      value: event:/Mech/Legs/Footstep_Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Path
+      value: event:/Mech/Legs/Footstep_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Path
+      value: event:/Mech/Legs/Leg_Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Path
+      value: event:/Mech/Legs/Leg_InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data1
+      value: -1250534114
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data2
+      value: 1302691139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data3
+      value: 829765001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data4
+      value: -1552851892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data1
+      value: -412303873
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data2
+      value: 1225023239
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data3
+      value: -866977404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data4
+      value: -1345976556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data1
+      value: -1716007875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data2
+      value: 1255973010
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data3
+      value: -910298727
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data4
+      value: -434021125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data1
+      value: -810599273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data2
+      value: 1298944808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data3
+      value: 39411892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690617855167, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data4
+      value: -1852454881
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: controllerRef
       value: 
       objectReference: {fileID: 1697465691348680709}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Path
+      value: event:/Mech/Legs/Footstep_Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Path
+      value: event:/Mech/Legs/Footstep_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Path
+      value: event:/Mech/Legs/Leg_Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Path
+      value: event:/Mech/Legs/Leg_InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data1
+      value: -1250534114
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data2
+      value: 1302691139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data3
+      value: 829765001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data4
+      value: -1552851892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data1
+      value: -412303873
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data2
+      value: 1225023239
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data3
+      value: -866977404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data4
+      value: -1345976556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data1
+      value: -1716007875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data2
+      value: 1255973010
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data3
+      value: -910298727
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data4
+      value: -434021125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data1
+      value: -810599273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data2
+      value: 1298944808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data3
+      value: 39411892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465690731581927, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data4
+      value: -1852454881
+      objectReference: {fileID: 0}
     - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
       propertyPath: controllerRef
       value: 
       objectReference: {fileID: 1697465691348680709}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Path
+      value: event:/Mech/Legs/Footstep_Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Path
+      value: event:/Mech/Legs/Footstep_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Path
+      value: event:/Mech/Legs/Leg_Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Path
+      value: event:/Mech/Legs/Leg_InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data1
+      value: -1250534114
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data2
+      value: 1302691139
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data3
+      value: 829765001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legIceCrash.Guid.Data4
+      value: -1552851892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data1
+      value: -412303873
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data2
+      value: 1225023239
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data3
+      value: -866977404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legSnowCrash.Guid.Data4
+      value: -1345976556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data1
+      value: -1716007875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data2
+      value: 1255973010
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data3
+      value: -910298727
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legActiveEvent.Guid.Data4
+      value: -434021125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data1
+      value: -810599273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data2
+      value: 1298944808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data3
+      value: 39411892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697465691194718599, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+      propertyPath: legInactiveEvent.Guid.Data4
+      value: -1852454881
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1697465690662624215, guid: 5226e785badf6824194c53c33b83e825, type: 3}
     - {fileID: 1697465690457274783, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+    - {fileID: 4257036969473799934, guid: 5226e785badf6824194c53c33b83e825, type: 3}
+    - {fileID: -2289882612521099354, guid: 5226e785badf6824194c53c33b83e825, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5226e785badf6824194c53c33b83e825, type: 3}
 --- !u!114 &1697465691348680709 stripped
 MonoBehaviour:

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using FMODUnity;
 
 public class Mech_Controller : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Mech_Controller : MonoBehaviour
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10;
     public LayerMask groundLayer;
     public bool isAiming = true;
-
+    [SerializeField] private EventReference shootEvent, explodeEvent;
     [HideInInspector] public Vector2 prevPosition;
 
     private PlayerInput playerInput;
@@ -139,7 +140,7 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isSkidding) {
-            mechGun.GenerateSequence();
+            ShootGun();
             if (mechGun.isReadyToShoot) {
                 ShootGun(); 
                 //Reset sequence in MechGun
@@ -204,9 +205,7 @@ public class Mech_Controller : MonoBehaviour
         UpdateBodyRotation();
 
         if(direction != 0) { UpdateDirectionRotations(); }
- 
-        HandleUI();
-    }
+     }
 
     #region UpdateFunctions
     private void UpdateDirectionRotations()
@@ -288,11 +287,6 @@ public class Mech_Controller : MonoBehaviour
         //Update pre position
         prevPosition = currentPos; 
     }
-
-    private void HandleUI()
-    {
-
-    }
     #endregion
 
     #region CallableFunctions
@@ -304,21 +298,23 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); return; }
+        if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 
         //If pressed and leg is idle, move leg up
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
-            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); script.LegActiveStatus(true);
+        }
 
         //If released and leg is idle in air, move leg down
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid") && !held) { 
-            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); }
+            anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State");anim.SetBool("LegDown", false); script.LegActiveStatus(false);
+        }
 
         //If pressed and leg is falling, reverse anim to leg idle
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); script.LegActiveStatus(true); }
 
         //If released and leg is rising, reverse anim to leg idle
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); script.LegActiveStatus(false); }
     }
 
     private void ChangeGears(bool newState) {
@@ -331,6 +327,7 @@ public class Mech_Controller : MonoBehaviour
     private void ShootGun()
     {
         GetComponent<CameraSwitcher>().CycleCamera();
+        Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
 
         //Calculate shot backward angle
         float angle = gun.eulerAngles.y;
@@ -357,6 +354,7 @@ public class Mech_Controller : MonoBehaviour
     private void Splat()
     {
         GameObject newMech = Instantiate(splatMech, transform.position, transform.rotation);
+        Audio_Manager.instance.PlayOneShot(explodeEvent, transform.position);
 
         List<Transform> children = new List<Transform>(0);
 

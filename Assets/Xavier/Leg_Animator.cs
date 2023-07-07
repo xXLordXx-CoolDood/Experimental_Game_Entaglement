@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Leg_Animator : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class Leg_Animator : MonoBehaviour
     public float rotationMultiplier, groundCheckDistance = 1;
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
-
     public bool isSkidding, showDebug;
+    [SerializeField] private EventReference legActiveEvent, legInactiveEvent, legIceCrash, legSnowCrash;
 
     public Mech_Controller controllerRef;
     public bool isHeld, canMove, grounded = true;
@@ -108,5 +109,11 @@ public class Leg_Animator : MonoBehaviour
     { 
         if (isSkidding) { return; } 
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = newState; 
+    }
+
+    public void LegActiveStatus(bool active)
+    {
+        if (active) { Audio_Manager.instance.PlayOneShot(legActiveEvent, transform.position); return; }
+        Audio_Manager.instance.PlayOneShot(legInactiveEvent, transform.position);
     }
 }
