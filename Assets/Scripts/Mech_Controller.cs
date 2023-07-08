@@ -156,6 +156,8 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isSkidding) {
+            ShootGun();
+            mechGun.GenerateSequence();
             if (mechGun.isReadyToShoot && GetComponent<CameraSwitcher>().cameraList[1].enabled) {
                 ShootGun(); 
                 //Reset sequence in MechGun
