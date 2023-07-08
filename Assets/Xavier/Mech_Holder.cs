@@ -29,7 +29,7 @@ public class Mech_Holder : MonoBehaviour
 
     private void Update()
     {
-        if (!startupSequence) { Destroy(initialCamera); mech.SetActive(true); }
+        if (!startupSequence && initialCamera != null) { Destroy(initialCamera); mech.SetActive(true); }
 
         if (!ArduinoDevice.current.gun1down.isPressed && !ArduinoDevice.current.gun1up.isPressed &&
             !ArduinoDevice.current.gun2down.isPressed && !ArduinoDevice.current.gun2up.isPressed &&
