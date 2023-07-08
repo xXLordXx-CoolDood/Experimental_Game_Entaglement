@@ -27,7 +27,7 @@ public class Mech_Controller : MonoBehaviour
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
-    private float moveDirection;
+    private float moveDirection = 1;
 
     MechGun mechGun;
 
@@ -123,7 +123,7 @@ public class Mech_Controller : MonoBehaviour
     }
     public void Direction(InputAction.CallbackContext ctx)
     {
-        moveDirection = ctx.ReadValue<float>();
+        if (ctx.performed) { moveDirection = ctx.ReadValue<float>(); }
 
         if (moveDirection > 0)
         {
@@ -156,6 +156,8 @@ public class Mech_Controller : MonoBehaviour
     public void Gun_Shoot(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !isSkidding) {
+            ShootGun();
+            mechGun.GenerateSequence();
             if (mechGun.isReadyToShoot && GetComponent<CameraSwitcher>().cameraList[1].enabled) {
                 ShootGun(); 
                 //Reset sequence in MechGun
@@ -316,7 +318,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if(moveDirection == 0) { return; }
+        if(moveDirection == 0) { Debug.Log("Neutral"); return; }
 
         if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 

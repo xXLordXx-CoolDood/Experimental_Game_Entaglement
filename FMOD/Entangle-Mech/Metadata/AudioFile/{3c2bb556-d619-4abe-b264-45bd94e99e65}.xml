@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{3c2bb556-d619-4abe-b264-45bd94e99e65}">
 		<property name="assetPath">
-			<value>Swivel-Loop.wav</value>
+			<value>GUN-Swivel/Swivel-Loop.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

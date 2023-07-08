@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{a3a92450-5ad9-420d-9b97-607076359283}">
 		<property name="assetPath">
-			<value>Wind, General, Mountain Wind, Constant With Strong Gusts, Winter, Snowy, Cabin Area 07 (AmbiX) SND89928 2.wav</value>
+			<value>ENV/Wind, General, Mountain Wind, Constant With Strong Gusts, Winter, Snowy, Cabin Area 07 (AmbiX) SND89928 2.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

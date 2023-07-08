@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{59b770fb-a475-44ef-95c7-d8296c4d18f2}">
 		<property name="assetPath">
-			<value>Bleep Sci Fi-08-004.wav</value>
+			<value>Cockpit/Bleep/Bleep Sci Fi-08-004.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
