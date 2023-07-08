@@ -22,8 +22,8 @@ public class Mech_Controller : MonoBehaviour
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
-    private int activeLegs = 0, gunDirectionX, gunDirectionY, prevDirX, prevDirY;
-    private float _skidMultiplier, tiltMultiplier, timer, direction, moveDirection = 1, gunAccelX, gunAccelY;
+    private int activeLegs = 0, icyLegs = 0, gunDirectionX, gunDirectionY, prevDirX, prevDirY;
+    private float _skidMultiplier, _skidDecay, tiltMultiplier, timer, direction, moveDirection = 1, gunAccelX, gunAccelY;
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
@@ -74,9 +74,9 @@ public class Mech_Controller : MonoBehaviour
             return;
         }
 
-        if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); FRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FRLeg.isHeld*/) { CheckLegStatus(FRAnim, FRLeg, false); activeLegs--; }
 
-        if (ctx.performed && !isSkidding && activeLegs < 2 && !FLLeg.isHeld && !BRLeg.isHeld) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.isHeld = true; FRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FLLeg.isHeld && !BRLeg.isHeld) { CheckLegStatus(FRAnim, FRLeg, true); FRLeg.SetTargetFollowState(true); activeLegs++; }
         else if(ctx.performed && isSkidding) { FRLeg.isHeld = true; activeLegs++; }
     }
     public void BR(InputAction.CallbackContext ctx)
@@ -88,9 +88,9 @@ public class Mech_Controller : MonoBehaviour
             return;
         }
 
-        if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); BRLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BRLeg.isHeld*/) { CheckLegStatus(BRAnim, BRLeg, false); activeLegs--; }
 
-        if (ctx.performed && !isSkidding && activeLegs < 2 && !BLLeg.isHeld && !FRLeg.isHeld) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.isHeld = true; BRLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BLLeg.isHeld && !FRLeg.isHeld) { CheckLegStatus(BRAnim, BRLeg, true); BRLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BRLeg.isHeld = true; activeLegs++; }
     }
     public void FL(InputAction.CallbackContext ctx)
@@ -102,9 +102,9 @@ public class Mech_Controller : MonoBehaviour
             return;
         }
 
-        if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); FLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& FLLeg.isHeld*/) { CheckLegStatus(FLAnim, FLLeg, false); activeLegs--; }
 
-        if (ctx.performed && !isSkidding && activeLegs < 2 && !FRLeg.isHeld && !BLLeg.isHeld) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.isHeld = true; FLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !FRLeg.isHeld && !BLLeg.isHeld) { CheckLegStatus(FLAnim, FLLeg, true); FLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { FLLeg.isHeld = true; activeLegs++; }
     }
     public void BL(InputAction.CallbackContext ctx)
@@ -115,9 +115,9 @@ public class Mech_Controller : MonoBehaviour
             if (ctx.canceled) { gunDirectionY = 0; }
             return;
         }
-        if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); BLLeg.isHeld = false; activeLegs--; }
+        if (ctx.canceled /*&& BLLeg.isHeld*/) { CheckLegStatus(BLAnim, BLLeg, false); activeLegs--; }
 
-        if (ctx.performed && !isSkidding && activeLegs < 2 && !BRLeg.isHeld && !FLLeg.isHeld) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.isHeld = true; BLLeg.SetTargetFollowState(true); activeLegs++; }
+        if (ctx.performed && !isSkidding && activeLegs < 2 && !BRLeg.isHeld && !FLLeg.isHeld) { CheckLegStatus(BLAnim, BLLeg, true); BLLeg.SetTargetFollowState(true); activeLegs++; }
         else if (ctx.performed && isSkidding) { BLLeg.isHeld = true; activeLegs++; }
     }
     public void Direction(InputAction.CallbackContext ctx)
@@ -203,14 +203,14 @@ public class Mech_Controller : MonoBehaviour
         #endregion
 
         if (_skidMultiplier > 0) { 
-            if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * skidDecay * 3; }
-            _skidMultiplier -= Time.deltaTime * skidDecay;
+            if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * _skidDecay * 3; }
+            _skidMultiplier -= Time.deltaTime * _skidDecay;
         }
         if(_skidMultiplier < 0) {
-            FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
-            BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
-            FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; 
-            BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false;
+            FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; FRLeg.isSkidding = false;
+            BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; BRLeg.isSkidding = false;
+            FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; FLLeg.isSkidding = false;
+            BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = false; BLLeg.isSkidding = false;
             FRAnim.ResetTrigger("Next_State");
             FLAnim.ResetTrigger("Next_State");
             BRAnim.ResetTrigger("Next_State");
@@ -222,13 +222,15 @@ public class Mech_Controller : MonoBehaviour
             isSkidding = false; 
         }
 
-        if(isSkidding) { transform.Translate(skidDir * Time.deltaTime * (_skidMultiplier * skidDecay), Space.World); return; }
+        UpdateBodyRotation();
+
+        if (isSkidding) { UpdateBodyHeight(); transform.Translate(skidDir * Time.deltaTime * (_skidMultiplier * _skidDecay), Space.World); return; }
+
+        UpdateBodyPosition();
 
         if (stumbled) { return; }
 
         //CheckLegCombos();
-        UpdateBodyPosition();
-        UpdateBodyRotation();
 
         if(direction != 0) { UpdateDirectionRotations(); }
      }
@@ -243,6 +245,12 @@ public class Mech_Controller : MonoBehaviour
         BRAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
         FLAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
         FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+    }
+
+    private void UpdateBodyHeight()
+    {
+        float averageY = (FRLeg.legHeight + BRLeg.legHeight + FLLeg.legHeight + BLLeg.legHeight) / 4;
+        transform.position = new Vector3(transform.position.x, averageY - heightOffset, transform.position.z);
     }
 
     //private void CheckLegCombos()
@@ -327,6 +335,8 @@ public class Mech_Controller : MonoBehaviour
     {
         if(moveDirection == 0) { Debug.Log("Neutral"); return; }
 
+        script.isHeld = held;
+
         if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 
         //If pressed and leg is idle, move leg up
@@ -371,10 +381,10 @@ public class Mech_Controller : MonoBehaviour
 
         StartCoroutine(ShotDelay());
 
-        if (angle > 240 && angle < 300) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Brace Back"); }
-        if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Brace Front"); }
-        if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Brace Right"); }
-        if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Brace Left"); }
+        if (angle > 240 && angle < 300) { resistor1 = BLLeg; resistor2 = BRLeg; }
+        if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; }
+        if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; }
+        if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; }
 
         RaycastHit hit;
         if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.GetComponent<Score>() && hit.collider.tag != "Points")
@@ -409,7 +419,11 @@ public class Mech_Controller : MonoBehaviour
         transform.parent.GetComponent<Mech_Holder>().MechDie(newMech);
     }
 
-    
+    public void IcyLegUpdate(bool icy)
+    {
+        if (icy) { icyLegs = Mathf.Clamp(icyLegs + 1, 0, 4); return; }
+        icyLegs = Mathf.Clamp(icyLegs - 1, 0, 4);
+    }
 
     public void CheckLegIdleStatus()
     {
@@ -432,7 +446,12 @@ public class Mech_Controller : MonoBehaviour
     IEnumerator ShotDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        _skidMultiplier = skidStrength;
+        FRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; FRLeg.isSkidding = true;
+        BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BRLeg.isSkidding = true;
+        FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; FLLeg.isSkidding = true;
+        BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BLLeg.isSkidding = true;
+        if (icyLegs > 2) { _skidMultiplier = skidStrength * 2; _skidDecay = skidDecay * 2; }
+        else { _skidMultiplier = skidStrength; _skidDecay = skidDecay; }
     }
     #endregion
 }

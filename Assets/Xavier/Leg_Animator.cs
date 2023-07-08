@@ -39,7 +39,7 @@ public class Leg_Animator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isHeld) { CheckForGround(); return; }
+        if (!isHeld || isSkidding) { CheckForGround(); return; }
         grounded = false;
         //RotateAnkleBone();
     }
@@ -66,12 +66,12 @@ public class Leg_Animator : MonoBehaviour
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
-
             controllerRef.CheckLegIdleStatus();
 
-            if (!grounded && Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
+            //Get terrain type
+            if (!grounded && !isSkidding && Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
             {
-                if(hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
+                if (hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
                 {
                     Vector3 terrainPos = hit.point - terrain.transform.position;
                     Vector3 splatMapPos = new Vector3(terrainPos.x / terrain.terrainData.size.x, 0, terrainPos.z / terrain.terrainData.size.z);
@@ -90,9 +90,13 @@ public class Leg_Animator : MonoBehaviour
                     for(int i = 0; i < textureSounds.Length; i++) 
                     { 
                         if(textureSounds[i].texture == terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture) { currentTerrainSfx = textureSounds[i].textureSound; }
-
-                        Audio_Manager.instance.PlayOneShot(currentTerrainSfx, transform.position);
                     }
+
+                    Debug.Log("Play Footstep");
+                    Audio_Manager.instance.PlayOneShot(currentTerrainSfx, transform.position);
+
+                    if (terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture.name == "perlin_1") { controllerRef.IcyLegUpdate(true); }
+                    else { controllerRef.IcyLegUpdate(false); }
                 }
             }
 
@@ -106,8 +110,8 @@ public class Leg_Animator : MonoBehaviour
         }
         else //If we did clip through the ground, ground the leg back on top
         {
+            Debug.Log("Prevented Clip");
             SetTargetFollowState(false);
-            Debug.Log("CLIPPING STOPPED");
             grounded = true;
             canMove = false;
         }

@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
-    public Transform target;
-    public Transform mech, pivot;
+    public Transform target, mech, pivot, hipBone, groundSnap;
+    public LayerMask groundLayer;
     public LayerMask quadLayer;
 
     [SerializeField] public bool follow = true, isSkidding;
@@ -23,6 +23,8 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position), Color.red);
+
         float dirMultiplier = Mathf.Clamp(mech.GetComponent<Mech_Controller>().waist.localEulerAngles.y - 270, -1, 1);
 
         Vector3 start = transform.position + (transform.right * dirMultiplier);
@@ -37,7 +39,13 @@ public class Target_Follow : MonoBehaviour
 
         if (isSkidding)
         {
-            TryMoveToPos(target.position);
+            RaycastHit hit;
+            if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer))
+            {
+                Debug.Log($"Hit Point is {hit.point}!");
+                transform.position = new Vector3(hit.point.x, hit.point.y + (transform.position.y - groundSnap.position.y), hit.point.z);
+            }
+            else { Debug.Log("Failed to hit for some reason :/"); TryMoveToPos(target.position); }
             prevTargetPos = target.position;
             return;
         }
