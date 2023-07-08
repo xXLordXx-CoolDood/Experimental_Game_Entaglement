@@ -143,7 +143,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmmisiveColor: {r: 0, g: 0.69803923, b: 1.4980392, a: 0}
-    - _SnowColor: {r: 7.999999, g: 7.999999, b: 7.999999, a: 0}
+    - _EmmisiveColor: {r: 0, g: 11.168628, b: 23.968628, a: 0}
+    - _SnowColor: {r: 1.65445, g: 2.4083767, b: 4.1884813, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
