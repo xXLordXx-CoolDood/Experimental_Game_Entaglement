@@ -9,6 +9,7 @@ public class Mech_Holder : MonoBehaviour
 {
     [SerializeField] private GameObject mech, cameraFollow, initialCamera;
     private GameObject debris;
+    public bool startupSequence = false;
 
     private void Awake()
     {
@@ -28,6 +29,8 @@ public class Mech_Holder : MonoBehaviour
 
     private void Update()
     {
+        if (!startupSequence) { Destroy(initialCamera); mech.SetActive(true); }
+
         if (!ArduinoDevice.current.gun1down.isPressed && !ArduinoDevice.current.gun1up.isPressed &&
             !ArduinoDevice.current.gun2down.isPressed && !ArduinoDevice.current.gun2up.isPressed &&
             !ArduinoDevice.current.gun3down.isPressed && !ArduinoDevice.current.gun3up.isPressed &&
