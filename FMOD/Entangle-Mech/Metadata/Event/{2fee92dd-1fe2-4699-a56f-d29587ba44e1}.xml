@@ -61,7 +61,7 @@
 			<destination>{431c21a1-d5cb-4071-b02f-71f8a4a11e22}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{dd56739d-f79d-4906-8118-5dd93d464b1f}</destination>
+			<destination>{415197f5-989f-4a9a-bfca-604cd259cd8e}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{1ee1c2a6-bd57-434d-9b17-a732913e6ab2}" />
@@ -125,6 +125,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{a92622b4-87bb-4f53-b90b-6308f820697b}">
+		<property name="volume">
+			<value>-6</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{eba5b1a4-1656-44ad-8de3-869100a29610}</destination>
 		</relationship>
@@ -159,7 +162,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{3d40ef9a-9aeb-4b20-ab27-16d1103b9dbc}">
 		<property name="volume">
-			<value>2.5</value>
+			<value>2</value>
 		</property>
 		<property name="name">
 			<value>Anime</value>
@@ -186,6 +189,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{c78cf3f5-3840-4a2f-87b2-fd631a6d8705}">
+		<property name="volume">
+			<value>2</value>
+		</property>
 		<property name="name">
 			<value>Torch-Noise</value>
 		</property>
@@ -210,6 +216,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{9f89e339-0415-480d-b243-4660f6e1be3b}">
+		<property name="volume">
+			<value>2.5</value>
+		</property>
 		<property name="name">
 			<value>BurpFlangeLaser</value>
 		</property>
@@ -242,6 +251,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{6ece6bd0-7103-4177-a482-57079e112029}">
+		<property name="volume">
+			<value>2.5</value>
+		</property>
 		<property name="name">
 			<value>Laser</value>
 		</property>
@@ -265,6 +277,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d4829792-db7a-41a1-82dd-0d9540de6c23}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<property name="name">
 			<value>Explosion</value>
 		</property>
@@ -451,6 +466,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{983d8421-a4d3-4b0e-8cfb-8602f023e720}">
 		<relationship name="effects">
+			<destination>{85e7416f-cddf-434b-b08f-acfd85a7c418}</destination>
 			<destination>{655c0a55-7eb5-4a4f-b5c6-0b5c2bc88a50}</destination>
 		</relationship>
 	</object>
@@ -546,7 +562,38 @@
 			<value>0</value>
 		</property>
 	</object>
+	<object class="GainEffect" id="{85e7416f-cddf-434b-b08f-acfd85a7c418}">
+		<relationship name="modulators">
+			<destination>{1d38c5b3-d625-4eaa-b7dc-555979041561}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{655c0a55-7eb5-4a4f-b5c6-0b5c2bc88a50}" />
 	<object class="MixerBusFader" id="{b0436480-d7dc-4046-93be-85302fa7dd00}" />
 	<object class="MixerBusFader" id="{17535c30-29e8-48ed-b5e0-1b20f6603e05}" />
+	<object class="ADSRModulator" id="{1d38c5b3-d625-4eaa-b7dc-555979041561}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>gain</value>
+		</property>
+		<property name="attackTime">
+			<value>500</value>
+		</property>
+		<property name="peakValue">
+			<value>-9</value>
+		</property>
+		<property name="holdTime">
+			<value>720</value>
+		</property>
+		<property name="decayTime">
+			<value>880</value>
+		</property>
+		<property name="decayShape">
+			<value>0.176279813</value>
+		</property>
+		<property name="sustainValue">
+			<value>-13.5</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 </objects>
