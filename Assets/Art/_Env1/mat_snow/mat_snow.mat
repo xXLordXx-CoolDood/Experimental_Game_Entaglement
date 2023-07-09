@@ -86,7 +86,7 @@ Material:
     - _IceColorContrast: 0
     - _IceFresnelPower: 3
     - _IceParallaxSteps: 1
-    - _IceParallaxStrength: 911.7
+    - _IceParallaxStrength: 500
     - _IceRoughness: 0.75
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -105,7 +105,7 @@ Material:
     - _IceFresnelColor: {r: 0, g: 1, b: 0.43849897, a: 0}
     - _IceOffset: {r: 1.2, g: 1.2, b: 0, a: 0}
     - _IceParallaxColor: {r: 0.048282295, g: 0.18011819, b: 0.2924528, a: 0}
-    - _IceTiling: {r: 8, g: 8, b: 0, a: 0}
+    - _IceTiling: {r: 4, g: 4, b: 0, a: 0}
     - _SnowColor: {r: 0.73709506, g: 1.297916, b: 1.5471698, a: 0}
     - _SnowColor1: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor2: {r: 1, g: 1, b: 1, a: 0}
