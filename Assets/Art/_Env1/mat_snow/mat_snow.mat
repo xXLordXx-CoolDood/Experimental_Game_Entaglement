@@ -20,6 +20,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _IceTexture:
+        m_Texture: {fileID: 2800000, guid: 79684195dd8fd954185910ab569f5ae9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_ec70599b0cf44ee7a57f2cab905dc644_Heightmap_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxOcclusionMapping_2f0f0d84133344c3aa74c1dca58c93c2_Heightmap_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxOcclusionMapping_63e3a00722914303ab27a177ddc3626d_Heightmap_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxOcclusionMapping_8668f721ea614433b32e2a7aad72e2ae_Heightmap_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_91f07f84f2d7487393eeefb186efe0f9_Texture_1:
         m_Texture: {fileID: 8400000, guid: 5eeed2e575547eb4b9e6587b8c455a29, type: 2}
         m_Scale: {x: 1, y: 1}
@@ -64,7 +84,10 @@ Material:
     m_Floats:
     - _Float: 0
     - _IceColorContrast: 0
-    - _IceRoughness: 0.61
+    - _IceFresnelPower: 3
+    - _IceParallaxSteps: 1
+    - _IceParallaxStrength: 911.7
+    - _IceRoughness: 0.75
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SnowBrighness: 0.7
@@ -78,7 +101,11 @@ Material:
     - _VertexOffsetSubtract: 2
     - _VertexPatternScale: 100
     m_Colors:
-    - _IceColor: {r: 0.40610537, g: 0.5635427, b: 0.735849, a: 0}
+    - _IceColor: {r: 0.5235849, g: 0.71877974, b: 1, a: 0}
+    - _IceFresnelColor: {r: 0, g: 1, b: 0.43849897, a: 0}
+    - _IceOffset: {r: 1.2, g: 1.2, b: 0, a: 0}
+    - _IceParallaxColor: {r: 0.048282295, g: 0.18011819, b: 0.2924528, a: 0}
+    - _IceTiling: {r: 8, g: 8, b: 0, a: 0}
     - _SnowColor: {r: 0.73709506, g: 1.297916, b: 1.5471698, a: 0}
     - _SnowColor1: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor2: {r: 1, g: 1, b: 1, a: 0}
