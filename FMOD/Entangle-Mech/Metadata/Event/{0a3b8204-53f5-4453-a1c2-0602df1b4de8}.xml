@@ -5,7 +5,7 @@
 			<value>Red Light 1</value>
 		</property>
 		<property name="name">
-			<value>GUN_Load-State3</value>
+			<value>GUN_Load-State3_Loop</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
