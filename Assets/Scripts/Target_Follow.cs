@@ -25,9 +25,11 @@ public class Target_Follow : MonoBehaviour
     {
         #region legsnap
         pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
+        Debug.DrawRay(pivot.position, pivot.forward * 3, Color.green);
         Vector3 posOnLine = Vector3.Project(transform.position - pivot.position, pivot.forward) + new Vector3(pivot.position.x, transform.position.y, pivot.position.z);
-        Debug.Log(Vector3.Distance(transform.position, posOnLine));
-        if (Vector3.Distance(transform.position, posOnLine) > 0.25f) { transform.position = posOnLine; }
+        
+        if (Vector3.Distance(transform.position, posOnLine) > 0.25f && (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower"))) 
+        { Debug.Log("Snapped to line"); transform.position = posOnLine; }
 
         //Get x/z vector towards target position. Get the direction we are currently moving as well
         Vector3 calcDir = target.position - transform.position;
