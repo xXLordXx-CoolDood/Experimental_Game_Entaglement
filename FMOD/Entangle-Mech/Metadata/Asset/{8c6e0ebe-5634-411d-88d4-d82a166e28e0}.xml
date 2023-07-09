@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{8c6e0ebe-5634-411d-88d4-d82a166e28e0}">
+		<property name="assetPath">
+			<value>STEP_Snow/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{15d0a97c-00e7-4db2-aea6-778facc4445a}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{f132e900-4f8e-4681-9031-e26d4cb44a1d}">
 		<property name="assetPath">
-			<value>LegStart-007.wav</value>
+			<value>LEG/LegStart-007.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.2910208333333333</value>
+			<value>1.2441458333333333</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{15d0a97c-00e7-4db2-aea6-778facc4445a}</destination>

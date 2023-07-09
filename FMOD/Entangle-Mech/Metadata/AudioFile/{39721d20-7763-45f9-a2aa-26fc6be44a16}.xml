@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{39721d20-7763-45f9-a2aa-26fc6be44a16}">
+		<property name="assetPath">
+			<value>STEP_Ice/STEP_Ice_Med-001.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.51966666666666672</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{15d0a97c-00e7-4db2-aea6-778facc4445a}</destination>
+		</relationship>
+	</object>
+</objects>

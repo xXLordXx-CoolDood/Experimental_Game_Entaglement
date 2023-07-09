@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{341e3591-9291-4639-ba31-eaa9f4462686}">
 		<property name="assetPath">
-			<value>LegMove_CarLift-003.wav</value>
+			<value>LEG/LegMove_CarLift-003.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
