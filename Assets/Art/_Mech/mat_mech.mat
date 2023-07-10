@@ -151,6 +151,7 @@ Material:
     - _EmissionColor: {r: 4, g: 1.0890051, b: 0, a: 1}
     - _EmmisiveColor: {r: 23.968628, g: 3.137255, b: 0, a: 1}
     - _FresnelColor: {r: 0.14462443, g: 0.36061645, b: 0.4716981, a: 0}
+    - _MechDarken: {r: 0.11764705, g: 0.30464342, b: 0.34901962, a: 0}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor1: {r: 1, g: 1, b: 1, a: 0}
     - _SnowColor2: {r: 1, g: 1, b: 1, a: 0}
