@@ -11,7 +11,7 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim, camAnim;
     public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator, turnIndicator, camBehind;
     public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10, skidDecay = 1, _skidMultiplier;
     public LayerMask groundLayer;
@@ -255,6 +255,10 @@ public class Mech_Controller : MonoBehaviour
 
         camBehind.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
         turnIndicator.localPosition = new Vector3((chest.localEulerAngles.y - 270) * -3.33f, 0, 0);
+
+        if(turnIndicator.localPosition.x > 0.2f) { camAnim.SetBool("Left", false); }
+        if(turnIndicator.localPosition.x < -0.2f) { camAnim.SetBool("Left", true); }
+
         idleTimer = 0;
     }
 

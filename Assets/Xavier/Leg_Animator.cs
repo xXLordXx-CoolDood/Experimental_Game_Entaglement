@@ -102,6 +102,7 @@ public class Leg_Animator : MonoBehaviour
         {
             grounded = false;
             ApplyGravity(3);
+            return;
         }
         else if(hipBone.position.y - hit.point.y > 4.76f) //If we did clip through the ground, ground the leg back on top
         {
@@ -110,6 +111,7 @@ public class Leg_Animator : MonoBehaviour
             grounded = true;
         }
 
+        grounded = true;
         prevTargetPos = targetPoint.position;
     }
 
