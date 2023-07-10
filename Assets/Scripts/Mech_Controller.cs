@@ -11,19 +11,20 @@ public class Mech_Controller : MonoBehaviour
 {
     public Leg_Animator FRLeg, BRLeg, FLLeg, BLLeg;
     public GameObject bullet, splatMech;
-    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim;
-    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator;
-    public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10, skidDecay = 1;
+    public Animator FRAnim, BRAnim, FLAnim, BLAnim, gunAnim, camAnim;
+    public Transform gun, gunYaw, shotSpawn, chest, waist, heightLines, frontCheck, backCheck, gunRotIndicator, turnIndicator, camBehind;
+    public float heightOffset = 0.5f, positionOffset = 1, rotationMultiplierX = 1, rotationMultiplierY = 0.5f, skidStrength = 10, skidDecay = 1, _skidMultiplier;
     public LayerMask groundLayer;
     public bool isAiming = true;
     [SerializeField] private EventReference shootEvent, explodeEvent;
     [HideInInspector] public Vector2 prevPosition;
+    public float idleTimer = 0;
     [SerializeField] private VisualEffect gunLaser;
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
     private int activeLegs = 0, icyLegs = 0, gunDirectionX, gunDirectionY, prevDirX, prevDirY;
-    private float _skidMultiplier, _skidDecay, tiltMultiplier, timer, direction, moveDirection = 1, gunAccelX, gunAccelY;
+    private float _skidDecay, tiltMultiplier, direction, moveDirection = 1, gunAccelX, gunAccelY;
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
@@ -137,7 +138,10 @@ public class Mech_Controller : MonoBehaviour
     public void Turn(InputAction.CallbackContext ctx)
     {
         if (ctx.performed) { direction = ctx.ReadValue<float>() * -15; /*ChangeDirection(direction / 45);*/ }
-        if (ctx.canceled) { direction = 0;/* ChangeDirection(0);*/ }
+        if (ctx.canceled) { direction = 0; }
+
+        if (ctx.canceled && turnIndicator.localPosition.x < 7 && turnIndicator.localPosition.x > -7f)
+        { ResetDirectionAndRotations(); }
     }
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
@@ -172,10 +176,12 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        if (FRLeg.targetPoint.GetComponent<Target_Follow>().reseting) { return; }
+
         #region //Blocked logic & gun rotation
         RaycastHit hit;
-        if ((Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) && FRAnim.GetBool("Forward")) ||
-            (Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer) && !FRAnim.GetBool("Forward"))) 
+        if (Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) ||
+            Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer)) 
         { blocked = true; Debug.Log("Blocked"); }
         else { blocked = false; }
 
@@ -216,7 +222,7 @@ public class Mech_Controller : MonoBehaviour
             BRAnim.ResetTrigger("Next_State");
             BLAnim.ResetTrigger("Next_State");
 
-            if (stumbled) { Splat(); }
+            if (stumbled && icyLegs < 3) { Splat(); }
 
             _skidMultiplier = 0;
             isSkidding = false; 
@@ -224,6 +230,7 @@ public class Mech_Controller : MonoBehaviour
 
         UpdateBodyRotation();
 
+        if (blocked) { return; }
         if (isSkidding) { UpdateBodyHeight(); transform.Translate(skidDir * Time.deltaTime * (_skidMultiplier * _skidDecay), Space.World); return; }
 
         UpdateBodyPosition();
@@ -245,6 +252,29 @@ public class Mech_Controller : MonoBehaviour
         BRAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
         FLAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
         FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+
+        camBehind.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+        turnIndicator.localPosition = new Vector3((chest.localEulerAngles.y - 270) * -3.33f, 0, 0);
+
+        if(turnIndicator.localPosition.x > 0.2f) { camAnim.SetBool("Left", false); }
+        if(turnIndicator.localPosition.x < -0.2f) { camAnim.SetBool("Left", true); }
+
+        idleTimer = 0;
+    }
+
+    private void ResetDirectionAndRotations()
+    {
+        chest.localEulerAngles = new Vector3(180, 90, 0);
+        waist.localEulerAngles = new Vector3(180, 90, 0);
+
+        BLAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        BRAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        FLAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+        FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+
+        camBehind.localEulerAngles = new Vector3(chest.localEulerAngles.x, 0, 0);
+        turnIndicator.localPosition = Vector3.zero;
+        idleTimer = 0;
     }
 
     private void UpdateBodyHeight()
@@ -333,14 +363,14 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if(moveDirection == 0) { Debug.Log("Neutral"); return; }
+        if(moveDirection == 0) { return; }
 
         script.isHeld = held;
 
         if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 
         //If pressed and leg is idle, move leg up
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held) { 
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held && EnoughGroundedLegs()) {
             anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); script.LegActiveStatus(true);
         }
 
@@ -351,9 +381,21 @@ public class Mech_Controller : MonoBehaviour
 
         //If pressed and leg is falling, reverse anim to leg idle
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); script.LegActiveStatus(true); }
-
+        
         //If released and leg is rising, reverse anim to leg idle
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); script.LegActiveStatus(false); }
+    }
+
+    private bool EnoughGroundedLegs()
+    {
+        int groundedLegs = 0;
+        if (FRLeg.grounded) { groundedLegs++; }
+        if (FLLeg.grounded) { groundedLegs++; }
+        if (BRLeg.grounded) { groundedLegs++; }
+        if (BLLeg.grounded) { groundedLegs++; }
+
+        if(groundedLegs > 2) { return true; }
+        return false;
     }
 
     private void ChangeGears(bool newState) {
@@ -428,10 +470,20 @@ public class Mech_Controller : MonoBehaviour
     public void CheckLegIdleStatus()
     {
         //If all legs are grounded or idling, set all legs to idle state
-        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld &&
+            !FRLeg.targetPoint.GetComponent<Target_Follow>().reseting)
         {
-            Debug.Log("Idle");
             IdleAllLegs();
+            idleTimer += Time.deltaTime / 4;
+
+            if(idleTimer > 5)
+            {
+                FRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                BRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                FLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                BLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                idleTimer = 0;
+            }
         }
     }
 

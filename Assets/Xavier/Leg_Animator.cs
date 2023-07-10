@@ -15,7 +15,7 @@ public class Leg_Animator : MonoBehaviour
     [SerializeField] private TextureSound[] textureSounds;
 
     public Mech_Controller controllerRef;
-    public bool isHeld, canMove, grounded = true;
+    public bool isHeld, grounded = true;
     private EventReference currentTerrainSfx;
     [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
@@ -44,9 +44,9 @@ public class Leg_Animator : MonoBehaviour
         //RotateAnkleBone();
     }
 
-    private void ApplyGravity()
+    private void ApplyGravity(int multiplier)
     {
-        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime * multiplier, targetPoint.position.z);
     }
 
     private void OnDrawGizmos()
@@ -56,17 +56,15 @@ public class Leg_Animator : MonoBehaviour
 
     public void CheckForGround()
     {
-        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position));
-
         initialDir.Normalize();
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
-        
+
         RaycastHit hit;
         if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer)) //Initial check to see if we need to apply leg gravity
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
-            controllerRef.CheckLegIdleStatus();
+            //controllerRef.CheckLegIdleStatus();
 
             //Get terrain type
             if (!grounded && !isSkidding && Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
@@ -92,30 +90,28 @@ public class Leg_Animator : MonoBehaviour
                         if(textureSounds[i].texture == terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture) { currentTerrainSfx = textureSounds[i].textureSound; }
                     }
 
-                    Debug.Log("Play Footstep");
                     Audio_Manager.instance.PlayOneShot(currentTerrainSfx, transform.position);
 
                     if (terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture.name == "perlin_1") { controllerRef.IcyLegUpdate(true); }
                     else { controllerRef.IcyLegUpdate(false); }
+                    grounded = true;
                 }
             }
-
-            grounded = true;
-            canMove = false;
         }
         else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
             grounded = false;
-            ApplyGravity();
+            ApplyGravity(3);
+            return;
         }
-        else //If we did clip through the ground, ground the leg back on top
+        else if(hipBone.position.y - hit.point.y > 4.76f) //If we did clip through the ground, ground the leg back on top
         {
-            Debug.Log("Prevented Clip");
             SetTargetFollowState(false);
+            ApplyGravity(-3);
             grounded = true;
-            canMove = false;
         }
 
+        grounded = true;
         prevTargetPos = targetPoint.position;
     }
 

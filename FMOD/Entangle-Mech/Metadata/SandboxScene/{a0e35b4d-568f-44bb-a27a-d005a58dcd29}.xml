@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="SandboxScene" id="{a0e35b4d-568f-44bb-a27a-d005a58dcd29}">
+		<property name="name">
+			<value>Step_Simulation</value>
+		</property>
+		<relationship name="folder">
+			<destination>{fa9d71da-599f-488f-9dca-e15382aa9e81}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{17b45792-39f4-4071-9fca-8876d63e14cf}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{b088eb75-4df9-4e13-be3d-8bdcf390e696}</destination>
+		</relationship>
+		<relationship name="emitters">
+			<destination>{f44633e9-1995-480a-b0cd-06b8da3c40b7}</destination>
+			<destination>{e7f44b54-1608-49f0-9a6f-18ef16c727f9}</destination>
+			<destination>{e3a02661-1283-43b5-ab78-f4133c5a3e5d}</destination>
+			<destination>{eb0ff150-b060-4587-9e6f-045b575d42ef}</destination>
+			<destination>{2f55800a-0823-48ce-be5b-5f48f1e5f578}</destination>
+			<destination>{dd8f6253-674b-4c42-8987-611b7ad15bdf}</destination>
+			<destination>{118036cf-3072-4275-bfc2-13db8d07a945}</destination>
+		</relationship>
+	</object>
+	<object class="MarkerTrack" id="{17b45792-39f4-4071-9fca-8876d63e14cf}" />
+	<object class="Timeline" id="{b088eb75-4df9-4e13-be3d-8bdcf390e696}" />
+	<object class="SandboxEmitter" id="{f44633e9-1995-480a-b0cd-06b8da3c40b7}">
+		<property name="positionZ">
+			<value>-0.0249999873</value>
+		</property>
+		<property name="rotationY">
+			<value>2.32647586</value>
+		</property>
+		<relationship name="event">
+			<destination>{b31434e0-f4c1-44c7-9d66-a449a6e26546}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{e7f44b54-1608-49f0-9a6f-18ef16c727f9}">
+		<property name="positionX">
+			<value>-3.625</value>
+		</property>
+		<property name="positionZ">
+			<value>2.47500014</value>
+		</property>
+		<relationship name="event">
+			<destination>{99b7cc3d-a092-4adc-99f1-bdc9fb5c21e6}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{e3a02661-1283-43b5-ab78-f4133c5a3e5d}">
+		<property name="positionX">
+			<value>2.97500014</value>
+		</property>
+		<property name="positionZ">
+			<value>-3.32500005</value>
+		</property>
+		<property name="rotationY">
+			<value>1.61856222</value>
+		</property>
+		<relationship name="event">
+			<destination>{99b7cc3d-a092-4adc-99f1-bdc9fb5c21e6}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{eb0ff150-b060-4587-9e6f-045b575d42ef}">
+		<property name="positionX">
+			<value>-3.82500005</value>
+		</property>
+		<property name="positionZ">
+			<value>2.57499981</value>
+		</property>
+		<property name="rotationY">
+			<value>-73.4471436</value>
+		</property>
+		<relationship name="event">
+			<destination>{178f0307-4bbf-4cdf-ac9c-5e951212dba1}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{2f55800a-0823-48ce-be5b-5f48f1e5f578}">
+		<property name="positionX">
+			<value>3.10000014</value>
+		</property>
+		<property name="positionZ">
+			<value>-3.29999995</value>
+		</property>
+		<relationship name="event">
+			<destination>{178f0307-4bbf-4cdf-ac9c-5e951212dba1}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{dd8f6253-674b-4c42-8987-611b7ad15bdf}">
+		<property name="positionX">
+			<value>-3.7750001</value>
+		</property>
+		<property name="positionZ">
+			<value>2.42499995</value>
+		</property>
+		<relationship name="event">
+			<destination>{e76cbdff-5f07-4904-84f9-52cc1407c6af}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxEmitter" id="{118036cf-3072-4275-bfc2-13db8d07a945}">
+		<property name="positionX">
+			<value>2.95000005</value>
+		</property>
+		<property name="positionZ">
+			<value>-3.32500005</value>
+		</property>
+		<property name="rotationY">
+			<value>0.8321504</value>
+		</property>
+		<relationship name="event">
+			<destination>{e76cbdff-5f07-4904-84f9-52cc1407c6af}</destination>
+		</relationship>
+	</object>
+</objects>

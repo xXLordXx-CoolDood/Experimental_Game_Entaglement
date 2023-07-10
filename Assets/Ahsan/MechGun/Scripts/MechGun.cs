@@ -65,6 +65,5 @@ public class MechGun : MonoBehaviour
             on3.color = new Color32(255, 255, 0, Convert.ToByte(255 - (Convert.ToInt32(shootSequence.Item3) * 180)));
             off3.color = new Color32(33, 255, 0, Convert.ToByte((Mathf.Clamp(Convert.ToInt32(shootSequence.Item3), 0, 1) * 180) + 75));
         }
-        Debug.Log(shootSequence); 
     }
 }

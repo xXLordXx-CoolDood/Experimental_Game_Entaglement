@@ -7,23 +7,65 @@ public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
     public Transform target, mech, pivot, hipBone, groundSnap;
+    public bool reseting;
+    public float maxLegDistance = 3.5f, timer = -1;
     public LayerMask groundLayer;
-    public LayerMask quadLayer;
 
     [SerializeField] public bool follow = true, isSkidding;
-    private float maxLegDistance;
 
-    private Vector3 prevTargetPos = Vector3.zero;
+    private Vector3 prevTargetPos = Vector3.zero, prevPos = Vector3.zero;
+    private bool isTooFar;
 
     private void Start()
     {
-        maxLegDistance = 4.5f;
         prevTargetPos = target.position;
+        prevPos = transform.position;
     }
 
     private void Update()
     {
-        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position), Color.red);
+        //if (reseting && timer >= 0) 
+        //{ 
+        //    timer += Time.deltaTime;
+        //    transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
+        //    target.parent.GetComponent<Leg_Animator>().CheckForGround();
+
+        //    if (timer >= 1) { 
+        //        timer = -1;
+        //        reseting = false;
+        //        target.parent.GetComponent<Leg_Animator>().CheckForGround();
+        //    }
+
+        //    return;
+        //}
+
+        #region legsnap
+        pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
+        Debug.DrawRay(pivot.position, pivot.forward * 3, Color.green);
+        Vector3 posOnLine = Vector3.Project(transform.position - pivot.position, pivot.forward) + new Vector3(pivot.position.x, transform.position.y, pivot.position.z);
+
+        if (Vector3.Distance(transform.position, posOnLine) > 0.25f && (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")))
+        { transform.position = posOnLine; }
+
+        //Get x/z vector towards target position. Get the direction we are currently moving as well
+        Vector3 calcDir = target.position - transform.position;
+        Vector3 movingDir = prevPos - transform.position;
+        calcDir.y = 0;
+        movingDir.y = 0;
+        calcDir.Normalize();
+        movingDir.Normalize();
+
+        //Check if leg is too far from target point
+        if (!SimilarDirections(calcDir, movingDir) && Vector3.Distance(transform.position, target.position) > maxLegDistance) //If applicable, move back towards the mech by a small amount
+        {
+            transform.position += calcDir * Time.deltaTime * 5;
+            isTooFar = true;
+
+            prevTargetPos = target.position;
+            return;
+        }
+        else { isTooFar = false; }
+        #endregion
 
         float dirMultiplier = Mathf.Clamp(mech.GetComponent<Mech_Controller>().waist.localEulerAngles.y - 270, -1, 1);
 
@@ -35,46 +77,54 @@ public class Target_Follow : MonoBehaviour
             prevTargetPos = target.position;
         }
 
-        if (!follow && !isSkidding) { return; }
+        if (!follow && !isSkidding) { prevPos = transform.position; prevTargetPos = target.position; return; }
 
         if (isSkidding)
         {
             RaycastHit hit;
             if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer))
             {
-                Debug.Log($"Hit Point is {hit.point}!");
-                transform.position = new Vector3(hit.point.x, hit.point.y + (transform.position.y - groundSnap.position.y), hit.point.z);
+                transform.position = new Vector3(hit.point.x, hit.point.y + (transform.position.y - groundSnap.position.y), hit.point.z); 
             }
-            else { Debug.Log("Failed to hit for some reason :/"); TryMoveToPos(target.position); }
+            else { transform.position = target.position; }
             prevTargetPos = target.position;
+            prevPos = transform.position;
             return;
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel")) 
         {
             //Calculate position difference to pivot
+            timer = 0;
             Vector3 delta = target.position - prevTargetPos;
-
-            TryMoveToPos(new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z));
-
-            RaycastHit hit;
-            if (Physics.Raycast(start, transform.right * -dirMultiplier, out hit, 1.5f, quadLayer) && (dirMultiplier == 1 || dirMultiplier == -1))
-            {
-                TryMoveToPos(Vector3.Lerp(transform.position, hit.point, anim.GetCurrentAnimatorStateInfo(0).normalizedTime));
-                Debug.Log("Snapped");
-            }
-
+            mech.GetComponent<Mech_Controller>().idleTimer = 0;
+            transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);
             prevTargetPos = target.position;
         }
     }
 
-    private void TryMoveToPos(Vector3 newPos)
+    private bool SimilarDirections(Vector3 calculatedDirection, Vector3 movingDirection)
     {
-        if (Vector3.Distance(pivot.position, newPos) < maxLegDistance) { transform.position = newPos; return; }
+        float dotProduct = Vector3.Dot(calculatedDirection, movingDirection);
+        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
 
-        Vector3 fixedPos = Vector3.Normalize(pivot.position - newPos);
-        fixedPos += transform.position;
+        return angle <= 45;
+    }
 
-        transform.position = new Vector3(fixedPos.x, newPos.y, fixedPos.z);
+    public void ResetLeg()
+    {
+        return;
+
+        reseting = true;
+        timer = 0;
+
+        prevPos = transform.position;
+        prevTargetPos = target.position;
+
+        RaycastHit hit;
+        if(Physics.Raycast(pivot.position, -pivot.up, out hit, Mathf.Infinity, groundLayer))
+        {
+            prevTargetPos.y = hit.point.y + 2.33f;
+        }
     }
 }
