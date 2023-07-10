@@ -44,9 +44,9 @@ public class Leg_Animator : MonoBehaviour
         //RotateAnkleBone();
     }
 
-    private void ApplyGravity()
+    private void ApplyGravity(int multiplier)
     {
-        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime * 3, targetPoint.position.z);
+        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime * multiplier, targetPoint.position.z);
     }
 
     private void OnDrawGizmos()
@@ -105,12 +105,13 @@ public class Leg_Animator : MonoBehaviour
         else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
             grounded = false;
-            ApplyGravity();
+            ApplyGravity(3);
         }
-        else //If we did clip through the ground, ground the leg back on top
+        else if(hipBone.position.y - hit.point.y > 4.76f) //If we did clip through the ground, ground the leg back on top
         {
-            Debug.Log("Prevented Clip");
+            Debug.Log($"Distance = {hipBone.position.y - hit.point.y}");
             SetTargetFollowState(false);
+            ApplyGravity(-3);
             grounded = true;
         }
 

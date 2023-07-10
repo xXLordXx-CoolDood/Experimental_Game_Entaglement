@@ -18,12 +18,13 @@ public class Mech_Controller : MonoBehaviour
     public bool isAiming = true;
     [SerializeField] private EventReference shootEvent, explodeEvent;
     [HideInInspector] public Vector2 prevPosition;
+    public float idleTimer = 0;
     [SerializeField] private VisualEffect gunLaser;
 
     private PlayerInput playerInput;
     private Vector3 skidDir;
     private int activeLegs = 0, icyLegs = 0, gunDirectionX, gunDirectionY, prevDirX, prevDirY;
-    private float _skidDecay, tiltMultiplier, timer, direction, moveDirection = 1, gunAccelX, gunAccelY;
+    private float _skidDecay, tiltMultiplier, direction, moveDirection = 1, gunAccelX, gunAccelY;
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
     [SerializeField] private bool isSkidding = false;
@@ -137,7 +138,11 @@ public class Mech_Controller : MonoBehaviour
     public void Turn(InputAction.CallbackContext ctx)
     {
         if (ctx.performed) { direction = ctx.ReadValue<float>() * -15; /*ChangeDirection(direction / 45);*/ }
-        if (ctx.canceled) { direction = 0;/* ChangeDirection(0);*/ }
+        if (ctx.canceled) { direction = 0; }
+        Debug.Log(turnIndicator.localPosition.x);
+
+        if (ctx.canceled && turnIndicator.localPosition.x < 7 && turnIndicator.localPosition.x > -7f)
+        { ResetDirectionAndRotations(); }
     }
     
     public void Gun_Turn(InputAction.CallbackContext ctx)
@@ -172,6 +177,8 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
+        if (FRLeg.targetPoint.GetComponent<Target_Follow>().reseting) { return; }
+
         #region //Blocked logic & gun rotation
         RaycastHit hit;
         if (Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) ||
@@ -249,6 +256,22 @@ public class Mech_Controller : MonoBehaviour
 
         camBehind.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
         turnIndicator.localPosition = new Vector3((chest.localEulerAngles.y - 270) * -3.33f, 0, 0);
+        idleTimer = 0;
+    }
+
+    private void ResetDirectionAndRotations()
+    {
+        chest.localEulerAngles = new Vector3(180, 90, 0);
+        waist.localEulerAngles = new Vector3(180, 90, 0);
+
+        BLAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        BRAnim.transform.localEulerAngles = new Vector3(waist.localEulerAngles.x, -waist.localEulerAngles.y - 90, 0);
+        FLAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+        FRAnim.transform.localEulerAngles = new Vector3(chest.localEulerAngles.x, -chest.localEulerAngles.y - 90, 0);
+
+        camBehind.localEulerAngles = new Vector3(chest.localEulerAngles.x, 0, 0);
+        turnIndicator.localPosition = Vector3.zero;
+        idleTimer = 0;
     }
 
     private void UpdateBodyHeight()
@@ -337,7 +360,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if(moveDirection == 0) { Debug.Log("Neutral"); return; }
+        if(moveDirection == 0 || FRLeg.targetPoint.GetComponent<Target_Follow>().reseting) { return; }
 
         script.isHeld = held;
 
@@ -444,10 +467,20 @@ public class Mech_Controller : MonoBehaviour
     public void CheckLegIdleStatus()
     {
         //If all legs are grounded or idling, set all legs to idle state
-        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld &&
+            !FRLeg.targetPoint.GetComponent<Target_Follow>().reseting)
         {
-            Debug.Log("Idle");
             IdleAllLegs();
+            idleTimer += Time.deltaTime / 4;
+
+            if(idleTimer > 5)
+            {
+                FRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                BRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                FLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                BLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+                idleTimer = 0;
+            }
         }
     }
 

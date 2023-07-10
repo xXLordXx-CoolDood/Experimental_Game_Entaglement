@@ -7,11 +7,13 @@ public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
     public Transform target, mech, pivot, hipBone, groundSnap;
+    public bool reseting;
     public float maxLegDistance = 3.5f;
     public LayerMask groundLayer;
 
     [SerializeField] public bool follow = true, isSkidding;
 
+    private float timer;
     private Vector3 prevTargetPos = Vector3.zero, prevPos = Vector3.zero;
     private bool isTooFar;
 
@@ -23,6 +25,21 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
+        if (reseting) 
+        { 
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
+            target.parent.GetComponent<Leg_Animator>().CheckForGround();
+
+            if (timer >= 1) { 
+                timer = 0; 
+                reseting = false;
+                target.parent.GetComponent<Leg_Animator>().CheckForGround();
+            }
+
+            return;
+        }
+
         #region legsnap
         pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
         Debug.DrawRay(pivot.position, pivot.forward * 3, Color.green);
@@ -80,7 +97,7 @@ public class Target_Follow : MonoBehaviour
         {
             //Calculate position difference to pivot
             Vector3 delta = target.position - prevTargetPos;
-
+            mech.GetComponent<Mech_Controller>().idleTimer = 0;
             transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);
 
             prevTargetPos = target.position;
@@ -93,5 +110,19 @@ public class Target_Follow : MonoBehaviour
         float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
 
         return angle <= 45;
+    }
+
+    public void ResetLeg()
+    {
+        reseting = true;
+
+        prevPos = transform.position;
+        prevTargetPos = target.position;
+
+        RaycastHit hit;
+        if(Physics.Raycast(pivot.position, -pivot.up, out hit, Mathf.Infinity, groundLayer))
+        {
+            prevTargetPos.y = hit.point.y + 2.33f;
+        }
     }
 }
