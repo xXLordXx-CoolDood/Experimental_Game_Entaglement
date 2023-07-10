@@ -1,9 +1,45 @@
 .slot {
-    margin-left: 25px;
-    margin-right: 25px;
-    font-size: 85px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 80px;
+    -unity-text-align: upper-center;
+    align-items: center;
 }
 
 .selectedChar {
-    color: rgb(243, 175, 77);
+    -unity-text-align: upper-center;
+    background-color: rgb(50, 87, 70);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 95px;
+}
+
+.scrollChar {
+    font-size: 64px;
+    -unity-text-align: upper-center;
+    width: 80px;
+}
+
+.yellowTriangle {
+    width: 75px;
+    height: 75px;
+    background-image: url('project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&guid=c10525db68afd7e4792c65a9ee2be72f&type=3#zt');
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.greenTriangle {
+    width: 75px;
+    height: 75px;
+    background-image: url('project://database/Assets/Ahsan/Screens/Sprites/path111.png?fileID=2800000&guid=cdb9bc449d1894e48a79db1d89b1d046&type=3#path111');
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }

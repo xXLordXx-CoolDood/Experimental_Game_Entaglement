@@ -765,6 +765,69 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeftSelect",
+                    "type": "Button",
+                    "id": "ded5cb13-0ad2-4c63-8d95-e1eaf0f61949",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightSelect",
+                    "type": "Button",
+                    "id": "9ad69e09-37cf-4069-8e75-5df451f57534",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftScroll",
+                    "type": "Value",
+                    "id": "02d24f57-2b43-4a21-9958-707e96064e2a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightScroll",
+                    "type": "Value",
+                    "id": "7d6391a3-5dab-4967-9abd-fc2310feecae",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LogMission",
+                    "type": "Button",
+                    "id": "6914796d-5176-4356-acce-2848925f0f93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DeleteLeft",
+                    "type": "Button",
+                    "id": "7e3635ed-4fda-4f28-a3e3-78eac8c734ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DeleteRight",
+                    "type": "Button",
+                    "id": "43c8f597-fbcf-4823-b8f7-2653cb6f8ab8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -833,6 +896,292 @@
                     "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8b72e333-bbce-421a-b934-00c82f87e4c6",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3232d87b-d6b0-443d-8ba3-1b85ec41ab14",
+                    "path": "<ArduinoDevice>/Button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cb120cc-4d23-4924-94aa-ce2c2daec46e",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0924c6c-3f3e-4182-b900-ec10303f755b",
+                    "path": "<ArduinoDevice>/Button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "a957ef89-053c-49db-877f-0fdcc335e6bd",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e36538ce-fb62-4e5e-8592-499d81f16067",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "aad4a315-d1ec-4527-9c7e-e20957fde6eb",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f289063c-b808-440e-81eb-27d73603d969",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c6c78940-df59-4718-8b48-b6e2f93725c8",
+                    "path": "<ArduinoDevice>/Button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3861bd49-6e92-4411-a2f7-853484a654a8",
+                    "path": "<ArduinoDevice>/Button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "8947b702-f811-4f3f-9a46-8a0e398751f4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "0d551bb0-168d-4cb9-a4bd-73347d6d6bde",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "64916cda-c57f-4ed8-8413-1278e5c83909",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "20fb0693-cac4-415b-81d0-68367d27d47e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f925a389-e374-41a3-8833-257fb2ae311e",
+                    "path": "<ArduinoDevice>/Button7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2aa88709-80b1-4b13-a466-640e07b64b77",
+                    "path": "<ArduinoDevice>/Button8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "fce0b1ae-4f72-4743-9dec-58021982d129",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "a59f551d-0057-46ff-83c8-24ee0152376d",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "d4a9b5a4-0c00-452d-af35-f2f7334d3cff",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "668e8f92-84aa-446f-add6-570fe5795bd6",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "4699a991-e17d-4166-84c1-715844a618c2",
+                    "path": "<ArduinoDevice>/Button1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "77c3cbfb-a69b-43a0-a5b9-96c6179974ba",
+                    "path": "<ArduinoDevice>/Button11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LogMission",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d30ede14-907d-420f-9dfd-e40f54fa77db",
+                    "path": "<ArduinoDevice>/Button16",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dc92a61-9a6f-4e4f-bd6e-ee5240effe5d",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3274e85-a378-40f1-b51d-fb780899fba7",
+                    "path": "<ArduinoDevice>/Button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1555644-9b0b-4582-847a-8930528f2ea1",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

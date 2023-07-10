@@ -1,53 +1,68 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Ahsan/Screens/UI/NameScreenUSS.uss?fileID=7433441132597879392&amp;guid=bd80072b61551994e9ef630be77dbdf0&amp;type=3#NameScreenUSS" />
-    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto;">
-        <ui:Label text="The Mech Game" display-tooltip-when-elided="true" name="title" class="title" style="-unity-text-align: upper-center; font-size: 125px; -unity-font-style: normal; padding-left: 64px; padding-right: 64px; padding-top: 64px; padding-bottom: 64px;" />
-        <ui:VisualElement name="highScore" style="flex-grow: 1;">
-            <ui:Label text="Type Your Name" display-tooltip-when-elided="true" name="highScoreTitle" class="highScoreTitle" style="font-size: 75px; align-items: stretch; -unity-text-align: upper-center; padding-left: 25px; padding-right: 25px; padding-top: 25px; padding-bottom: 25px;" />
-            <ui:VisualElement name="NameSelection" style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: center; font-size: 100px;">
-                <ui:VisualElement name="LeftName" style="flex-direction: row;">
-                    <ui:VisualElement name="slot1" class="slot">
-                        <ui:VisualElement name="yellowTri" />
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
-                        <ui:VisualElement name="greenTri" />
+    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto; flex-direction: row;">
+        <ui:VisualElement name="LogMission">
+            <ui:VisualElement name="highScore" style="flex-grow: 1;">
+                <ui:Label text="Type Your Name" display-tooltip-when-elided="true" name="highScoreTitle" class="highScoreTitle" style="font-size: 75px; align-items: stretch; -unity-text-align: upper-center; padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 16px;" />
+                <ui:VisualElement name="NameSelection" style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: center; font-size: 64px;">
+                    <ui:VisualElement name="LeftName" style="flex-direction: row;">
+                        <ui:VisualElement name="slot1" class="slot">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="A" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="B" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="slot2" class="slot">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label text="G" display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="H" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="I" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="slot3" class="slot">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:VisualElement name="slot2" class="slot">
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="slot3" class="slot">
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:Label text="&amp;" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center; font-size: 65px; margin-left: 15px; margin-right: 15px;" />
-                <ui:VisualElement name="RightName" style="flex-direction: row;">
-                    <ui:VisualElement name="slot2" class="slot">
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="slot3" class="slot">
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="slot1" class="slot">
-                        <ui:Label text="R" display-tooltip-when-elided="true" name="scrollUp" />
-                        <ui:Label text="S" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
-                        <ui:Label text="T" display-tooltip-when-elided="true" name="scrollDown" />
+                    <ui:Label text="&amp;" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center; font-size: 65px; margin-left: 15px; margin-right: 15px;" />
+                    <ui:VisualElement name="RightName" style="flex-direction: row;">
+                        <ui:VisualElement name="slot1" class="slot">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label text="U" display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="V" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="W" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="slot2" class="slot" style="visibility: visible;">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label text="W" display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="X" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="Y" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="slot3" class="slot">
+                            <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />
+                            <ui:Label display-tooltip-when-elided="true" name="scrollUp" class="scrollChar" />
+                            <ui:Label text="A" display-tooltip-when-elided="true" name="selectedCharacter" class="selectedChar" />
+                            <ui:Label text="B" display-tooltip-when-elided="true" name="scrollDown" class="scrollChar" />
+                            <ui:VisualElement name="greenTri" class="greenTriangle" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="startMessage" class="startMessageContainer" style="flex-direction: row; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px;">
+                <ui:VisualElement name="leftButton" style="background-color: rgb(243, 175, 77); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 0; margin-right: 125px;" />
+                <ui:Label text="Log Mission" display-tooltip-when-elided="true" name="startText" class="startMessageText" style="-unity-text-align: upper-center; font-size: 75px; -unity-font-style: normal;" />
+                <ui:VisualElement name="rightButton" style="background-color: rgb(0, 255, 111); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 125px; margin-right: 0;" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="startMessage" class="startMessageContainer" style="flex-direction: row; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px;">
-            <ui:VisualElement name="leftButton" style="background-color: rgb(243, 175, 77); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 0; margin-right: 125px;" />
-            <ui:Label text="Log Mission" display-tooltip-when-elided="true" name="startText" class="startMessageText" style="-unity-text-align: upper-center; font-size: 75px; -unity-font-style: normal;" />
-            <ui:VisualElement name="rightButton" style="background-color: rgb(0, 255, 111); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 125px; margin-right: 0;" />
+        <ui:VisualElement name="HighScore" style="-unity-text-align: upper-center; flex-grow: 1;">
+            <ui:Label text="Previous Logs" display-tooltip-when-elided="true" name="HighScoreText" style="font-size: 75px; padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 16px;" />
+            <ui:ListView focusable="true" name="HighScoreTable" fixed-item-height="0" virtualization-method="DynamicHeight" style="flex-grow: 1; font-size: 64px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

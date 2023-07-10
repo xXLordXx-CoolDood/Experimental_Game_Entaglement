@@ -1,11 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Ahsan/Start%20Screen/UI/StartScreenUSS.uss?fileID=7433441132597879392&amp;guid=e347f6fc479259f4da0bfcbe93fbb00e&amp;type=3#StartScreenUSS" />
-    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto;">
+    <Style src="project://database/Assets/Ahsan/Screens/UI/StartScreenUSS.uss?fileID=7433441132597879392&amp;guid=e347f6fc479259f4da0bfcbe93fbb00e&amp;type=3#StartScreenUSS" />
+    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto; justify-content: center;">
         <ui:Label text="The Mech Game" display-tooltip-when-elided="true" name="title" class="title" style="-unity-text-align: upper-center; font-size: 125px; -unity-font-style: normal; padding-left: 64px; padding-right: 64px; padding-top: 64px; padding-bottom: 64px;" />
-        <ui:VisualElement name="highScore" style="flex-grow: 1;">
-            <ui:Label text="High Score" display-tooltip-when-elided="true" name="highScoreTitle" class="highScoreTitle" style="font-size: 75px; align-items: stretch; -unity-text-align: upper-center; padding-left: 25px; padding-right: 25px; padding-top: 25px; padding-bottom: 25px;" />
-            <ui:ListView focusable="true" name="highScoreList" virtualization-method="DynamicHeight" fixed-item-height="0" class="highScoreList" style="flex-grow: 1; align-items: stretch; -unity-text-align: upper-center; font-size: 50px;" />
-        </ui:VisualElement>
         <ui:VisualElement name="startMessage" class="startMessageContainer" style="flex-direction: row; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px;">
             <ui:VisualElement name="leftButton" style="background-color: rgb(243, 175, 77); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 0; margin-right: 125px;" />
             <ui:Label text="Begin Mission" display-tooltip-when-elided="true" name="startText" class="startMessageText" style="-unity-text-align: upper-center; font-size: 75px; -unity-font-style: normal;" />
