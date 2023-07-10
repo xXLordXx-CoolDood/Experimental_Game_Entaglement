@@ -2515,6 +2515,7 @@
 	<object class="MixerBusPanner" id="{3a1e231d-b114-4e6d-9322-02998df2f548}" />
 	<object class="MixerBusEffectChain" id="{a03d651f-75f7-4fa0-a670-62a47f4d21bb}">
 		<relationship name="effects">
+			<destination>{3f444aba-c81d-4db4-9dd0-d8b380be9cff}</destination>
 			<destination>{ac894b67-b845-48ba-bdd6-ef43f2ec9b3f}</destination>
 		</relationship>
 	</object>
@@ -7391,6 +7392,11 @@
 			<destination>{76f17711-77e8-431a-949e-ef66a97f73e4}</destination>
 		</relationship>
 	</object>
+	<object class="GainEffect" id="{3f444aba-c81d-4db4-9dd0-d8b380be9cff}">
+		<relationship name="modulators">
+			<destination>{8c3b4fef-5e11-436e-8e34-963392a7c94c}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{ac894b67-b845-48ba-bdd6-ef43f2ec9b3f}" />
 	<object class="ADSRModulator" id="{2d46b649-b4d4-4699-ba31-48c06c8febe9}">
 		<property name="nameOfPropertyBeingModulated">
@@ -7525,6 +7531,29 @@
 		</property>
 		<property name="sustainValue">
 			<value>-40</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{8c3b4fef-5e11-436e-8e34-963392a7c94c}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>gain</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>5200</value>
+		</property>
+		<property name="attackShape">
+			<value>-0.162485585</value>
+		</property>
+		<property name="releaseTime">
+			<value>3000</value>
+		</property>
+		<property name="releaseShape">
+			<value>0.162485629</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
 		</property>
 	</object>
 </objects>

@@ -130,7 +130,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{c37c21a8-d145-419f-a801-342782384fd6}">
 		<property name="volume">
-			<value>-11</value>
+			<value>-6</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{e6d60fff-32ae-4672-ab25-e1a711d05c55}</destination>
@@ -253,6 +253,9 @@
 	<object class="EventMixerGroup" id="{6ba05ba7-7826-4ecb-ad29-0b519657beec}">
 		<property name="color">
 			<value>Blue Light 2</value>
+		</property>
+		<property name="volume">
+			<value>-7.5</value>
 		</property>
 		<property name="name">
 			<value>Kaefer</value>
@@ -519,7 +522,7 @@
 	<object class="MixerBusFader" id="{882dc9a1-6348-4d65-8835-af0cd69336b8}" />
 	<object class="AutomationPoint" id="{026abdd6-9de0-41d0-a946-54c33f8eb224}">
 		<property name="position">
-			<value>0.20000000000000101</value>
+			<value>0</value>
 		</property>
 		<property name="value">
 			<value>1</value>

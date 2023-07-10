@@ -5,7 +5,7 @@
 			<value>ENV_Loop</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>3</value>
 		</property>
 		<relationship name="folder">
 			<destination>{5473af1d-31ee-4529-b374-7daf3481ceca}</destination>
@@ -59,7 +59,7 @@
 			<destination>{1e8cd821-9500-412a-bcb0-3825c8d3de0c}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{dd56739d-f79d-4906-8118-5dd93d464b1f}</destination>
+			<destination>{cc1430b6-e21b-4bf9-9e5a-0df24939316f}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{106f2164-c5bb-42a6-af6f-7532cd38576c}">
@@ -256,8 +256,8 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{5b03ab13-4db5-4d61-bd64-25ce2d968bb0}">
 		<relationship name="effects">
+			<destination>{342a55c5-3a37-4d93-a732-18253f8cdfa6}</destination>
 			<destination>{dae8107f-a3a3-456f-8c7a-7ced91501945}</destination>
-			<destination>{45602775-b1ed-4756-912b-c6172e72e05a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f53b790f-5026-4e49-adb1-f58f89c66860}" />
@@ -380,8 +380,12 @@
 			<destination>{a5c0ddbb-cde4-407e-816f-01d25d972c30}</destination>
 		</relationship>
 	</object>
+	<object class="GainEffect" id="{342a55c5-3a37-4d93-a732-18253f8cdfa6}">
+		<relationship name="modulators">
+			<destination>{64b446ad-867a-4885-8755-d16069694ff0}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{dae8107f-a3a3-456f-8c7a-7ced91501945}" />
-	<object class="SpatialiserEffect" id="{45602775-b1ed-4756-912b-c6172e72e05a}" />
 	<object class="AutomationPoint" id="{04af304a-7365-4dd9-b290-fbe5ddf534ff}">
 		<property name="position">
 			<value>0</value>
@@ -460,4 +464,21 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{beb61ac1-82b3-44c5-a250-acbd5c0e3517}" />
+	<object class="ADSRModulator" id="{64b446ad-867a-4885-8755-d16069694ff0}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>gain</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>2615.38501</value>
+		</property>
+		<property name="releaseTime">
+			<value>2000</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 </objects>
