@@ -139,7 +139,6 @@ public class Mech_Controller : MonoBehaviour
     {
         if (ctx.performed) { direction = ctx.ReadValue<float>() * -15; /*ChangeDirection(direction / 45);*/ }
         if (ctx.canceled) { direction = 0; }
-        Debug.Log(turnIndicator.localPosition.x);
 
         if (ctx.canceled && turnIndicator.localPosition.x < 7 && turnIndicator.localPosition.x > -7f)
         { ResetDirectionAndRotations(); }
@@ -360,14 +359,14 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if(moveDirection == 0 || FRLeg.targetPoint.GetComponent<Target_Follow>().reseting) { return; }
+        if(moveDirection == 0) { return; }
 
         script.isHeld = held;
 
         if (blocked && anim.GetCurrentAnimatorStateInfo(0).IsTag("Mid")) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetTrigger("Next_State"); script.LegActiveStatus(false); return; }
 
         //If pressed and leg is idle, move leg up
-        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held && EnoughGroundedLegs()) { 
+        if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Cycle") && held && EnoughGroundedLegs()) {
             anim.SetFloat("Speed_Multiplier", 2f); anim.SetTrigger("Next_State"); anim.SetBool("LegDown", true); script.LegActiveStatus(true);
         }
 

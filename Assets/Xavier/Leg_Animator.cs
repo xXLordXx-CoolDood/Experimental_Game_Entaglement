@@ -56,17 +56,15 @@ public class Leg_Animator : MonoBehaviour
 
     public void CheckForGround()
     {
-        Debug.DrawRay(hipBone.position, Vector3.down * Vector3.Distance(hipBone.position, groundSnap.position));
-
         initialDir.Normalize();
         targetPoint.gameObject.GetComponent<Target_Follow>().follow = true;
-        
+
         RaycastHit hit;
         if (Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer)) //Initial check to see if we need to apply leg gravity
         {
             legHeight = targetPoint.position.y;
             SetTargetFollowState(false);
-            controllerRef.CheckLegIdleStatus();
+            //controllerRef.CheckLegIdleStatus();
 
             //Get terrain type
             if (!grounded && !isSkidding && Physics.Raycast(groundSnap.position, Vector3.down * groundCheckDistance, out hit, groundCheckDistance, groundLayer))
@@ -92,15 +90,13 @@ public class Leg_Animator : MonoBehaviour
                         if(textureSounds[i].texture == terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture) { currentTerrainSfx = textureSounds[i].textureSound; }
                     }
 
-                    Debug.Log("Play Footstep");
                     Audio_Manager.instance.PlayOneShot(currentTerrainSfx, transform.position);
 
                     if (terrain.terrainData.terrainLayers[primaryTexture].diffuseTexture.name == "perlin_1") { controllerRef.IcyLegUpdate(true); }
                     else { controllerRef.IcyLegUpdate(false); }
+                    grounded = true;
                 }
             }
-
-            grounded = true;
         }
         else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
@@ -109,7 +105,6 @@ public class Leg_Animator : MonoBehaviour
         }
         else if(hipBone.position.y - hit.point.y > 4.76f) //If we did clip through the ground, ground the leg back on top
         {
-            Debug.Log($"Distance = {hipBone.position.y - hit.point.y}");
             SetTargetFollowState(false);
             ApplyGravity(-3);
             grounded = true;

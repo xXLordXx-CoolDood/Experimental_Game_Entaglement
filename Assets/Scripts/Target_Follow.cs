@@ -24,20 +24,20 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
-        if (reseting && timer >= 0) 
-        { 
-            timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
-            target.parent.GetComponent<Leg_Animator>().CheckForGround();
+        //if (reseting && timer >= 0) 
+        //{ 
+        //    timer += Time.deltaTime;
+        //    transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
+        //    target.parent.GetComponent<Leg_Animator>().CheckForGround();
 
-            if (timer >= 1) { 
-                timer = -1;
-                reseting = false;
-                target.parent.GetComponent<Leg_Animator>().CheckForGround();
-            }
+        //    if (timer >= 1) { 
+        //        timer = -1;
+        //        reseting = false;
+        //        target.parent.GetComponent<Leg_Animator>().CheckForGround();
+        //    }
 
-            return;
-        }
+        //    return;
+        //}
 
         #region legsnap
         pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
@@ -113,6 +113,8 @@ public class Target_Follow : MonoBehaviour
 
     public void ResetLeg()
     {
+        return;
+
         reseting = true;
         timer = 0;
 

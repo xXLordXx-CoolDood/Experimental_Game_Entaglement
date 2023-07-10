@@ -29,7 +29,7 @@ public class CameraSwitcher : MonoBehaviour
         cameraList[index].enabled = false;
         cameraList[(index + 1)  % cameraList.Length].enabled = true;
 
-        if (cameraList[gunCam].enabled) { gunUI.SetActive(true); GetComponent<Mech_Controller>().isAiming = true; Debug.Log("Aiming enabled"); }
+        if (cameraList[gunCam].enabled) { gunUI.SetActive(true); GetComponent<Mech_Controller>().isAiming = true; }
         else { gunUI.SetActive(false); GetComponent<Mech_Controller>().isAiming = false; }
     }
 }
