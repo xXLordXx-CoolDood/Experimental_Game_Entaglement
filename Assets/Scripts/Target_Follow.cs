@@ -8,12 +8,11 @@ public class Target_Follow : MonoBehaviour
     public Animator anim;
     public Transform target, mech, pivot, hipBone, groundSnap;
     public bool reseting;
-    public float maxLegDistance = 3.5f;
+    public float maxLegDistance = 3.5f, timer = -1;
     public LayerMask groundLayer;
 
     [SerializeField] public bool follow = true, isSkidding;
 
-    private float timer;
     private Vector3 prevTargetPos = Vector3.zero, prevPos = Vector3.zero;
     private bool isTooFar;
 
@@ -25,14 +24,14 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
-        if (reseting) 
+        if (reseting && timer >= 0) 
         { 
             timer += Time.deltaTime;
             transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
             target.parent.GetComponent<Leg_Animator>().CheckForGround();
 
             if (timer >= 1) { 
-                timer = 0; 
+                timer = -1;
                 reseting = false;
                 target.parent.GetComponent<Leg_Animator>().CheckForGround();
             }
@@ -96,10 +95,10 @@ public class Target_Follow : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel")) 
         {
             //Calculate position difference to pivot
+            timer = 0;
             Vector3 delta = target.position - prevTargetPos;
             mech.GetComponent<Mech_Controller>().idleTimer = 0;
             transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);
-
             prevTargetPos = target.position;
         }
     }
@@ -115,6 +114,7 @@ public class Target_Follow : MonoBehaviour
     public void ResetLeg()
     {
         reseting = true;
+        timer = 0;
 
         prevPos = transform.position;
         prevTargetPos = target.position;
