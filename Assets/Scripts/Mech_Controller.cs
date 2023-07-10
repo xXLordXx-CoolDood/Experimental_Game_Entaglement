@@ -377,7 +377,7 @@ public class Mech_Controller : MonoBehaviour
 
         //If pressed and leg is falling, reverse anim to leg idle
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") && held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", true); script.LegActiveStatus(true); }
-
+        
         //If released and leg is rising, reverse anim to leg idle
         if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") && !held) { anim.SetFloat("Speed_Multiplier", -2f); anim.SetBool("LegDown", false); script.LegActiveStatus(false); }
     }

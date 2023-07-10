@@ -3320,6 +3320,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6997947681339966765, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.331
+      objectReference: {fileID: 0}
     - target: {fileID: 6997947681377588120, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 18
