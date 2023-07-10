@@ -27,9 +27,9 @@ public class Target_Follow : MonoBehaviour
         pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
         Debug.DrawRay(pivot.position, pivot.forward * 3, Color.green);
         Vector3 posOnLine = Vector3.Project(transform.position - pivot.position, pivot.forward) + new Vector3(pivot.position.x, transform.position.y, pivot.position.z);
-        
-        if (Vector3.Distance(transform.position, posOnLine) > 0.25f && (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower"))) 
-        { Debug.Log("Snapped to line"); transform.position = posOnLine; }
+
+        if (Vector3.Distance(transform.position, posOnLine) > 0.25f && (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower")))
+        { transform.position = posOnLine; }
 
         //Get x/z vector towards target position. Get the direction we are currently moving as well
         Vector3 calcDir = target.position - transform.position;
@@ -68,8 +68,7 @@ public class Target_Follow : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer))
             {
-                Debug.Log($"Hit Point is {hit.point}!");
-                transform.position = new Vector3(hit.point.x, hit.point.y + (transform.position.y - groundSnap.position.y), hit.point.z);
+                transform.position = new Vector3(hit.point.x, hit.point.y + (transform.position.y - groundSnap.position.y), hit.point.z); 
             }
             else { transform.position = target.position; }
             prevTargetPos = target.position;
@@ -95,6 +94,4 @@ public class Target_Follow : MonoBehaviour
 
         return angle <= 45;
     }
-
-
 }

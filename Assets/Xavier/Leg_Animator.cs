@@ -15,7 +15,7 @@ public class Leg_Animator : MonoBehaviour
     [SerializeField] private TextureSound[] textureSounds;
 
     public Mech_Controller controllerRef;
-    public bool isHeld, canMove, grounded = true;
+    public bool isHeld, grounded = true;
     private EventReference currentTerrainSfx;
     [HideInInspector] public float legSpeed, legHeight;
     [HideInInspector] public int forwardMultiplier = 1;
@@ -46,7 +46,7 @@ public class Leg_Animator : MonoBehaviour
 
     private void ApplyGravity()
     {
-        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime, targetPoint.position.z);
+        targetPoint.position = new Vector3(targetPoint.position.x, targetPoint.position.y - Time.deltaTime * 3, targetPoint.position.z);
     }
 
     private void OnDrawGizmos()
@@ -101,7 +101,6 @@ public class Leg_Animator : MonoBehaviour
             }
 
             grounded = true;
-            canMove = false;
         }
         else if(Physics.Raycast(hipBone.position, Vector3.down, out hit, Vector3.Distance(hipBone.position, groundSnap.position), groundLayer) == false) //Check to ensure the leg didn't clip through the ground
         {
@@ -113,7 +112,6 @@ public class Leg_Animator : MonoBehaviour
             Debug.Log("Prevented Clip");
             SetTargetFollowState(false);
             grounded = true;
-            canMove = false;
         }
 
         prevTargetPos = targetPoint.position;
