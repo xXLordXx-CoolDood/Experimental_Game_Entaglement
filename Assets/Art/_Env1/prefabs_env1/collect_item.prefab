@@ -164,10 +164,8 @@ MonoBehaviour:
   value: 100
   matList:
   - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
-  - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
-  - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
-  - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
-  - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
+  - {fileID: 2100000, guid: 78c0b7125641f1e46bb5666e8a4ae5e4, type: 2}
+  - {fileID: 2100000, guid: 3f6884f34dc01dc4fb6dd38cf756f636, type: 2}
 --- !u!1 &6845511165496440784
 GameObject:
   m_ObjectHideFlags: 0
