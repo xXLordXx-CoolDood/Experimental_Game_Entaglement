@@ -62,7 +62,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="HighScore" style="-unity-text-align: upper-center; flex-grow: 1;">
             <ui:Label text="Previous Logs" display-tooltip-when-elided="true" name="HighScoreText" style="font-size: 75px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ChargeVectorBold-mLyD9%20SDF.asset?fileID=11400000&amp;guid=87711266bf41fee439d664173f7edeeb&amp;type=2#ChargeVectorBold-mLyD9 SDF&apos;); margin-top: 64px; margin-left: 0; margin-right: 0; margin-bottom: 0;" />
-            <ui:ListView focusable="true" name="HighScoreTable" fixed-item-height="0" virtualization-method="DynamicHeight" style="flex-grow: 1; font-size: 64px; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ConnectionSerif-d20X%20SDF.asset?fileID=11400000&amp;guid=8033b44acf617164596e64796eb0e9e0&amp;type=2#ConnectionSerif-d20X SDF&apos;); padding-left: 128px; padding-right: 128px;" />
+            <ui:ListView focusable="true" name="HighScoreTable" fixed-item-height="0" virtualization-method="DynamicHeight" style="flex-grow: 1; font-size: 64px; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ConnectionSerif-d20X%20SDF.asset?fileID=11400000&amp;guid=8033b44acf617164596e64796eb0e9e0&amp;type=2#ConnectionSerif-d20X SDF&apos;); padding-left: 128px; padding-right: 128px; padding-top: 128px; padding-bottom: 128px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
