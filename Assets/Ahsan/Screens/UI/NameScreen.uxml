@@ -28,7 +28,7 @@
                             <ui:VisualElement name="greenTri" class="greenTriangle" />
                         </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:Label text="&amp;" display-tooltip-when-elided="true" name="and" style="-unity-text-align: middle-center; font-size: 65px; margin-left: 15px; margin-right: 15px;" />
+                    <ui:Label text="&amp;" display-tooltip-when-elided="true" name="and" style="-unity-text-align: middle-center; font-size: 65px; margin-left: 15px; margin-right: 15px; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ConnectionSerif-d20X%20SDF.asset?fileID=11400000&amp;guid=8033b44acf617164596e64796eb0e9e0&amp;type=2#ConnectionSerif-d20X SDF&apos;);" />
                     <ui:VisualElement name="RightName" style="flex-direction: row;">
                         <ui:VisualElement name="slot1" class="slot">
                             <ui:VisualElement name="yellowTri" class="yellowTriangle" style="background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/zt.png?fileID=2800000&amp;guid=c10525db68afd7e4792c65a9ee2be72f&amp;type=3#zt&apos;);" />

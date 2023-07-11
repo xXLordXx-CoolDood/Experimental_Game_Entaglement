@@ -138,7 +138,7 @@ public class NameScreenScript : MonoBehaviour
         {
             Scroll(leftScroll, leftName, ref leftSlot, ref leftChar);
             Scroll(rightScroll, rightName, ref rightSlot, ref rightChar);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 

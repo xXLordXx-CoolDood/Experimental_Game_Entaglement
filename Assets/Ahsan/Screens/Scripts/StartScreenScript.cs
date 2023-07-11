@@ -14,13 +14,9 @@ public class StartScreenScript : MonoBehaviour
     void Start()
     {
         uiDoc = GetComponent<UIDocument>();
-        
-
         var root = uiDoc.rootVisualElement;
 
         root.Q("Slider").visible = false;
-
-        
     }
 
 
