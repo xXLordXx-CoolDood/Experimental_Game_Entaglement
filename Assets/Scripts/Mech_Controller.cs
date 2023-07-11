@@ -176,38 +176,43 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
-        if (FRLeg.targetPoint.GetComponent<Target_Follow>().reseting) { return; }
+        Debug.Log(gun.localEulerAngles.y);
 
         #region //Blocked logic & gun rotation
-        RaycastHit hit;
-        if (Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) ||
-            Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer)) 
-        { blocked = true; Debug.Log("Blocked"); }
-        else { blocked = false; }
+        if (GetComponent<CameraSwitcher>().cameraList[1].enabled)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(frontCheck.position, frontCheck.forward, out hit, 2, groundLayer) ||
+                Physics.Raycast(backCheck.position, backCheck.forward, out hit, 2, groundLayer))
+            { blocked = true; Debug.Log("Blocked"); }
+            else { blocked = false; }
 
-        if (gunDirectionX != 0) { gunAccelX = Mathf.Clamp(gunAccelX + (Mathf.Abs(gunDirectionX) * 30 * Time.deltaTime), 0, 15); prevDirX = gunDirectionX; }
-        else { gunAccelX = Mathf.Clamp(gunAccelX - (15 * Time.deltaTime), 0, 15); }
-        if (gunDirectionY != 0) { gunAccelY = Mathf.Clamp(gunAccelY + (Mathf.Abs(gunDirectionY) * 60 * Time.deltaTime), 0, 30); prevDirY = gunDirectionY; }
-        else { gunAccelY = Mathf.Clamp(gunAccelY - (30 * Time.deltaTime), 0, 30); }
+            if (gunDirectionX != 0) { gunAccelX = Mathf.Clamp(gunAccelX + (Mathf.Abs(gunDirectionX) * 30 * Time.deltaTime), 0, 15); prevDirX = gunDirectionX; }
+            else { gunAccelX = Mathf.Clamp(gunAccelX - (10 * Time.deltaTime), 0, 30); }
+            if (gunDirectionY != 0) { gunAccelY = Mathf.Clamp(gunAccelY + (Mathf.Abs(gunDirectionY) * 60 * Time.deltaTime), 0, 30); prevDirY = gunDirectionY; }
+            else { gunAccelY = Mathf.Clamp(gunAccelY - (20 * Time.deltaTime), 0, 60); }
 
-        float accelX = (gunAccelX * prevDirX)  + (gunDirectionX * 15);
-        float accelY = (gunAccelY * prevDirY) + (gunDirectionY * 30);
+            float accelX = gunAccelX * prevDirX;
+            float accelY = gunAccelY * prevDirY;
 
-        gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + accelY * Time.deltaTime, 90); //Gun Left/Right
-        gunYaw.Rotate(new Vector3(-1, 0, 0), accelX * Time.deltaTime); //Gun Up/Down
+            gun.localEulerAngles = new Vector3(0, gun.localEulerAngles.y + accelY * Time.deltaTime, 90); //Gun Left/Right
+            gunYaw.Rotate(new Vector3(-1, 0, 0), accelX * Time.deltaTime); //Gun Up/Down
 
-        float rot = gunYaw.eulerAngles.x - 180;
+            float rot = gunYaw.eulerAngles.x - 180;
 
-        if(rot * 1.25f > 0) { heightLines.localPosition = new Vector3(0, (rot * 1.5f) - 270, 0); }
-        else { heightLines.localPosition = new Vector3(0, (rot * 1.5f) + 270, 0); }
+            if (rot * 1.25f > 0) { heightLines.localPosition = new Vector3(0, (rot * 1.5f) - 270, 0); }
+            else { heightLines.localPosition = new Vector3(0, (rot * 1.5f) + 270, 0); }
 
-        if (rot > -170 && rot < 0) { rot = -170; }
-        if(rot < 100 && rot > 0) { rot = 100; }
-        gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
+            if (rot > -170 && rot < 0) { rot = -170; }
+            if (rot < 100 && rot > 0) { rot = 100; }
+            gunYaw.eulerAngles = new Vector3(rot + 180, gunYaw.eulerAngles.y, gunYaw.eulerAngles.z);
 
-        gunRotIndicator.Rotate(new Vector3(0, 0, 1), gunDirectionY * 60 * Time.deltaTime);
+            gunRotIndicator.localEulerAngles = new Vector3(0, 0, gun.localEulerAngles.y);
+        }
+        else if(gunAccelX != 0 || gunAccelY != 0) { gunAccelX = 0; gunAccelY = 0; }
         #endregion
 
+        #region skid logic
         if (_skidMultiplier > 0) { 
             if(resistor1.isHeld || resistor2.isHeld) { stumbled = false; _skidMultiplier -= Time.deltaTime * _skidDecay * 3; }
             _skidMultiplier -= Time.deltaTime * _skidDecay;
@@ -236,10 +241,10 @@ public class Mech_Controller : MonoBehaviour
         UpdateBodyPosition();
 
         if (stumbled) { return; }
+        #endregion
 
-        //CheckLegCombos();
-
-        if(direction != 0) { UpdateDirectionRotations(); }
+        if (direction != 0) { UpdateDirectionRotations(); }
+        CheckLegIdleStatus();
      }
 
     #region UpdateFunctions
@@ -283,6 +288,7 @@ public class Mech_Controller : MonoBehaviour
         transform.position = new Vector3(transform.position.x, averageY - heightOffset, transform.position.z);
     }
 
+    //Used to be a game mechanic, but became defunct as the project progressed
     //private void CheckLegCombos()
     //{
     //    kneeling = false;
@@ -363,7 +369,7 @@ public class Mech_Controller : MonoBehaviour
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)
     {
-        if(moveDirection == 0) { return; }
+        if(moveDirection == 0) { idleTimer = 999; CheckLegIdleStatus(); return; }
 
         script.isHeld = held;
 
@@ -417,16 +423,16 @@ public class Mech_Controller : MonoBehaviour
         gunLaser.SendEvent("MechShot");
 
         //Calculate shot backward angle
-        float angle = gun.eulerAngles.y;
+        float angle = gun.localEulerAngles.y;
 
-        skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
+        skidDir = new Vector3(-1 * Mathf.Cos(Mathf.Deg2Rad * gun.eulerAngles.y), 0, Mathf.Sin(Mathf.Deg2Rad * gun.eulerAngles.y));
 
         StartCoroutine(ShotDelay());
 
-        if (angle > 240 && angle < 300) { resistor1 = BLLeg; resistor2 = BRLeg; }
-        if (angle > 60 && angle < 120) { resistor1 = FLLeg; resistor2 = FRLeg; }
-        if (angle > 120 && angle < 240) { resistor1 = FRLeg; resistor2 = BRLeg; }
-        if (angle > 300 || angle < 60) { resistor1 = FLLeg; resistor2 = BLLeg; }
+        if (angle > 330 || angle < 30) { resistor1 = BLLeg; resistor2 = BRLeg; Debug.Log("Back"); }
+        if (angle > 150 && angle < 210) { resistor1 = FLLeg; resistor2 = FRLeg; Debug.Log("Front"); }
+        if (angle > 30 && angle < 150) { resistor1 = FRLeg; resistor2 = BRLeg; Debug.Log("Right"); }
+        if (angle > 210 && angle < 330) { resistor1 = FLLeg; resistor2 = BLLeg; Debug.Log("Left"); }
 
         RaycastHit hit;
         if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.GetComponent<Score>() && hit.collider.tag != "Points")
@@ -470,13 +476,11 @@ public class Mech_Controller : MonoBehaviour
     public void CheckLegIdleStatus()
     {
         //If all legs are grounded or idling, set all legs to idle state
-        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld &&
-            !FRLeg.targetPoint.GetComponent<Target_Follow>().reseting)
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
         {
-            IdleAllLegs();
-            idleTimer += Time.deltaTime / 4;
+            idleTimer += Time.deltaTime;
 
-            if(idleTimer > 5)
+            if(idleTimer > 10)
             {
                 FRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
                 BRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
@@ -487,14 +491,6 @@ public class Mech_Controller : MonoBehaviour
         }
     }
 
-    private void IdleAllLegs()
-    {
-        FRAnim.SetTrigger("Idle"); FRAnim.SetFloat("Speed_Multiplier", 1); FRAnim.ResetTrigger("Next_State");
-        FLAnim.SetTrigger("Idle"); FLAnim.SetFloat("Speed_Multiplier", 1); FLAnim.ResetTrigger("Next_State");
-        BRAnim.SetTrigger("Idle"); BRAnim.SetFloat("Speed_Multiplier", 1); BRAnim.ResetTrigger("Next_State");
-        BLAnim.SetTrigger("Idle"); BLAnim.SetFloat("Speed_Multiplier", 1); BLAnim.ResetTrigger("Next_State");
-    }
-
     IEnumerator ShotDelay()
     {
         yield return new WaitForSeconds(0.5f);
@@ -502,7 +498,7 @@ public class Mech_Controller : MonoBehaviour
         BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BRLeg.isSkidding = true;
         FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; FLLeg.isSkidding = true;
         BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BLLeg.isSkidding = true;
-        if (icyLegs > 2) { _skidMultiplier = skidStrength * 2; _skidDecay = skidDecay * 2; }
+        if (icyLegs > 2) { _skidMultiplier = skidStrength * 3.5f; _skidDecay = skidDecay * 3.5f; }
         else { _skidMultiplier = skidStrength; _skidDecay = skidDecay; }
     }
     #endregion

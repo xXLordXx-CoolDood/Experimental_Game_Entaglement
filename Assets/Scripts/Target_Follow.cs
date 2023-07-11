@@ -7,8 +7,7 @@ public class Target_Follow : MonoBehaviour
 {
     public Animator anim;
     public Transform target, mech, pivot, hipBone, groundSnap;
-    public bool reseting;
-    public float maxLegDistance = 3.5f, timer = -1;
+    public float maxLegDistance = 3.5f;
     public LayerMask groundLayer;
 
     [SerializeField] public bool follow = true, isSkidding;
@@ -24,21 +23,6 @@ public class Target_Follow : MonoBehaviour
 
     private void Update()
     {
-        //if (reseting && timer >= 0) 
-        //{ 
-        //    timer += Time.deltaTime;
-        //    transform.position = Vector3.Lerp(prevPos, prevTargetPos, timer);
-        //    target.parent.GetComponent<Leg_Animator>().CheckForGround();
-
-        //    if (timer >= 1) { 
-        //        timer = -1;
-        //        reseting = false;
-        //        target.parent.GetComponent<Leg_Animator>().CheckForGround();
-        //    }
-
-        //    return;
-        //}
-
         #region legsnap
         pivot.eulerAngles = new Vector3(0, pivot.eulerAngles.y, pivot.eulerAngles.z);
         Debug.DrawRay(pivot.position, pivot.forward * 3, Color.green);
@@ -95,7 +79,6 @@ public class Target_Follow : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Rise") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Lower") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Kneel")) 
         {
             //Calculate position difference to pivot
-            timer = 0;
             Vector3 delta = target.position - prevTargetPos;
             mech.GetComponent<Mech_Controller>().idleTimer = 0;
             transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);
@@ -113,18 +96,10 @@ public class Target_Follow : MonoBehaviour
 
     public void ResetLeg()
     {
-        return;
-
-        reseting = true;
-        timer = 0;
-
-        prevPos = transform.position;
-        prevTargetPos = target.position;
-
-        RaycastHit hit;
-        if(Physics.Raycast(pivot.position, -pivot.up, out hit, Mathf.Infinity, groundLayer))
+        if (Vector3.Distance(transform.position, target.position) > 1)
         {
-            prevTargetPos.y = hit.point.y + 2.33f;
+            transform.position = target.position;
+            target.parent.GetComponent<Leg_Animator>().CheckForGround();
         }
     }
 }

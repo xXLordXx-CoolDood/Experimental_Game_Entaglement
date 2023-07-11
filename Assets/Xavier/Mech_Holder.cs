@@ -57,7 +57,6 @@ public class Mech_Holder : MonoBehaviour
     {
         while (!mech.activeInHierarchy)
         {
-            Debug.Log("Flash");
             ArduinoHandler.LightOn();
             yield return new WaitForSeconds(1.0f);
             ArduinoHandler.LightOff();
