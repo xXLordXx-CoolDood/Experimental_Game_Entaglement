@@ -1597,7 +1597,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: -46.32889, y: 22.492678, z: -27.618011}
-  m_TranslationOffset: {x: 140.79085, y: 2.157322, z: -59.39941}
+  m_TranslationOffset: {x: -40.045834, y: 3.0673218, z: -142.98917}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 0
   m_AffectTranslationZ: 1
@@ -2478,9 +2478,9 @@ Canvas:
   m_GameObject: {fileID: 426608407}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1478535623}
+  m_PlaneDistance: 0.1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -3883,7 +3883,7 @@ VisualEffect:
       - m_Value: 3.4
         m_Name: Size
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 15
         m_Name: Rate
         m_Overridden: 1
       - m_Value: 600
@@ -3893,10 +3893,10 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
+      - m_Value: {x: -0, y: 84.30788, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -246.74055, y: 1.9599136, z: -42.150673}
+      - m_Value: {x: -160.75049, y: 2.8699136, z: -56.460434}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -4535,7 +4535,7 @@ VisualEffect:
       - m_Value: 3.4
         m_Name: Size
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 15
         m_Name: Rate
         m_Overridden: 1
       - m_Value: 600
@@ -4545,10 +4545,10 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
+      - m_Value: {x: -0, y: 84.30788, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -250.87357, y: 1.9595598, z: -37.803566}
+      - m_Value: {x: -165.62714, y: 2.8695598, z: -59.952896}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -4808,7 +4808,7 @@ VisualEffect:
       - m_Value: 3.4
         m_Name: Size
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 15
         m_Name: Rate
         m_Overridden: 1
       - m_Value: 600
@@ -4818,10 +4818,10 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
+      - m_Value: {x: -0, y: 84.30788, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -247.77002, y: 1.9595598, z: -37.050617}
+      - m_Value: {x: -165.9439, y: 2.8695598, z: -56.775078}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -4878,7 +4878,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.459961, y: -31.099976}
+  m_AnchoredPosition: {x: 4.5999756, y: -37.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &812840393
@@ -4901,17 +4901,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: T I M E - 300
+  m_text: TIME - 300
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bfeac2ffacc3cf429e1d890b56f049d, type: 2}
+  m_sharedMaterial: {fileID: -7039785660479671677, guid: 3bfeac2ffacc3cf429e1d890b56f049d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 3019899647
+  m_fontColor: {r: 1, g: 0.009313964, b: 0, a: 0.7058824}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4934,7 +4934,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5222,7 +5222,7 @@ VisualEffect:
       - m_Value: 3.4
         m_Name: Size
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 15
         m_Name: Rate
         m_Overridden: 1
       - m_Value: 600
@@ -5232,10 +5232,10 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
+      - m_Value: {x: -0, y: 84.30788, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -249.6478, y: 1.9599136, z: -42.855995}
+      - m_Value: {x: -160.45378, y: 2.8699136, z: -59.43725}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -6261,7 +6261,7 @@ RectTransform:
   m_GameObject: {fileID: 1003728088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 1, z: 1}
+  m_LocalScale: {x: 0.108, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1223980575}
@@ -6285,14 +6285,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 15d56b449c82ac74fb3b2622c612f99c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7272,7 +7272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -13.6}
+  m_AnchoredPosition: {x: 0, y: -13.599976}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1223980576
@@ -7295,7 +7295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7eb5134f2d93813429bd9058b130738b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8526,14 +8526,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8339653, g: 0.38389105, b: 0.8584906, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0e2b0ee9f71d93a4a9d68a63ca91a7f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8586,7 +8586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.459961, y: 0}
+  m_AnchoredPosition: {x: 4.5999756, y: -9.599976}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1476446508
@@ -8611,15 +8611,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: SCORE - 0pts
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bfeac2ffacc3cf429e1d890b56f049d, type: 2}
+  m_sharedMaterial: {fileID: -7039785660479671677, guid: 3bfeac2ffacc3cf429e1d890b56f049d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3036676095
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8636,13 +8636,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 3
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -8689,6 +8689,11 @@ CanvasRenderer:
 --- !u!4 &1478535620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6997947680462919391, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+  m_PrefabInstance: {fileID: 519754357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1478535623 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6997947680462919386, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
   m_PrefabInstance: {fileID: 519754357}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1490541560
@@ -9002,8 +9007,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533031145}
-  m_LocalRotation: {x: -0, y: -0.9929272, z: -0, w: -0.11872536}
-  m_LocalPosition: {x: -219.38, y: -0.35, z: -59.93}
+  m_LocalRotation: {x: -0, y: -0.6711248, z: -0, w: -0.7413444}
+  m_LocalPosition: {x: -139.36, y: 0.56, z: -31.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9012,7 +9017,7 @@ Transform:
   - {fileID: 1490751762}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -193.637, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -275.69202, z: 0}
 --- !u!1001 &1552592692
 PrefabInstance:
   m_ObjectHideFlags: 0
