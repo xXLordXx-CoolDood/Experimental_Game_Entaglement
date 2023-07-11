@@ -10,14 +10,12 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
-        switch (value)
+        for(int i = 0; i < matList.Length; i++)
         {
-            case 100: GetComponent<Renderer>().material = matList[0]; break;
-            case 200: GetComponent<Renderer>().material = matList[1]; break;
-            case 300: GetComponent<Renderer>().material = matList[2]; break;
-            case 400: GetComponent<Renderer>().material = matList[3]; break;
-            case 500: GetComponent<Renderer>().material = matList[4]; break;
-            default: break;
+            if(GetComponent<Renderer>().material == matList[i])
+            {
+                value = 100 + i * 100;
+            }
         }
     }
 
