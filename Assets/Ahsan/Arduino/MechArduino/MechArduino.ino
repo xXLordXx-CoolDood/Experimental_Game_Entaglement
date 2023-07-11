@@ -49,10 +49,10 @@ void loop() {
   for(int i = A0; i<=A5 ; i++){
     float val = analogRead(i);
     val = floatMap(val, 0, 1023, 0, 1);
-    if(val > 0.5f){
+    if(val > 0.75f){
       input |= (uint32_t)((uint32_t)1 << (i-3));  
     }
-    if(val < 0.2f){
+    if(val < 0.5f){
       input |= (uint32_t)((uint32_t)0 << (i-3));  
     }
   }

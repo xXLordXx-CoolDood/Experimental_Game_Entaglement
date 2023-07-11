@@ -945,13 +945,13 @@ MonoBehaviour:
       Data2: 1255973010
       Data3: -910298727
       Data4: -434021125
-    Path: event:/Mech/Legs/Leg_Active
+    Path: event:/Mech/Legs/Leg_Active_Loop
   legInactiveEvent:
     Guid:
-      Data1: -810599273
-      Data2: 1298944808
-      Data3: 39411892
-      Data4: -1852454881
+      Data1: 395248391
+      Data2: 1289702335
+      Data3: -1788961620
+      Data4: -1579478510
     Path: event:/Mech/Legs/Leg_InActive
   textureSounds:
   - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
@@ -1340,13 +1340,13 @@ MonoBehaviour:
       Data2: 1255973010
       Data3: -910298727
       Data4: -434021125
-    Path: event:/Mech/Legs/Leg_Active
+    Path: event:/Mech/Legs/Leg_Active_Loop
   legInactiveEvent:
     Guid:
-      Data1: -810599273
-      Data2: 1298944808
-      Data3: 39411892
-      Data4: -1852454881
+      Data1: 395248391
+      Data2: 1289702335
+      Data3: -1788961620
+      Data4: -1579478510
     Path: event:/Mech/Legs/Leg_InActive
   textureSounds:
   - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
@@ -1796,13 +1796,13 @@ MonoBehaviour:
       Data2: 1255973010
       Data3: -910298727
       Data4: -434021125
-    Path: event:/Mech/Legs/Leg_Active
+    Path: event:/Mech/Legs/Leg_Active_Loop
   legInactiveEvent:
     Guid:
-      Data1: -810599273
-      Data2: 1298944808
-      Data3: 39411892
-      Data4: -1852454881
+      Data1: 395248391
+      Data2: 1289702335
+      Data3: -1788961620
+      Data4: -1579478510
     Path: event:/Mech/Legs/Leg_InActive
   textureSounds:
   - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
@@ -2497,13 +2497,13 @@ MonoBehaviour:
       Data2: 1255973010
       Data3: -910298727
       Data4: -434021125
-    Path: event:/Mech/Legs/Leg_Active
+    Path: event:/Mech/Legs/Leg_Active_Loop
   legInactiveEvent:
     Guid:
-      Data1: -810599273
-      Data2: 1298944808
-      Data3: 39411892
-      Data4: -1852454881
+      Data1: 395248391
+      Data2: 1289702335
+      Data3: -1788961620
+      Data4: -1579478510
     Path: event:/Mech/Legs/Leg_InActive
   textureSounds:
   - texture: {fileID: 2800000, guid: b35b3de068a594c4d8e4ee247a36d44f, type: 3}
@@ -3219,6 +3219,34 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ade743e3-a2e3-490f-be92-7f2367208b15
     m_ActionName: UI/Start[/Keyboard/v,/Keyboard/n]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ded5cb13-0ad2-4c63-8d95-e1eaf0f61949
+    m_ActionName: UI/LeftSelect[/Keyboard/v,/ArduinoDevice1/Button1,/ArduinoDevice2/Button1,/ArduinoDevice3/Button1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ad69e09-37cf-4069-8e75-5df451f57534
+    m_ActionName: UI/RightSelect[/Keyboard/n,/ArduinoDevice1/Button1,/ArduinoDevice2/Button1,/ArduinoDevice3/Button1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02d24f57-2b43-4a21-9958-707e96064e2a
+    m_ActionName: UI/LeftScroll[/Keyboard/g,/Keyboard/t,/ArduinoDevice1/Button3,/ArduinoDevice2/Button3,/ArduinoDevice3/Button3,/ArduinoDevice1/Button4,/ArduinoDevice2/Button4,/ArduinoDevice3/Button4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d6391a3-5dab-4967-9abd-fc2310feecae
+    m_ActionName: UI/RightScroll[/Keyboard/j,/Keyboard/u,/ArduinoDevice1/Button7,/ArduinoDevice2/Button7,/ArduinoDevice3/Button7,/ArduinoDevice1/Button8,/ArduinoDevice2/Button8,/ArduinoDevice3/Button8]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6914796d-5176-4356-acce-2848925f0f93
+    m_ActionName: UI/LogMission[/Keyboard/v,/Keyboard/n,/ArduinoDevice1/Button1,/ArduinoDevice2/Button1,/ArduinoDevice3/Button1,/ArduinoDevice1/Button11,/ArduinoDevice2/Button11,/ArduinoDevice3/Button11]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e3635ed-4fda-4f28-a3e3-78eac8c734ff
+    m_ActionName: UI/DeleteLeft[/ArduinoDevice1/Button16,/ArduinoDevice2/Button16,/ArduinoDevice3/Button16,/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43c8f597-fbcf-4823-b8f7-2653cb6f8ab8
+    m_ActionName: UI/DeleteRight[/ArduinoDevice1/Button17,/ArduinoDevice2/Button17,/ArduinoDevice3/Button17,/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DogMech
@@ -3247,6 +3275,7 @@ MonoBehaviour:
   FLAnim: {fileID: 6997947681688313281}
   BLAnim: {fileID: 6997947681511017710}
   gunAnim: {fileID: 4196801243959665369}
+  camAnim: {fileID: 0}
   gun: {fileID: 7436100209350573521}
   gunYaw: {fileID: 5444604156041084691}
   shotSpawn: {fileID: 6997947681667819710}
@@ -3278,10 +3307,10 @@ MonoBehaviour:
     Path: event:/Mech/GUN/GUN_Fire
   explodeEvent:
     Guid:
-      Data1: -200603613
-      Data2: 1295937352
-      Data3: -364732012
-      Data4: -1888562377
+      Data1: -212065073
+      Data2: 1124341763
+      Data3: 1046564009
+      Data4: 1902553073
     Path: event:/Mech/MECH_EXPLODE
   prevPosition: {x: 0, y: 0}
   idleTimer: 0

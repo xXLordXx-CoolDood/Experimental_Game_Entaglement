@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.Mesh;
 using static UnityEngine.Rendering.DebugUI;
@@ -22,7 +25,9 @@ public class NameScreenScript : MonoBehaviour
     int leftChar, rightChar;
     float leftScroll, rightScroll;
 
+
     bool leftFinalized = false, rightFinalized = false;
+    bool listUpdated = false;
     string p1Name = "", p2Name = "";
 
     List<char> chars = new List<char>();
@@ -70,18 +75,28 @@ public class NameScreenScript : MonoBehaviour
         }
         Func<VisualElement> makeItem = () =>
         {
-            return new Label();
+            var v = new VisualElement();
+            v.style.flexDirection = FlexDirection.Row;
+            v.style.flexGrow = 1;
+            v.style.justifyContent = Justify.SpaceBetween;
+            
+            Label name = new Label();
+            Label score = new Label();
+            v.Add(name);
+            v.Add(score);
+
+            return v;
         };
 
         Action<VisualElement, int> bindItem = (e, i) =>
         {
-            string s = String.Format("{0}  and  {1}", saveData[i].p1Name, saveData[i].p2Name);
-            Debug.Log(s);
-            (e as Label).text = s;
+            var labels = e.Query<Label>().ToList();
+            labels[0].text = saveData[i].p1Name + " & " + saveData[i].p2Name;
+            labels[1].text = saveData[i].score.ToString(); 
         };
 
-
-
+        saveData.Add(thisLevelData);
+        saveData.Sort((x, y) => { return (y.score.CompareTo(x.score)); });
 
         highScoreList = root.Query<ListView>();
         highScoreList.makeItem = makeItem;
@@ -89,8 +104,6 @@ public class NameScreenScript : MonoBehaviour
         highScoreList.itemsSource = saveData;
         highScoreList.selectionType = SelectionType.None;
 
-        saveData.Add(thisLevelData);
-        saveData.Sort((x, y) => { return (x.score.CompareTo(y.score)); });
 
     }
 
@@ -197,26 +210,11 @@ public class NameScreenScript : MonoBehaviour
     public void SaveNames()
     {
         leftName.ForEach(x => p1Name += x.Query<Label>("selectedCharacter").First().text);
-        rightName.ForEach(x => p1Name += x.Query<Label>("selectedCharacter").First().text);
-
+        rightName.ForEach(x => p2Name += x.Query<Label>("selectedCharacter").First().text);
 
         thisLevelData.p1Name = p1Name;
         thisLevelData.p2Name = p2Name;
 
-        Func<VisualElement> makeItem = () =>
-        {
-            return new Label();
-        };
-
-        Action<VisualElement, int> bindItem = (e, i) =>
-        {
-            string s = String.Format("{0}  and  {1}", saveData[i].p1Name, saveData[i].p2Name);
-            Debug.Log(s);
-            (e as Label).text = s;
-        };
-
-        highScoreList.makeItem = makeItem;
-        highScoreList.bindItem = bindItem;
         highScoreList.Rebuild();
 
     }
@@ -296,11 +294,26 @@ public class NameScreenScript : MonoBehaviour
     public void LogMission(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
+        if (listUpdated)
+        {
+            SaveLoadScript.Save(JsonHelper.ToJson<SaveData>(saveData.ToArray()));
+            SceneManager.LoadScene("StartScreenUI");
+            return;
+        }
+
         if (leftFinalized && rightFinalized)
         {
             SaveNames();
-
+            listUpdated = true;
             Debug.Log(saveData.Count);
+            root.Q<Label>("startText").style.fontSize = 48;
+            root.Q<Label>("startText").text = "Transfer To"+"\n"+"Next Pilots";
+
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

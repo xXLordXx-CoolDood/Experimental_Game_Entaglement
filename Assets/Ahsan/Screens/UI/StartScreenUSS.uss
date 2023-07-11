@@ -3,21 +3,30 @@
 }
 
 .title {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Ahsan/Screens/Fonts/ConnectionSerif-d20X.otf?fileID=12800000&guid=8a557b0915892044e9ada2802f98bf00&type=3#ConnectionSerif-d20X');
 }
 
 .highScoreTitle {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .highScoreList {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .startMessageContainer {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .startMessageText {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.sliderBar {
+    background-color: rgba(255, 255, 255, 255);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

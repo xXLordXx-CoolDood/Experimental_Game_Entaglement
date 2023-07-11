@@ -1,11 +1,36 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Ahsan/Screens/UI/StartScreenUSS.uss?fileID=7433441132597879392&amp;guid=e347f6fc479259f4da0bfcbe93fbb00e&amp;type=3#StartScreenUSS" />
-    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto; justify-content: center;">
-        <ui:Label text="The Mech Game" display-tooltip-when-elided="true" name="title" class="title" style="-unity-text-align: upper-center; font-size: 125px; -unity-font-style: normal; padding-left: 64px; padding-right: 64px; padding-top: 64px; padding-bottom: 64px;" />
+    <ui:VisualElement name="root" class="background" style="flex-grow: 1; flex-basis: auto; justify-content: center; background-image: url(&apos;project://database/Assets/Ahsan/Screens/Sprites/gradient.png?fileID=2800000&amp;guid=48a798614a71ba74bb587b1695b93130&amp;type=3#gradient&apos;);">
+        <ui:Label text="BOKKSUMEKA" display-tooltip-when-elided="true" name="title" class="title" style="-unity-text-align: upper-center; font-size: 192px; -unity-font-style: normal; padding-left: 64px; padding-right: 64px; padding-top: 64px; padding-bottom: 64px; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ChargeVectorBold-mLyD9%20SDF.asset?fileID=11400000&amp;guid=87711266bf41fee439d664173f7edeeb&amp;type=2#ChargeVectorBold-mLyD9 SDF&apos;);" />
         <ui:VisualElement name="startMessage" class="startMessageContainer" style="flex-direction: row; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px;">
-            <ui:VisualElement name="leftButton" style="background-color: rgb(243, 175, 77); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 0; margin-right: 125px;" />
-            <ui:Label text="Begin Mission" display-tooltip-when-elided="true" name="startText" class="startMessageText" style="-unity-text-align: upper-center; font-size: 75px; -unity-font-style: normal;" />
-            <ui:VisualElement name="rightButton" style="background-color: rgb(0, 255, 111); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 125px; margin-right: 0;" />
+            <ui:VisualElement name="leftButton" style="background-color: rgb(243, 127, 11); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 0; margin-right: 125px;" />
+            <ui:Label text="Begin Mission" display-tooltip-when-elided="true" name="startText" class="startMessageText" style="-unity-text-align: upper-center; font-size: 75px; -unity-font-style: normal; -unity-font-definition: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ChargeVectorBold-mLyD9%20SDF.asset?fileID=11400000&amp;guid=87711266bf41fee439d664173f7edeeb&amp;type=2#ChargeVectorBold-mLyD9 SDF&apos;); -unity-font: url(&apos;project://database/Assets/Ahsan/Screens/Fonts/ConnectionSerif-d20X.otf?fileID=12800000&amp;guid=8a557b0915892044e9ada2802f98bf00&amp;type=3#ConnectionSerif-d20X&apos;);" />
+            <ui:VisualElement name="rightButton" style="background-color: rgb(0, 228, 99); width: 100px; border-top-left-radius: 101px; border-bottom-left-radius: 101px; border-top-right-radius: 101px; border-bottom-right-radius: 101px; height: 100px; margin-left: 125px; margin-right: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Slider" style="border-left-color: rgba(255, 255, 255, 255); border-right-color: rgba(255, 255, 255, 255); border-top-color: rgba(255, 255, 255, 255); border-bottom-color: rgba(255, 255, 255, 255); margin-left: 192px; margin-right: 192px; margin-top: 30px; margin-bottom: 0; border-left-width: 25px; border-right-width: 25px; border-top-width: 25px; border-bottom-width: 25px; flex-direction: row; width: auto; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px;">
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
+            <ui:VisualElement class="sliderBar" style="flex-grow: 1; height: 75px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
