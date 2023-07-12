@@ -365,6 +365,11 @@ public class Mech_Controller : MonoBehaviour
         stumbled = false;
         
         prevPosition = transform.position;
+
+        FRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+        FLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+        BRLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
+        BLLeg.targetPoint.GetComponent<Target_Follow>().ResetLeg();
     }
 
     private void CheckLegStatus(Animator anim, Leg_Animator script, bool held)

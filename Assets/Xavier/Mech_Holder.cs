@@ -28,7 +28,7 @@ public class Mech_Holder : MonoBehaviour
         if (!ArduinoDevice.current.gun1down.isPressed && !ArduinoDevice.current.gun1up.isPressed &&
             !ArduinoDevice.current.gun2down.isPressed && !ArduinoDevice.current.gun2up.isPressed &&
             !ArduinoDevice.current.gun3down.isPressed && !ArduinoDevice.current.gun3up.isPressed &&
-            ArduinoDevice.current.shootLeft.isPressed && ArduinoDevice.current.shootRight.isPressed && !mech.activeInHierarchy)
+            ArduinoDevice.current.shootLeft.isPressed && ArduinoDevice.current.shootRight.isPressed)
         {
             mech.SetActive(true);
             StopCoroutine("StumbleLightOn");
