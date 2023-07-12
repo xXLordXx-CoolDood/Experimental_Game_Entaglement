@@ -87,7 +87,7 @@ public class Target_Follow : MonoBehaviour
             //Calculate position difference to pivot
             Vector3 delta = target.position - prevTargetPos;
             mech.GetComponent<Mech_Controller>().idleTimer = 0;
-            transform.position = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, transform.position.z + delta.z);
+            transform.position = new Vector3(transform.position.x + delta.x, Mathf.Clamp(transform.position.y + delta.y, 3, 999), transform.position.z + delta.z);
             prevTargetPos = target.position;
         }
     }
