@@ -187,10 +187,10 @@ public class Mech_Controller : MonoBehaviour
             { blocked = true; Debug.Log("Blocked"); }
             else { blocked = false; }
 
-            if (gunDirectionX != 0) { gunAccelX = Mathf.Clamp(gunAccelX + (Mathf.Abs(gunDirectionX) * 30 * Time.deltaTime), 0, 15); prevDirX = gunDirectionX; }
-            else { gunAccelX = Mathf.Clamp(gunAccelX - (10 * Time.deltaTime), 0, 30); }
-            if (gunDirectionY != 0) { gunAccelY = Mathf.Clamp(gunAccelY + (Mathf.Abs(gunDirectionY) * 60 * Time.deltaTime), 0, 30); prevDirY = gunDirectionY; }
-            else { gunAccelY = Mathf.Clamp(gunAccelY - (20 * Time.deltaTime), 0, 60); }
+            if (gunDirectionX != 0) { gunAccelX = Mathf.Clamp(gunAccelX + (Mathf.Abs(gunDirectionX) * 10 * Time.deltaTime), 0, 15); prevDirX = gunDirectionX; }
+            else { gunAccelX = Mathf.Clamp(gunAccelX - (15 * Time.deltaTime), 0, 30); }
+            if (gunDirectionY != 0) { gunAccelY = Mathf.Clamp(gunAccelY + (Mathf.Abs(gunDirectionY) * 20 * Time.deltaTime), 0, 30); prevDirY = gunDirectionY; }
+            else { gunAccelY = Mathf.Clamp(gunAccelY - (30 * Time.deltaTime), 0, 60); }
 
             float accelX = gunAccelX * prevDirX;
             float accelY = gunAccelY * prevDirY;
