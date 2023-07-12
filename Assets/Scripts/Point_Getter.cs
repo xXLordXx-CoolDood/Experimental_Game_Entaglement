@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 public class Point_Getter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText, timerText;
+    [HideInInspector] public bool saveScore = true;
 
-    public float time = 300, gColor;
+    public float time = 30;
+    private float gColor;
     private int points = 0, multiplier = 1;
 
     private void Start()
@@ -28,9 +30,14 @@ public class Point_Getter : MonoBehaviour
         timerText.text = $"T I M E - {Math.Round(time, 2)}";
         timerText.color = new Color32(255, Convert.ToByte(gColor), 0, 255);
 
-        if(time <= 0)
+        if(time <= 0 && saveScore)
         {
             PlayerPrefs.SetInt("points", points);
+            SceneManager.LoadScene("NameScreenUI");
+        }
+        else if(time <= 0 && !saveScore)
+        {
+            PlayerPrefs.SetInt("points", 0);
             SceneManager.LoadScene("NameScreenUI");
         }
     }

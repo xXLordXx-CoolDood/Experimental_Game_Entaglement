@@ -2659,7 +2659,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.3
+  m_Elasticity: 1
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -3144,6 +3144,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1983012102, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 872271591978694983, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 872271591978694983, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 872271591978694983, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935324075008489847, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935324075008489847, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935324075008489847, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 935324075008489847, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1019540541585965924, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
@@ -3639,6 +3667,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1308453952}
     - target: {fileID: 6997947681377588135, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: time
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997947681377588135, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1476446508}
@@ -3665,6 +3697,18 @@ PrefabInstance:
     - target: {fileID: 7233947386689474505, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392391794471986318, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392391794471986318, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392391794471986318, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8636701373276499192, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.x
@@ -6910,11 +6954,6 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 546945670569736719, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
   m_PrefabInstance: {fileID: 519754357}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1113337920 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4750546320971683193, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
-  m_PrefabInstance: {fileID: 519754357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1117445367
 GameObject:
   m_ObjectHideFlags: 0
@@ -7422,11 +7461,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223980574}
   m_CullTransparentMesh: 1
---- !u!4 &1227542997 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3790159460063173803, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
-  m_PrefabInstance: {fileID: 519754357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1228340763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2322070230137672974, guid: af54bd1b86f10d14e9f48d3901f1d38d, type: 3}
@@ -8527,11 +8561,6 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7533172814011507523, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
   m_PrefabInstance: {fileID: 519754357}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1443335176 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 935324075008489847, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
-  m_PrefabInstance: {fileID: 519754357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1445944598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5444604156041084691, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
@@ -8899,20 +8928,6 @@ MonoBehaviour:
   - 2U
   - 2U
   - 2U
-  chunkyLegs:
-  - 2D
-  - 2D
-  - 2U
-  - 2U
-  - 3U
-  - 1U
-  - 3U
-  - 1U
-  legs:
-  - {fileID: 1443335176}
-  - {fileID: 1227542997}
-  - {fileID: 1113337920}
-  - {fileID: 1996951631}
   turret: {fileID: 519754360}
   cheatCode: []
 --- !u!1 &1492077786
@@ -11374,11 +11389,6 @@ Transform:
 --- !u!137 &1996951630 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1970203787932482291, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
-  m_PrefabInstance: {fileID: 519754357}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1996951631 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6232003988992319056, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
   m_PrefabInstance: {fileID: 519754357}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2004840493

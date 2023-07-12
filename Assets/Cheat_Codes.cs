@@ -8,9 +8,7 @@ public class Cheat_Codes : MonoBehaviour
 {
     public List<string> bigHead = new List<string>();
     public List<string> superIceSlide = new List<string>();
-    public List<string> chunkyLegs = new List<string>();
 
-    public Transform[] legs;
     public Transform turret;
 
     [SerializeField] private List<string> cheatCode = new List<string>(0);
@@ -63,27 +61,17 @@ public class Cheat_Codes : MonoBehaviour
 
     private void CheckValidCode()
     {
-        if(cheatCode[cheatCode.Count - 1] != bigHead[cheatCode.Count - 1] && cheatCode[cheatCode.Count - 1] != superIceSlide[cheatCode.Count - 1] && cheatCode[cheatCode.Count - 1] != chunkyLegs[cheatCode.Count - 1])
+        if(cheatCode[cheatCode.Count - 1] != bigHead[cheatCode.Count - 1] && cheatCode[cheatCode.Count - 1] != superIceSlide[cheatCode.Count - 1])
         {
             cheatCode.Clear();
         }
         else if (CheckForBigHead()) { turret.localScale = new Vector3(2, 2, 2); cheatCode.Clear(); }
-        else if (CheckForIceSlide()) { transform.GetChild(0).GetComponent<Mech_Controller>().iceMultiplier = 7; cheatCode.Clear(); }
-        else if (CheckForChunkyLegs()) 
-        {
-            foreach(Transform leg in legs)
-            {
-                leg.localScale = new Vector3(2, 2, 2);
-            }
-
-            cheatCode.Clear();
+        else if (CheckForIceSlide()) 
+        { 
+            transform.GetChild(0).GetComponent<Mech_Controller>().iceMultiplier = 7;
+            transform.GetChild(0).GetComponent<Point_Getter>().saveScore = false;
+            cheatCode.Clear(); 
         }
-    }
-
-    private bool CheckForChunkyLegs()
-    {
-        if (cheatCode.Count == chunkyLegs.Count) { return !chunkyLegs.Except(cheatCode).Any(); }
-        return false;
     }
 
     private bool CheckForBigHead()
