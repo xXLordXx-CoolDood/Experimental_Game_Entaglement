@@ -21,13 +21,15 @@ public class Mech_Controller : MonoBehaviour
     public float idleTimer = 0;
     [SerializeField] private VisualEffect gunLaser;
 
+    [HideInInspector] public int iceMultiplier = 3;
+
     private PlayerInput playerInput;
     private Vector3 skidDir;
     private int activeLegs = 0, icyLegs = 0, gunDirectionX, gunDirectionY, prevDirX, prevDirY;
     private float _skidDecay, tiltMultiplier, direction, moveDirection = 1, gunAccelX, gunAccelY;
     private bool kneeling, stumbled, blocked;
     private Leg_Animator resistor1, resistor2;
-    [SerializeField] private bool isSkidding = false;
+    public bool isSkidding = false;
 
     MechGun mechGun;
 
@@ -473,7 +475,7 @@ public class Mech_Controller : MonoBehaviour
     public void CheckLegIdleStatus()
     {
         //If all legs are grounded or idling, set all legs to idle state
-        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld)
+        if(FRLeg.grounded && FLLeg.grounded && BLLeg.grounded && BRLeg.grounded && !FRLeg.isHeld && !FLLeg.isHeld && !BLLeg.isHeld && !BRLeg.isHeld && !isSkidding)
         {
             idleTimer += Time.deltaTime;
 
@@ -495,7 +497,7 @@ public class Mech_Controller : MonoBehaviour
         BRLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BRLeg.isSkidding = true;
         FLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; FLLeg.isSkidding = true;
         BLLeg.targetPoint.GetComponent<Target_Follow>().isSkidding = true; BLLeg.isSkidding = true;
-        if (icyLegs > 2) { _skidMultiplier = skidStrength * 3.5f; _skidDecay = skidDecay * 3.5f; }
+        if (icyLegs > 2) { _skidMultiplier = skidStrength * iceMultiplier; _skidDecay = skidDecay * iceMultiplier; }
         else { _skidMultiplier = skidStrength; _skidDecay = skidDecay; }
     }
     #endregion

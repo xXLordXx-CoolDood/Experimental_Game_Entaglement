@@ -42,6 +42,12 @@ public class Target_Follow : MonoBehaviour
         //Check if leg is too far from target point
         if (!SimilarDirections(calcDir, movingDir) && Vector3.Distance(transform.position, target.position) > maxLegDistance) //If applicable, move back towards the mech by a small amount
         {
+            if(mech.GetComponent<Mech_Controller>().isSkidding && mech.GetComponent<Mech_Controller>().iceMultiplier > 5)
+            {
+                transform.position = target.position;
+                return;
+            }
+
             transform.position += calcDir * Time.deltaTime * 5;
             isTooFar = true;
 

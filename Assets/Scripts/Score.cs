@@ -12,7 +12,6 @@ public class Score : MonoBehaviour
     {
         for(int i = 0; i < matList.Length; i++)
         {
-            Debug.Log(GetComponent<MeshRenderer>().material.name.Substring(0, 12));
             if (GetComponent<MeshRenderer>().material.name.Substring(0, 12) == matList[i].name && tag != "Points")
             {
                 value = 100 + i * 100;

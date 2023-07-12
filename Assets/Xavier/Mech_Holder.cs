@@ -20,10 +20,6 @@ public class Mech_Holder : MonoBehaviour
         mech.SetActive(false);
         StartCoroutine("StumbleLightOn");
         debris = _debris;
-        GameObject cam = Instantiate(cameraFollow, debris.transform.position, debris.transform.rotation);
-        Debug.Log(cam.name);
-        cam.transform.Translate(Vector3.back * 10 + Vector3.right * 10 + Vector3.up * 20, Space.World);
-        cam.transform.LookAt(debris.transform);
     }
 
     private void Update()
