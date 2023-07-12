@@ -10,6 +10,7 @@ public class StartScreenScript : MonoBehaviour
 {
     UIDocument uiDoc;
     float loadProg;
+    bool on = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +29,7 @@ public class StartScreenScript : MonoBehaviour
 
     public void LoadMechScene()
     {
-
-        StartCoroutine("ProgressLoad");
-
+        if (!on) { StartCoroutine("ProgressLoad"); on = true; }
     }
 
     public IEnumerator ProgressLoad()
@@ -47,6 +46,6 @@ public class StartScreenScript : MonoBehaviour
             yield return new WaitForSeconds(0.075f);
         }
 
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync("Mech_Test_Scene");
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync("level1");
     }
 }

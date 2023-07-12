@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Ahsan/Screens/Scenes/StartScreenUI.unity
     guid: 1804f2ea596d22d4f8c00f01d390d594
   - enabled: 1
-    path: Assets/Scenes/Mech_Test_Scene.unity
-    guid: ed121f045d03393418bd869905cecf51
+    path: Assets/Art/level1.unity
+    guid: 3d9c6c0d3dda42044b3d18775ae6c67d
   - enabled: 1
     path: Assets/Ahsan/Screens/Scenes/NameScreenUI.unity
     guid: c5d035ee676288845bf28ac9c15abfaa
