@@ -8,11 +8,12 @@ public class Score : MonoBehaviour
 
     [SerializeField] private Material[] matList = new Material[5];
 
-    private void Awake()
+    private void Start()
     {
         for(int i = 0; i < matList.Length; i++)
         {
-            if(GetComponent<Renderer>().material == matList[i])
+            Debug.Log(GetComponent<MeshRenderer>().material.name.Substring(0, 12));
+            if (GetComponent<MeshRenderer>().material.name.Substring(0, 12) == matList[i].name && tag != "Points")
             {
                 value = 100 + i * 100;
             }

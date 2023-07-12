@@ -176,7 +176,7 @@ public class Mech_Controller : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(gun.localEulerAngles.y);
+        Debug.DrawRay(shotSpawn.position, shotSpawn.forward * 1000, Color.red);
 
         #region //Blocked logic & gun rotation
         if (GetComponent<CameraSwitcher>().cameraList[1].enabled)
@@ -418,7 +418,6 @@ public class Mech_Controller : MonoBehaviour
         isAiming = false;
         isSkidding = true;
         stumbled = true;
-        Debug.Log($"Stumbled = {stumbled}");
         Audio_Manager.instance.PlayOneShot(shootEvent, transform.position);
         gunLaser.SendEvent("MechShot");
 
@@ -436,12 +435,10 @@ public class Mech_Controller : MonoBehaviour
 
         RaycastHit hit;
         if(Physics.Raycast(shotSpawn.position, shotSpawn.forward, out hit, Mathf.Infinity) && hit.collider.GetComponent<Score>() && hit.collider.tag != "Points")
-        {
+        {          
             GetComponent<Point_Getter>().GetPoints(hit.collider.GetComponent<Score>().value, hit.collider.gameObject);
             Destroy(hit.collider.gameObject);
         }
-
-
     }
 
     private void Splat()

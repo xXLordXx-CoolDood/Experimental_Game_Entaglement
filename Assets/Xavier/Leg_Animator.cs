@@ -6,8 +6,11 @@ using FMODUnity;
 public class Leg_Animator : MonoBehaviour
 {
     public Transform targetPoint, groundSnap, footBone, ankleBone, kneeBone, hipBone;
+    public SkinnedMeshRenderer legRenderer;
+    public Material[] wireMats;
     public LayerMask groundLayer;
     public float rotationMultiplier, groundCheckDistance = 1;
+    public int matToUse = 0;
     public AnimationCurve ankleCurve;
     public Animator legAnimations;
     public bool isSkidding, showDebug;
@@ -39,7 +42,8 @@ public class Leg_Animator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isHeld || isSkidding) { CheckForGround(); return; }
+        if (!isHeld || isSkidding) { legRenderer.materials = new Material[2] { wireMats[matToUse], wireMats[matToUse] }; CheckForGround(); return; }
+        legRenderer.materials = wireMats;
         grounded = false;
         //RotateAnkleBone();
     }
