@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 9150668343365023493}
   - component: {fileID: 4769763017541015995}
   - component: {fileID: 3879960940764243629}
+  - component: {fileID: 8228407492930393148}
   m_Layer: 0
   m_Name: collect_item
   m_TagString: Untagged
@@ -166,6 +167,26 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b6c4bb14517f13e43865369339136128, type: 2}
   - {fileID: 2100000, guid: 78c0b7125641f1e46bb5666e8a4ae5e4, type: 2}
   - {fileID: 2100000, guid: 3f6884f34dc01dc4fb6dd38cf756f636, type: 2}
+--- !u!95 &8228407492930393148
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150082104458253782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f213551a014b984e9551e6f46c78463, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6845511165496440784
 GameObject:
   m_ObjectHideFlags: 0
