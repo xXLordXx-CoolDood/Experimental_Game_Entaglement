@@ -229,8 +229,6 @@ public class Mech_Controller : MonoBehaviour
             BRAnim.ResetTrigger("Next_State");
             BLAnim.ResetTrigger("Next_State");
 
-            if (stumbled && icyLegs < 3) { Splat(); }
-
             _skidMultiplier = 0;
             isSkidding = false; 
         }
