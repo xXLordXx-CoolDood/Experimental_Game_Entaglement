@@ -3400,11 +3400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997947680879249889, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.48
+      value: 7.9
       objectReference: {fileID: 0}
     - target: {fileID: 6997947680879249889, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -63
+      value: -29.2
       objectReference: {fileID: 0}
     - target: {fileID: 6997947680879249889, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3668,7 +3668,7 @@ PrefabInstance:
       objectReference: {fileID: 1308453952}
     - target: {fileID: 6997947681377588135, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: time
-      value: 30
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 6997947681377588135, guid: cf8760a9c0a05c74d8815b4c7e718a0e, type: 3}
       propertyPath: scoreText
@@ -4039,7 +4039,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -255.18117, y: 1.9599136, z: -7.3599167}
+      - m_Value: {x: -247.2121, y: 3.3799138, z: -40.207054}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -4691,7 +4691,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -259.31418, y: 1.9595598, z: -3.0128098}
+      - m_Value: {x: -251.34511, y: 3.37956, z: -35.859947}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -4964,7 +4964,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -256.21063, y: 1.9595598, z: -2.2598572}
+      - m_Value: {x: -248.24156, y: 3.37956, z: -35.107}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -5378,7 +5378,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 166.3629, z: -2.442666e-12}
         m_Name: PlayerTransform_angles
         m_Overridden: 1
-      - m_Value: {x: -258.0884, y: 1.9599136, z: -8.065239}
+      - m_Value: {x: -250.11932, y: 3.3799138, z: -40.912376}
         m_Name: PlayerTransform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
