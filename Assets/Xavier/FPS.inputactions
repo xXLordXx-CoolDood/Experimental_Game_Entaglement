@@ -933,7 +933,7 @@
                 {
                     "name": "",
                     "id": "f0924c6c-3f3e-4182-b900-ec10303f755b",
-                    "path": "<ArduinoDevice>/Button1",
+                    "path": "<ArduinoDevice>/Button11",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
